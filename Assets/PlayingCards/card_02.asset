@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: card_02
   m_EditorClassIdentifier: 
   cardName: Kitten Spit
-  sigilDirection: {x: 0, y: 0}
+  sigilDirection: {x: 1, y: 1}
   power: 2
   sprite: {fileID: 21300000, guid: 9a4fd8b0d80c0934dbddac4244b449db, type: 3}
   rarity: 10

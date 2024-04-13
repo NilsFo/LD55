@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameState : MonoBehaviour
@@ -25,18 +26,17 @@ public class GameState : MonoBehaviour
     public PlayingCardDeck deckGameObject;
     public GameObject mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
+    public Vector3 mouseCardPlaneTargetPos;
 
     [Header("States")] public PlayingState playingState = PlayingState.Default;
     private PlayingState _playingState;
     public LevelState levelState = LevelState.Playing;
     private LevelState _levelState;
-    public GameObject draggingCard;
+    public PlayingCardBehaviour draggingCard;
     private float _draggingDoubleClickTimer = 0;
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
-
-    [Header("Game Rules")] public bool TEST;
 
     private void Awake()
     {
@@ -57,7 +57,7 @@ public class GameState : MonoBehaviour
         _draggingDoubleClickTimer -= Time.deltaTime;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastResults = Physics.RaycastAll(ray);
-        
+
         if (_levelState != levelState)
         {
             OnNewLevelState();
@@ -71,7 +71,9 @@ public class GameState : MonoBehaviour
         }
 
         mouseSelectTargetObj = null;
+        mouseCardPlaneTargetPos = Vector3.zero;
         mouseSelectTargetPos = Vector3.zero;
+        
         switch (playingState)
         {
             case PlayingState.Unknown:
@@ -81,31 +83,53 @@ public class GameState : MonoBehaviour
                 foreach (RaycastHit raycastHit in raycastResults)
                 {
                     SelectorTarget selectable = raycastHit.transform.gameObject.GetComponent<SelectorTarget>();
+                    CardHoverPlane hoverTarget = raycastHit.transform.gameObject.GetComponent<CardHoverPlane>();
                     if (selectable != null)
                     {
                         mouseSelectTargetObj = selectable.gameObject;
                         mouseSelectTargetPos = raycastHit.point;
                     }
+
+                    if (hoverTarget != null)
+                    {
+                        print("hover hit");
+                        mouseCardPlaneTargetPos = raycastHit.point;
+                    }
                 }
+
+                if (Input.GetMouseButtonUp(0) && AllowDropping)
+                {
+                    if (mouseSelectTargetObj != null)
+                    {
+                        draggingCard.PlaceOnTable();
+                    }
+                    else
+                    {
+                        draggingCard.ReturnToHand();
+                    }
+                }
+
                 break;
             case PlayingState.Default:
                 draggingCard = null;
 
-                PlayingCardBehaviour targetedCard=null;
+                PlayingCardBehaviour targetedCard = null;
                 foreach (RaycastHit raycastHit in raycastResults)
                 {
-                    PlayingCardBehaviour cardBehaviour = raycastHit.transform.gameObject.GetComponent<PlayingCardBehaviour>();
+                    PlayingCardBehaviour cardBehaviour =
+                        raycastHit.transform.gameObject.GetComponent<PlayingCardBehaviour>();
                     if (cardBehaviour != null)
                     {
                         targetedCard = cardBehaviour;
                     }
                 }
-                
+
                 if (targetedCard != null && Input.GetMouseButtonDown(0))
                 {
                     _draggingDoubleClickTimer = 0.1f;
                     targetedCard.OnClick();
                 }
+
                 break;
         }
 
@@ -130,6 +154,12 @@ public class GameState : MonoBehaviour
         if (Application.isPlaying)
         {
             Debug.DrawLine(Vector3.zero, GetMouseWorldPosition(), Color.green);
+            
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(mouseSelectTargetPos, 0.1f);
+            
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(mouseCardPlaneTargetPos, 0.1f);
         }
     }
 
@@ -165,7 +195,7 @@ public class GameState : MonoBehaviour
     public void DragCard(PlayingCardBehaviour playingCardBehaviour)
     {
         playingState = PlayingState.CardDrag;
-        draggingCard = playingCardBehaviour.gameObject;
+        draggingCard = playingCardBehaviour;
     }
 
     public Vector3 GetMouseWorldPosition()
