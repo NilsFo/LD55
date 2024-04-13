@@ -24,7 +24,8 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     [Header("Card visual design")] public TMP_Text nameTF;
     public TMP_Text powerTF;
-    public SpriteRenderer artworkSprite;
+    public UnityEngine.UI.Image artworkImg;
+    public Sigil sigil;
 
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState, _playingCardState;
     public bool isBurned;
@@ -108,8 +109,14 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             nameTF.text = playingCardData.cardName;
             powerTF.text = playingCardData.PowerScala().ToString();
-            artworkSprite.sprite = playingCardData.sprite;
+            artworkImg.sprite = playingCardData.sprite;
+            sigil.dir = GetSigilDirection();
+            sigil.UpdateSigilSprite();
         }
+    }
+
+    public void GetSigilSprite(Vector2 dir) {
+
     }
 
     public void OnClick()
