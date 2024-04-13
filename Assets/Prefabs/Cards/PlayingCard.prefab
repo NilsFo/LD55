@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6549439021956969885}
   - component: {fileID: 2172701750074201447}
+  - component: {fileID: 3094548340809106592}
   m_Layer: 0
   m_Name: PlayingCard
   m_TagString: Untagged
@@ -131,8 +132,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f013d8055c7e5147a0c4589d17d5fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playingCardBase: {fileID: 0}
-  playingCardFallback: {fileID: 11400000, guid: 762ad5cd48fabe6478b1087d6dc58931, type: 2}
+  playingCardDataBase: {fileID: 0}
+  playingCardDataFallback: {fileID: 11400000, guid: 762ad5cd48fabe6478b1087d6dc58931, type: 2}
+  handWorldPos: {x: 0, y: 0, z: 0}
+  movementSpeed: 5
+  inTransition: 0
+--- !u!65 &3094548340809106592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606137317059629792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3214645, y: 0.50895464, z: 1}
+  m_Center: {x: 0.000000014901161, y: 0.001488015, z: 0}
 --- !u!1 &6590170991458127532
 GameObject:
   m_ObjectHideFlags: 0

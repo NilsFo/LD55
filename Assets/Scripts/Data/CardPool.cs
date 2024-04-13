@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "New Playing Card", menuName = "Cards/New Card Pool", order = 1)]
 public class CardPool : ScriptableObject
 {
-    public List<PlayingCard> knownCards;
+    public List<PlayingCardData> knownCards;
 
     private void OnValidate()
     {
@@ -20,11 +20,11 @@ public class CardPool : ScriptableObject
         }
     }
 
-    public PlayingCard Next()
+    public PlayingCardData Next()
     {
-        List<PlayingCard> cardPool = new List<PlayingCard>();
+        List<PlayingCardData> cardPool = new List<PlayingCardData>();
 
-        foreach (PlayingCard card in knownCards)
+        foreach (PlayingCardData card in knownCards)
         {
             for (int i = 0; i < card.weight; i++)
             {

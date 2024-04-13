@@ -17,12 +17,12 @@ public class PlayingCardDeck : MonoBehaviour
     {
     }
 
-    public PlayingCard NextCard()
+    public PlayingCardData NextCard()
     {
         Debug.Log("Request to draw next card.");
-        PlayingCard card = cardPool.Next();
+        PlayingCardData cardData = cardPool.Next();
 
-        Debug.Log("Card drawn: " + card.cardName);
-        return card;
+        Debug.Log("Card drawn: " + cardData.cardName);
+        return cardData;
     }
 }
