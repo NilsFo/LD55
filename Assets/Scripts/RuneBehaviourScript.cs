@@ -5,7 +5,14 @@ public class RuneBehaviourScript : MonoBehaviour
 {
     public SummoningCircleBehaviourScript summoningCircleBehaviourScript;
     public int runeId;
-    
+
+    private GameState _gameState;
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PlayingCardBehaviour PlayingCardBehaviour = other.gameObject.GetComponent<PlayingCardBehaviour>();
@@ -61,4 +68,5 @@ public class RuneBehaviourScript : MonoBehaviour
             }
         }
     }
+    
 }

@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayingCardHand : MonoBehaviour
 {
     [Header("Gameplay config")] public int handSize = 5;
+    public bool alignX;
+    public bool alignY;
+    public bool alignZ;
 
     [Header("Cards in Hand")] public List<PlayingCardBehaviour> cardsInHand;
     public float cardOffset = 1f;
@@ -39,6 +42,7 @@ public class PlayingCardHand : MonoBehaviour
 
             PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
             cardBehaviour.playingCardDataBase = cardDataData;
+            cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.InHand;
 
             cardsInHand.Add(cardBehaviour);
         }
@@ -54,9 +58,27 @@ public class PlayingCardHand : MonoBehaviour
     public Vector3 GetDesiredCardPosition(int index)
     {
         int centerIndex = CardsInHandCount / 2;
+        float oddOffset = 0;
+        if (CardsInHandCount % 2 == 0)
+        {
+            oddOffset = cardOffset / 2;
+        }
 
         Vector3 pos = transform.position;
-        pos.x += (index - centerIndex) * cardOffset;
+        if (alignX)
+        {
+            pos.x += (index - centerIndex) * cardOffset + oddOffset;
+        }
+
+        if (alignY)
+        {
+            pos.y += (index - centerIndex) * cardOffset + oddOffset;
+        }
+
+        if (alignZ)
+        {
+            pos.z += (index - centerIndex) * cardOffset + oddOffset;
+        }
 
         return pos;
     }

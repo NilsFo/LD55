@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,7 +38,14 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     List<PlayingCardBehaviour> listRuneThree = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneFour = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneFive = new List<PlayingCardBehaviour>();
-    
+
+    private GameState _gameState;
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
+    }
+
     // Update is called once per frame
     void UpdateStats()
     {

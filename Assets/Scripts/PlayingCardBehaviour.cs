@@ -6,26 +6,36 @@ using UnityEngine.Serialization;
 
 public class PlayingCardBehaviour : MonoBehaviour
 {
+    public enum PlayingCardState
+    {
+        DrawAnimation,
+        Drawing,
+        InHand,
+        Selected,
+        Played
+    }
+
     [Header("World Hookup")] public PlayingCardData playingCardDataBase;
     public PlayingCardData playingCardDataFallback;
     public Vector3 handWorldPos;
     private GameState _gameState;
-    
-    [Header("Gameplay Modifiers")]
+    public Vector3 playedWorldPos;
+
+    [Header("Gameplay Modifiers")] public PlayingCardState playingCardState, _playingCardState;
     public bool isBurned;
     public bool isBloodSoaked;
-    
+
     [Header("Parameters")] public float movementSpeed = 5;
 
     [Header("Readonly")] public bool inTransition;
+
+    // Power
+    public Vector2 CurrentPower => GetPower();
 
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
     }
-    
-    // Power
-    public Vector2 CurrentPower => GetPower();
 
     // Start is called before the first frame update
     void Start()
@@ -34,23 +44,88 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             playingCardDataBase = playingCardDataFallback;
         }
+
+        _playingCardState = playingCardState;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);
+        if (_playingCardState != playingCardState)
+        {
+            _playingCardState = playingCardState;
+            Debug.Log("New card state: " + playingCardState);
+        }
 
-        inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
+        switch (playingCardState)
+        {
+            case PlayingCardState.Drawing:
+                transform.position =
+                    Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);
+                inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
+                break;
+            case PlayingCardState.DrawAnimation:
+                playingCardState = PlayingCardState.Drawing;
+                break;
+            case PlayingCardState.Played:
+                transform.position =
+                    Vector3.MoveTowards(transform.position, playedWorldPos, Time.deltaTime * movementSpeed);
+                inTransition = !(Vector3.Distance(transform.position, playedWorldPos) <= 0.01f);
+                break;
+            case PlayingCardState.Selected:
+                // Updating mouse pos if selected
+                // Vector3 mousePos = _gameState.GetMouseWorldPosition();
+                // Vector3 offset = _gameState.selectedCardOffset;
+                // Vector3 pos = mousePos + offset;
+                // transform.position = pos;
+                break;
+            case PlayingCardState.InHand:
+                transform.position =
+                    Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);
+                inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
+                break;
+        }
+
+        // Draw placement arrow
+        if (_gameState.playingState == GameState.PlayingState.CardDrag && playingCardState == PlayingCardState.Selected)
+        {
+            Debug.DrawLine(transform.position, _gameState.mouseSelectTargetPos, Color.red);
+
+            // Placing the card
+            if (Input.GetMouseButtonDown(0) && _gameState.AllowDropping)
+            {
+                playedWorldPos = _gameState.mouseSelectTargetPos;
+                _gameState.playingState = GameState.PlayingState.Default;
+                playingCardState = PlayingCardState.Played;
+                _gameState.handGameObject.cardsInHand.Remove(this);
+            }
+        }
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("Mouse down on card: " + name);
+    }
 
-        if (_gameState.playingState==GameState.PlayingState.Default)
+    public void OnClick()
+    {
+        print("card click");
+        if (_gameState.playingState == GameState.PlayingState.Default)
         {
-            _gameState.DragCard(this);
+            // Placing card on board
+            if (playingCardState == PlayingCardState.InHand)
+            {
+                Debug.Log("card selected: " + name);
+                _gameState.DragCard(this);
+                playingCardState = PlayingCardState.Selected;
+            }
+
+            // Returning card to hand
+            if (playingCardState == PlayingCardState.Played)
+            {
+                Debug.Log("Returning to hand: " + name);
+                playingCardState = PlayingCardState.InHand;
+                _gameState.handGameObject.cardsInHand.Add(this);
+            }
         }
     }
 
