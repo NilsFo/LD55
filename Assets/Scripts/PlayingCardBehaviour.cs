@@ -10,7 +10,11 @@ public class PlayingCardBehaviour : MonoBehaviour
     public PlayingCardData playingCardDataFallback;
     public Vector3 handWorldPos;
     private GameState _gameState;
-
+    
+    [Header("Gameplay Modifiers")]
+    public bool isBurned;
+    public bool isBloodSoaked;
+    
     [Header("Parameters")] public float movementSpeed = 5;
 
     [Header("Readonly")] public bool inTransition;
@@ -19,6 +23,9 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         _gameState = FindObjectOfType<GameState>();
     }
+    
+    // Power
+    public Vector2 CurrentPower => GetPower();
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +52,11 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             _gameState.DragCard(this);
         }
+    }
+
+    private Vector2 GetPower()
+    {
+        return playingCardDataBase.power;
     }
 
     private void OnMouseUp()
