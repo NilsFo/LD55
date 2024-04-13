@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class PlayingCardBehaviour : MonoBehaviour
 {
@@ -15,11 +17,14 @@ public class PlayingCardBehaviour : MonoBehaviour
         Played
     }
 
-    [Header("World Hookup")] public PlayingCardData playingCardDataBase;
-    public PlayingCardData playingCardDataFallback;
+    [Header("World Hookup")] public PlayingCardData playingCardData;
     public Vector3 handWorldPos;
     private GameState _gameState;
     public Vector3 playedWorldPos;
+
+    [Header("Card visual design")] public TMP_Text nameTF;
+    public TMP_Text powerTF;
+    public SpriteRenderer artworkSprite;
 
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState, _playingCardState;
     public bool isBurned;
@@ -30,7 +35,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     [Header("Readonly")] public bool inTransition;
 
     // Power
-    public Vector2 CurrentPower => GetPower();
+    public Vector2 CurrentPower => GetSigilDirection();
 
     private void Awake()
     {
@@ -40,11 +45,6 @@ public class PlayingCardBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (playingCardDataBase == null)
-        {
-            playingCardDataBase = playingCardDataFallback;
-        }
-
         _playingCardState = playingCardState;
     }
 
@@ -84,6 +84,8 @@ public class PlayingCardBehaviour : MonoBehaviour
                     Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);
                 inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
                 break;
+            default:
+                break;
         }
 
         // Draw placement arrow
@@ -100,10 +102,14 @@ public class PlayingCardBehaviour : MonoBehaviour
                 _gameState.handGameObject.cardsInHand.Remove(this);
             }
         }
-    }
 
-    private void OnMouseDown()
-    {
+        // Updating card art
+        if (playingCardData != null)
+        {
+            nameTF.text = playingCardData.cardName;
+            powerTF.text = playingCardData.PowerScala().ToString();
+            artworkSprite.sprite = playingCardData.sprite;
+        }
     }
 
     public void OnClick()
@@ -129,9 +135,15 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
     }
 
-    private Vector2 GetPower()
+    private Vector2 GetSigilDirection()
     {
-        return playingCardDataBase.power;
+        if (playingCardData == null)
+        {
+            return Vector2.zero;
+        }
+
+        Vector2 v = playingCardData.sigilDirection;
+        return v.normalized;
     }
 
     private void OnMouseUp()

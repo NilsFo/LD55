@@ -41,7 +41,7 @@ public class PlayingCardHand : MonoBehaviour
             playingCardObj.transform.position = _gameState.deckGameObject.transform.position;
 
             PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
-            cardBehaviour.playingCardDataBase = cardDataData;
+            cardBehaviour.playingCardData = cardDataData;
             cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.InHand;
 
             cardsInHand.Add(cardBehaviour);
