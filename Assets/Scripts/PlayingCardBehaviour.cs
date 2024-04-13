@@ -97,10 +97,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             // Placing the card
             if (Input.GetMouseButtonDown(0) && _gameState.AllowDropping)
             {
-                playedWorldPos = _gameState.mouseSelectTargetPos;
-                _gameState.playingState = GameState.PlayingState.Default;
-                playingCardState = PlayingCardState.Played;
-                _gameState.handGameObject.cardsInHand.Remove(this);
+                PlaceOnTable();
             }
         }
 
@@ -127,19 +124,42 @@ public class PlayingCardBehaviour : MonoBehaviour
             // Placing card on board
             if (playingCardState == PlayingCardState.InHand)
             {
-                Debug.Log("card selected: " + name);
-                _gameState.DragCard(this);
-                playingCardState = PlayingCardState.Selected;
+                DragCard();
             }
 
             // Returning card to hand
-            if (playingCardState == PlayingCardState.Played)
-            {
-                Debug.Log("Returning to hand: " + name);
-                playingCardState = PlayingCardState.InHand;
-                _gameState.handGameObject.cardsInHand.Add(this);
-            }
+            // if (playingCardState == PlayingCardState.Played)
+            // {
+            // ReturnToHand();
+            // }
         }
+    }
+
+    public void ReturnToHand()
+    {
+        Debug.Log("Returning to hand: " + name);
+        playingCardState = PlayingCardState.InHand;
+        _gameState.playingState = GameState.PlayingState.Default;
+
+        if (!_gameState.handGameObject.cardsInHand.Contains(this))
+        {
+            _gameState.handGameObject.cardsInHand.Add(this);
+        }
+    }
+
+    public void DragCard()
+    {
+        Debug.Log("card selected: " + name);
+        _gameState.DragCard(this);
+        playingCardState = PlayingCardState.Selected;
+    }
+
+    public void PlaceOnTable()
+    {
+        playedWorldPos = _gameState.mouseSelectTargetPos;
+        _gameState.playingState = GameState.PlayingState.Default;
+        playingCardState = PlayingCardState.Played;
+        _gameState.handGameObject.cardsInHand.Remove(this);
     }
 
     private Vector2 GetSigilDirection()
