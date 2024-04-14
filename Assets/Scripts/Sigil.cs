@@ -14,32 +14,32 @@ public class Sigil : MonoBehaviour
 
 	public void UpdateSigilSprite() {
 		int d = -1;
-		if(dir.x > 0 && dir.y > 0) {
+		if(dir.y > 0.5 && Mathf.Abs(dir.x) < 0.5) {
 			d = 0;
 		}
-		else if(dir.x > 0 && dir.y == 0) {
+		else if(dir.y < -0.5 && Mathf.Abs(dir.x) < 0.5) {
 			d = 1;
 		}
-		else if(dir.x > 0 && dir.y < 0) {
+		else if(dir.x < -0.5 && 0.5 > Mathf.Abs(dir.y)) {
 			d = 2;
 		}
-		else if(dir.x == 0 && dir.y < 0) {
+		else if(dir.x > 0.5 && 0.5 > Mathf.Abs(dir.y)) {
 			d = 3;
 		}
-		else if(dir.x == 0 && dir.y > 0) {
-			d = 4;
-		}
-		else if(dir.x < 0 && dir.y > 0) {
+		else if(dir.x > 0 && dir.y < 0) {
 			d = 5;
 		}
-		else if(dir.x < 0 && dir.y == 0) {
+		else if(dir.x < 0 && dir.y < 0) {
 			d = 6;
 		}
-		else if(dir.x < 0 && dir.y < 0) {
+		else if(dir.x < 0 && dir.y > 0) {
 			d = 7;
 		}
-		else {
+		else if(dir.x > 0 && dir.y > 0) {
 			d = 8;
+		}
+		else {
+			d = 4;
 		}
 		if(d != _sigilDir) {
 			_sigilDir = d;

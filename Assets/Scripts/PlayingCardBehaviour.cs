@@ -39,10 +39,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     public float rotationSpeed = 10;
 
     [Header("Readonly")] public bool inTransition;
-
-    // Power
-    public Vector2 CurrentPower => GetSigilDirection();
-
+    
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -92,10 +89,10 @@ public class PlayingCardBehaviour : MonoBehaviour
                 inTransition = !(Vector3.Distance(transform.position, playedWorldPos) <= 0.01f);
 
                 // rotation
-                var f = transform.forward * -1;
-                var r = Vector3.up;
-                var l = Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
-                transform.rotation = Quaternion.LookRotation(l, Vector3.up);
+                var f =transform.forward;
+                var r = -Vector3.up;
+                var l =Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
+                transform.rotation=Quaternion.LookRotation(l,Vector3.right);
 
                 break;
             case PlayingCardState.Selected:
@@ -208,7 +205,7 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
     }
 
-    private Vector2 GetSigilDirection()
+    public Vector2 GetSigilDirection()
     {
         if (playingCardData == null)
         {
@@ -243,9 +240,9 @@ public class PlayingCardBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public int GetPower()
+    public float GetPower()
     {
-        int basePower = playingCardData.PowerScala();
+        float basePower = playingCardData.PowerScala();
 
         if (isFoil)
         {

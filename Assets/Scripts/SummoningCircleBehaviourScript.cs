@@ -8,19 +8,34 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public UnityEvent onRuneChangeEvent;
     public UnityEvent onRuneConnectionChangeEvent;
 
-    public PlayingCardBehaviour runeOne;
-    public PlayingCardBehaviour runeTwo;
-    public PlayingCardBehaviour runeThree;
-    public PlayingCardBehaviour runeFour;
-    public PlayingCardBehaviour runeFive;
+    [Header("Hookup")] 
+    public GameState gameState;
+    
+    public RuneConnectionBehaviourScript connectionR1R2;
+    public RuneConnectionBehaviourScript connectionR1R3;
+    public RuneConnectionBehaviourScript connectionR1R4;
+    public RuneConnectionBehaviourScript connectionR1R5;
+    public RuneConnectionBehaviourScript connectionR2R3;
+    public RuneConnectionBehaviourScript connectionR2R4;
+    public RuneConnectionBehaviourScript connectionR2R5;
+    public RuneConnectionBehaviourScript connectionR3R4;
+    public RuneConnectionBehaviourScript connectionR3R5;
+    public RuneConnectionBehaviourScript connectionR4R5;
 
     public RuneBehaviourScript runeBehaviourOne;
     public RuneBehaviourScript runeBehaviourTwo;
     public RuneBehaviourScript runeBehaviourThree;
     public RuneBehaviourScript runeBehaviourFour;
     public RuneBehaviourScript runeBehaviourFive;
-
-    //Stats
+    
+    [Header("Card Live Pointer")]
+    public PlayingCardBehaviour runeOne;
+    public PlayingCardBehaviour runeTwo;
+    public PlayingCardBehaviour runeThree;
+    public PlayingCardBehaviour runeFour;
+    public PlayingCardBehaviour runeFive;
+    
+    [Header("Stats")]
     public Vector2 resultRuneOne;
     public Vector2 resultRuneTwo;
     public Vector2 resultRuneThree;
@@ -29,17 +44,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     public Vector2 resultRuneTotal;
 
-    //Dot Product 1 same direction <-> -1 opposite directions
-    public float connectionR1R2;
-    public float connectionR1R3;
-    public float connectionR1R4;
-    public float connectionR1R5;
-    public float connectionR2R3;
-    public float connectionR2R4;
-    public float connectionR2R5;
-    public float connectionR3R4;
-    public float connectionR3R5;
-    public float connectionR4R5;
+    public float resultTotalPower = 0f;
+
+    public float resultMod = 0f;
+
+    public float Value => resultMod * resultTotalPower;
 
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
@@ -65,214 +74,160 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     void UpdateStats()
     {
-        #region resultRuneOne
-
-        //V1 = + r1 + r2 + r5 - r4 - r3
         resultRuneOne = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneOne += runeOne.CurrentPower;
-        }
-
-        if (runeTwo != null)
-        {
-            resultRuneOne += runeTwo.CurrentPower;
-        }
-
-        if (runeThree != null)
-        {
-            resultRuneOne -= runeThree.CurrentPower;
-        }
-
-        if (runeFour != null)
-        {
-            resultRuneOne -= runeFour.CurrentPower;
-        }
-
-        if (runeFive != null)
-        {
-            resultRuneOne += runeFive.CurrentPower;
-        }
-
-        #endregion
-
-        #region resultRuneTwo
-
-        //V2 = + r2 + r3 + r1 - r4 - r5
         resultRuneTwo = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneTwo += runeOne.CurrentPower;
-        }
-
-        if (runeTwo != null)
-        {
-            resultRuneTwo += runeTwo.CurrentPower;
-        }
-
-        if (runeThree != null)
-        {
-            resultRuneTwo += runeThree.CurrentPower;
-        }
-
-        if (runeFour != null)
-        {
-            resultRuneTwo -= runeFour.CurrentPower;
-        }
-
-        if (runeFive != null)
-        {
-            resultRuneTwo -= runeFive.CurrentPower;
-        }
-
-        #endregion
-
-        #region resultRuneThree
-
-        //V3 = + r3 + r4 + r2 - r5 - r1
         resultRuneThree = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneThree -= runeOne.CurrentPower;
-        }
-
-        if (runeTwo != null)
-        {
-            resultRuneThree += runeTwo.CurrentPower;
-        }
-
-        if (runeThree != null)
-        {
-            resultRuneThree += runeThree.CurrentPower;
-        }
-
-        if (runeFour != null)
-        {
-            resultRuneThree += runeFour.CurrentPower;
-        }
-
-        if (runeFive != null)
-        {
-            resultRuneThree -= runeFive.CurrentPower;
-        }
-
-        #endregion
-
-        #region resultRuneFour
-
-        //V4 = + r4 + r5 + r3 - r2 - r1
         resultRuneFour = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneFour -= runeOne.CurrentPower;
-        }
-
-        if (runeTwo != null)
-        {
-            resultRuneFour -= runeTwo.CurrentPower;
-        }
-
-        if (runeThree != null)
-        {
-            resultRuneFour += runeThree.CurrentPower;
-        }
-
-        if (runeFour != null)
-        {
-            resultRuneFour += runeFour.CurrentPower;
-        }
-
-        if (runeFive != null)
-        {
-            resultRuneFour += runeFive.CurrentPower;
-        }
-
-        #endregion
-
-        #region resultRuneFive
-
-        //V5 = + r5 + r4 + r1 - r2 - r3
         resultRuneFive = Vector2.zero;
+        
         if (runeOne != null)
-        {
-            resultRuneFive += runeOne.CurrentPower;
-        }
-
+            resultRuneOne = runeOne.GetSigilDirection() * runeOne.GetPower();
+        
         if (runeTwo != null)
-        {
-            resultRuneFive -= runeTwo.CurrentPower;
-        }
+            resultRuneTwo = runeTwo.GetSigilDirection() * runeTwo.GetPower();
 
         if (runeThree != null)
-        {
-            resultRuneFive -= runeThree.CurrentPower;
-        }
-
+            resultRuneThree = runeThree.GetSigilDirection() * runeThree.GetPower();
+        
         if (runeFour != null)
-        {
-            resultRuneFive += runeFour.CurrentPower;
-        }
+            resultRuneFour = runeFour.GetSigilDirection() * runeFour.GetPower();
 
         if (runeFive != null)
-        {
-            resultRuneFive += runeFive.CurrentPower;
-        }
+            resultRuneFive = runeFive.GetSigilDirection() * runeFive.GetPower();
 
-        #endregion
-
+        
         resultRuneTotal = resultRuneOne + resultRuneTwo + resultRuneThree + resultRuneFour + resultRuneFive;
-        onRuneChangeEvent?.Invoke();
+        resultRuneTotal = resultRuneTotal.normalized;
+
+        resultMod = (Vector2.Dot(gameState.currentLevelSigil.normalized, resultRuneTotal)+1);
+        
 
         #region Connections
 
-        if (runeOne != null)
+        resultTotalPower = 0f;
+        if (runeOne != null && runeTwo != null)
         {
-            connectionR1R2 = runeTwo != null ? Vector2.Dot(runeOne.CurrentPower, runeTwo.CurrentPower) : 0f;
-            connectionR1R3 = runeThree != null ? Vector2.Dot(runeOne.CurrentPower, runeThree.CurrentPower) : 0f;
-            connectionR1R4 = runeFour != null ? Vector2.Dot(runeOne.CurrentPower, runeFour.CurrentPower) : 0f;
-            connectionR1R5 = runeFive != null ? Vector2.Dot(runeOne.CurrentPower, runeFive.CurrentPower) : 0f;
+            float newPower = (runeOne.GetPower() + runeTwo.GetPower());
+            float newPotencies = Vector2.Dot(runeOne.GetSigilDirection(), runeTwo.GetSigilDirection());
+            connectionR1R2.UpdateConnection(newPower, newPotencies + 1);
         }
         else
         {
-            connectionR1R2 = 0f;
-            connectionR1R3 = 0f;
-            connectionR1R4 = 0f;
-            connectionR1R5 = 0f;
+            connectionR1R2.UpdateConnection(0,0);
         }
-
-        if (runeTwo != null)
+        
+        if (runeOne != null && runeThree != null)
         {
-            connectionR2R3 = runeThree != null ? Vector2.Dot(runeTwo.CurrentPower, runeThree.CurrentPower) : 0f;
-            connectionR2R4 = runeFour != null ? Vector2.Dot(runeTwo.CurrentPower, runeFour.CurrentPower) : 0f;
-            connectionR2R5 = runeFive != null ? Vector2.Dot(runeTwo.CurrentPower, runeFive.CurrentPower) : 0f;
+            float newPower = (runeOne.GetPower() + runeThree.GetPower());
+            float newPotencies = -Vector2.Dot(runeOne.GetSigilDirection(), runeThree.GetSigilDirection());
+            connectionR1R3.UpdateConnection(newPower, newPotencies + 1);
         }
         else
         {
-            connectionR2R3 = 0f;
-            connectionR2R4 = 0f;
-            connectionR2R5 = 0f;
+            connectionR1R3.UpdateConnection(0,0);
         }
-
-        if (runeThree != null)
+        
+        if (runeOne != null && runeFour != null)
         {
-            connectionR3R4 = runeFour != null ? Vector2.Dot(runeThree.CurrentPower, runeFour.CurrentPower) : 0f;
-            connectionR3R5 = runeFive != null ? Vector2.Dot(runeThree.CurrentPower, runeFive.CurrentPower) : 0f;
+            float newPower = (runeOne.GetPower() + runeFour.GetPower());
+            float newPotencies = -Vector2.Dot(runeOne.GetSigilDirection(), runeFour.GetSigilDirection());
+            connectionR1R4.UpdateConnection(newPower, newPotencies + 1);
         }
         else
         {
-            connectionR3R4 = 0f;
-            connectionR3R5 = 0f;
+            connectionR1R4.UpdateConnection(0,0);
         }
-
-        if (runeFour != null)
+        
+        if (runeOne != null && runeFive != null)
         {
-            connectionR4R5 = runeFive != null ? Vector2.Dot(runeFour.CurrentPower, runeFive.CurrentPower) : 0f;
+            float newPower = (runeOne.GetPower() + runeFive.GetPower());
+            float newPotencies = Vector2.Dot(runeOne.GetSigilDirection(), runeFive.GetSigilDirection());
+            connectionR1R5.UpdateConnection(newPower, newPotencies + 1);
         }
         else
         {
-            connectionR4R5 = 0f;
+            connectionR1R5.UpdateConnection(0,0);
+        }
+        
+        if (runeTwo != null && runeThree != null)
+        {
+            float newPower = (runeTwo.GetPower() + runeThree.GetPower());
+            float newPotencies = Vector2.Dot(runeTwo.GetSigilDirection(), runeThree.GetSigilDirection());
+            connectionR2R3.UpdateConnection(newPower, newPotencies + 1);
+        }
+        else
+        {
+            connectionR2R3.UpdateConnection(0,0);
+        }
+        
+        if (runeTwo != null && runeFour != null)
+        {
+            float newPower = (runeTwo.GetPower() + runeFour.GetPower());
+            float newPotencies = -Vector2.Dot(runeTwo.GetSigilDirection(), runeFour.GetSigilDirection());
+            connectionR2R4.UpdateConnection(newPower, newPotencies + 1);
+        }
+        else
+        {
+            connectionR2R4.UpdateConnection(0,0);
+        }
+        
+        if (runeTwo != null && runeFive != null)
+        {
+            float newPower = (runeTwo.GetPower() + runeFive.GetPower());
+            float newPotencies = -Vector2.Dot(runeTwo.GetSigilDirection(), runeFive.GetSigilDirection());
+            connectionR2R5.UpdateConnection(newPower, newPotencies + 1);
+        }
+        else
+        {
+            connectionR2R5.UpdateConnection(0,0);
+        }
+        
+        if (runeThree != null && runeFour != null)
+        {
+            float newPower = (runeThree.GetPower() + runeFour.GetPower());
+            float newPotencies = Vector2.Dot(runeThree.GetSigilDirection(), runeFour.GetSigilDirection());
+            connectionR3R4.UpdateConnection(newPower, newPotencies + 1);
+        }
+        else
+        {
+            connectionR3R4.UpdateConnection(0,0);
+        }
+        
+        if (runeThree != null && runeFive != null)
+        {
+            float newPower = (runeThree.GetPower() + runeFive.GetPower());
+            float newPotencies = -Vector2.Dot(runeThree.GetSigilDirection(), runeFive.GetSigilDirection());
+            connectionR3R5.UpdateConnection(newPower, newPotencies + 1);
+        }
+        else
+        {
+            connectionR3R5.UpdateConnection(0,0);
+        }
+        
+        if (runeFour != null && runeFive != null)
+        {
+            float newPower = (runeFour.GetPower() + runeFive.GetPower());
+            float newPotencies = Vector2.Dot(runeFour.GetSigilDirection(), runeFive.GetSigilDirection());
+            connectionR4R5.UpdateConnection(newPower, newPotencies + 1);
+        }
+        else
+        {
+            connectionR4R5.UpdateConnection(0,0);
         }
 
+        
+        resultTotalPower += connectionR1R2.GetPower();
+        resultTotalPower += connectionR1R3.GetPower();
+        resultTotalPower += connectionR1R4.GetPower();
+        resultTotalPower += connectionR1R5.GetPower();
+        resultTotalPower += connectionR2R3.GetPower();
+        resultTotalPower += connectionR2R4.GetPower();
+        resultTotalPower += connectionR2R5.GetPower();
+        resultTotalPower += connectionR3R4.GetPower();
+        resultTotalPower += connectionR3R5.GetPower();
+        resultTotalPower += connectionR4R5.GetPower();
+
+        onRuneChangeEvent?.Invoke();
         onRuneConnectionChangeEvent?.Invoke();
 
         #endregion
