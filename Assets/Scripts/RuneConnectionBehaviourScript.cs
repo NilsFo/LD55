@@ -19,11 +19,11 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
     private void Start()
     {
         Vector3 midPoint = (runeOne.transform.position + runeTwo.transform.position) / 2;
-        transform.position = midPoint;
+        transform.position = new Vector3(midPoint.x, midPoint.y, midPoint.z);;
 
         Vector3[] positions = new Vector3[2];
-        positions[0] = runeOne.transform.position;
-        positions[1] = runeTwo.transform.position;
+        positions[0] = new Vector3(runeOne.transform.position.x, runeOne.transform.position.y - 0.5f, runeOne.transform.position.z);
+        positions[1] = new Vector3(runeTwo.transform.position.x, runeTwo.transform.position.y - 0.5f, runeTwo.transform.position.z);
 
         lineRenderer.SetPositions(positions);
         UpdateColor();
@@ -36,7 +36,8 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
         potencie = newpotencie;
         power = newPower;
         
-        //text.text = GetPower().ToString();
+        text.text = GetPower().ToString();
+        text.color = Color.white;
     }
 
     public float GetPower()
@@ -61,7 +62,8 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 
     public void SetHighlight(float deltaPower)
     {
-        text.text = "+"+deltaPower;
+        text.text = "+"+(float) Math.Round(deltaPower, 2);
+        text.color = Color.green;
     }
 
     public void ResetHighlight()
