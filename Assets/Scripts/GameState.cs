@@ -21,6 +21,7 @@ public class GameState : MonoBehaviour
         Playing,
         Paused,
         EndOfRound,
+        Calculating,
         GameOver
     }
 
@@ -41,6 +42,8 @@ public class GameState : MonoBehaviour
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
 
     [Header("Current Level")] public Vector2 currentLevelSigil;
+    public int levelCurrent=0;
+    public int levelMax = 6;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
 
@@ -65,6 +68,7 @@ public class GameState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelCurrent = 1;
         if (onRoundEnd == null)
         {
             onRoundEnd = new UnityEvent();
@@ -219,13 +223,20 @@ public class GameState : MonoBehaviour
                 break;
             case LevelState.Paused:
                 break;
+            case LevelState.Calculating:
+                levelState = LevelState.EndOfRound;
+                break;
             case LevelState.EndOfRound:
                 OnRoundEnd();
-                OnRoundStart();
                 break;
             default:
                 levelState = LevelState.Unknown;
                 break;
+        }
+
+        if (_levelState==LevelState.EndOfRound)
+        {
+            OnRoundStart();
         }
     }
 
@@ -244,9 +255,17 @@ public class GameState : MonoBehaviour
         return worldPosition;
     }
 
-    public void EndRound()
+    private void EndRound()
     {
         levelState = LevelState.EndOfRound;
+    }
+
+    public void StartCalculateScores()
+    {
+        Debug.Log("Calculating scores...");
+        levelState=LevelState.Calculating;
+
+        handGameObject.CreateDaemonCard();
     }
 
     private void OnRoundEnd()

@@ -36,6 +36,7 @@ Transform:
   - {fileID: 7395920293327863499}
   - {fileID: 5089119358752709458}
   - {fileID: 6834545911798856067}
+  - {fileID: 3138780983353239011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5921611843510460163
@@ -56,22 +57,7 @@ MonoBehaviour:
   onRuneConnectionChangeEvent:
     m_PersistentCalls:
       m_Calls: []
-  runeOne: {fileID: 0}
-  runeTwo: {fileID: 0}
-  runeThree: {fileID: 0}
-  runeFour: {fileID: 0}
-  runeFive: {fileID: 0}
-  runeBehaviourOne: {fileID: 4582168266760602564}
-  runeBehaviourTwo: {fileID: 8372362961822877089}
-  runeBehaviourThree: {fileID: 8381005829956287002}
-  runeBehaviourFour: {fileID: 1683265292628312523}
-  runeBehaviourFive: {fileID: 3990067877518959698}
-  resultRuneOne: {x: 0, y: 0}
-  resultRuneTwo: {x: 0, y: 0}
-  resultRuneThree: {x: 0, y: 0}
-  resultRuneFour: {x: 0, y: 0}
-  resultRuneFive: {x: 0, y: 0}
-  resultRuneTotal: {x: 0, y: 0}
+  gameState: {fileID: 0}
   connectionR1R2: {fileID: 2181701198775849526}
   connectionR1R3: {fileID: 2140458558397009725}
   connectionR1R4: {fileID: 2134618582260505002}
@@ -82,7 +68,55 @@ MonoBehaviour:
   connectionR3R4: {fileID: 3999851054625437247}
   connectionR3R5: {fileID: 5791528749493522157}
   connectionR4R5: {fileID: 3518710145073952663}
+  runeBehaviourOne: {fileID: 4582168266760602564}
+  runeBehaviourTwo: {fileID: 8372362961822877089}
+  runeBehaviourThree: {fileID: 8381005829956287002}
+  runeBehaviourFour: {fileID: 1683265292628312523}
+  runeBehaviourFive: {fileID: 3990067877518959698}
+  runeOne: {fileID: 0}
+  runeTwo: {fileID: 0}
+  runeThree: {fileID: 0}
+  runeFour: {fileID: 0}
+  runeFive: {fileID: 0}
+  resultRuneOne: {x: 0, y: 0}
+  resultRuneTwo: {x: 0, y: 0}
+  resultRuneThree: {x: 0, y: 0}
+  resultRuneFour: {x: 0, y: 0}
+  resultRuneFive: {x: 0, y: 0}
+  resultRuneTotal: {x: 0, y: 0}
   resultTotalPower: 0
+  resultMod: 0
+--- !u!1 &6107424350529183481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3138780983353239011}
+  m_Layer: 0
+  m_Name: DaemonSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3138780983353239011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107424350529183481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8958941325185734803}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6751662660375278053
 GameObject:
   m_ObjectHideFlags: 0
