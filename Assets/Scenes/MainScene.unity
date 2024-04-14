@@ -347,6 +347,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &804490907 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7558289235203441785, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+  m_PrefabInstance: {fileID: 1301062511954187956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &906472606
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,11 +487,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1788894402 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7558289235203441785, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
-  m_PrefabInstance: {fileID: 1301062511954187956}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789564941
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb02c52fc7184ce4d8fe5b3481358f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1788894402}
+  camera: {fileID: 804490907}
   handGameObject: {fileID: 1647541354}
   deckGameObject: {fileID: 2106481489}
   mouseSelectTargetObj: {fileID: 0}
