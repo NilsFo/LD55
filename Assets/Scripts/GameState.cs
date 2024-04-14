@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameState : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameState : MonoBehaviour
         Unknown,
         Playing,
         Paused,
+        EndOfRound,
         GameOver
     }
 
@@ -38,6 +40,8 @@ public class GameState : MonoBehaviour
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
 
+    [Header("Listeners")] public UnityEvent onRoundEnd;
+
     private void Awake()
     {
         playingState = PlayingState.Default;
@@ -49,6 +53,10 @@ public class GameState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (onRoundEnd == null)
+        {
+            onRoundEnd = new UnityEvent();
+        }
     }
 
     // Update is called once per frame
@@ -73,7 +81,7 @@ public class GameState : MonoBehaviour
         mouseSelectTargetObj = null;
         mouseCardPlaneTargetPos = Vector3.zero;
         mouseSelectTargetPos = Vector3.zero;
-        
+
         switch (playingState)
         {
             case PlayingState.Unknown:
@@ -154,10 +162,10 @@ public class GameState : MonoBehaviour
         if (Application.isPlaying)
         {
             Debug.DrawLine(Vector3.zero, GetMouseWorldPosition(), Color.green);
-            
+
             Gizmos.color = Color.blue;
             Gizmos.DrawSphere(mouseSelectTargetPos, 0.1f);
-            
+
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(mouseCardPlaneTargetPos, 0.1f);
         }
@@ -176,6 +184,9 @@ public class GameState : MonoBehaviour
                 break;
             case PlayingState.Default:
                 break;
+            default:
+                playingState = PlayingState.Unknown;
+                break;
         }
     }
 
@@ -188,6 +199,12 @@ public class GameState : MonoBehaviour
             case LevelState.Playing:
                 break;
             case LevelState.Paused:
+                break;
+            case LevelState.EndOfRound:
+                OnRoundEnd();
+                break;
+            default:
+                levelState = LevelState.Unknown;
                 break;
         }
     }
@@ -205,5 +222,16 @@ public class GameState : MonoBehaviour
         Vector3 worldPosition = camera.ScreenToWorldPoint(mousePos);
 
         return worldPosition;
+    }
+
+    public void EndRound()
+    {
+        levelState = LevelState.EndOfRound;
+    }
+
+    private void OnRoundEnd()
+    {
+        onRoundEnd.Invoke();
+        levelState = LevelState.Playing;
     }
 }
