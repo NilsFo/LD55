@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,22 +9,32 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
     public TMP_Text text;
     
     public float power;
-    public float potencies;
-    
-    
-    public void UpdateConnection(float newPower, float newPotencies)
+    public float potencie;
+
+    private void Start()
     {
-        potencies = newPotencies;
+        Vector3 midPoint = (runeOne.transform.position + runeTwo.transform.position) / 2;
+        transform.position = midPoint; 
+    }
+
+    public void UpdateConnection(float newPower, float newpotencie)
+    {
+        potencie = newpotencie;
         power = newPower;
         
         text.text = power.ToString();
     }
 
+    public float GetPower()
+    {
+        return power + potencie;
+    }
+    
     private void FixedUpdate()
     {
         Color color = Color.white;
-        if(potencies > 0) color = Color.red;
-        if(potencies < 0) color = Color.blue;
+        if(potencie > 0) color = Color.red;
+        if(potencie < 0) color = Color.blue;
         Debug.DrawLine(
             runeOne.transform.position,
             runeTwo.transform.position, 
