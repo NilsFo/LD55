@@ -42,6 +42,9 @@ public class GameState : MonoBehaviour
 
     [Header("Listeners")] public UnityEvent onRoundEnd;
 
+    [Header("Gameplay Rules")] public int handSize = 5;
+    public bool allowCardPickUp = true;
+
     private void Awake()
     {
         playingState = PlayingState.Default;
@@ -92,7 +95,7 @@ public class GameState : MonoBehaviour
                 {
                     SelectorTarget selectable = raycastHit.transform.gameObject.GetComponent<SelectorTarget>();
                     CardHoverPlane hoverTarget = raycastHit.transform.gameObject.GetComponent<CardHoverPlane>();
-                    if (selectable != null)
+                    if (selectable != null && selectable.active)
                     {
                         mouseSelectTargetObj = selectable.gameObject;
                         mouseSelectTargetPos = raycastHit.point;
