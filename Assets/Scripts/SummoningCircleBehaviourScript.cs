@@ -48,7 +48,10 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     public float resultMod = 0f;
 
-    public float Value => resultMod * resultTotalPower;
+    public float Value
+    {
+        get { return (float) Math.Round(resultMod * resultTotalPower, 0); }
+    }
 
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
@@ -100,7 +103,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         resultRuneTotal = resultRuneTotal.normalized;
 
         resultMod = (Vector2.Dot(gameState.currentLevelSigil.normalized, resultRuneTotal)+1);
-        
+        resultMod *= 0.5f; //0->2 => 0-1
+        resultMod += 1; //1-2;
+        resultMod = (float)(Math.Round(resultMod * 4, MidpointRounding.ToEven) / 4);
 
         #region Connections
 
