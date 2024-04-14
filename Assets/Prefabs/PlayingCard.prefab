@@ -543,7 +543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Blightwing, devourer of Souls'
+  m_text: Card Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4cf2c0411a57a63419e0b3501b24b0b0, type: 2}
   m_sharedMaterial: {fileID: 7235717029652812830, guid: 4cf2c0411a57a63419e0b3501b24b0b0, type: 2}
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.35
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -14.592384, y: 0, z: -6.238846, w: 0}
+  m_margin: {x: 11.615044, y: -3.8072891, z: 13.852615, w: 14.360527}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
