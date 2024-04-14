@@ -7,7 +7,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 {
     public UnityEvent onRuneChangeEvent;
     public UnityEvent onRuneConnectionChangeEvent;
-
+    public UnityEvent<int> onRuneActivation;
+    public UnityEvent onRuneActivationEnding;
+    
     [Header("Hookup")] 
     public GameState gameState;
     
@@ -34,6 +36,12 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public PlayingCardBehaviour runeThree;
     public PlayingCardBehaviour runeFour;
     public PlayingCardBehaviour runeFive;
+
+    [Header("PowerUp Animation")] 
+    public float stepTimer = 3f;
+    public bool isPlaying = false;
+    public float _currentTimer = 0f;
+    public int _currentAnimationState = 0;
     
     [Header("Stats")]
     public Vector2 resultRuneOne;
@@ -48,10 +56,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     public float resultMod = 0f;
 
-    public float Value
-    {
-        get { return (float) Math.Round(resultMod * resultTotalPower, 0); }
-    }
+    public float Value => (float) Math.Round(resultMod * resultTotalPower, 0);
 
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
@@ -65,16 +70,59 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
-    }
-
-    private void Start()
-    {
+        
         if (onRuneChangeEvent == null)
             onRuneChangeEvent = new UnityEvent();
         if (onRuneConnectionChangeEvent == null)
             onRuneConnectionChangeEvent = new UnityEvent();
+        if (onRuneActivation == null)
+            onRuneActivation = new UnityEvent<int>();
+        if (onRuneActivationEnding == null)
+            onRuneActivationEnding = new UnityEvent();
     }
 
+    private void Start()
+    {
+        PlayAnimation();
+    }
+
+    void Update()
+    {
+        if (isPlaying && _currentAnimationState < 6)
+        {
+            _currentTimer += Time.deltaTime;
+            if (_currentTimer >= stepTimer)
+            {
+                _currentTimer -= stepTimer;
+                _currentAnimationState++;
+                if (_currentAnimationState < 5)
+                {
+                    onRuneActivation?.Invoke(_currentAnimationState);
+                }
+                else
+                {
+                    onRuneActivationEnding?.Invoke();
+                }
+            }
+        }
+    }
+
+    public void PlayAnimation()
+    {
+        isPlaying = true;
+        _currentTimer = 0f;
+        _currentAnimationState = 0;
+        onRuneActivation?.Invoke(_currentAnimationState);
+    }
+    
+    public void ResetAnimation()
+    {
+        isPlaying = false;
+        _currentTimer = 0f;
+        _currentAnimationState = 0;
+        onRuneActivation?.Invoke(_currentAnimationState);
+    }
+    
     void UpdateStats()
     {
         resultRuneOne = Vector2.zero;
@@ -232,6 +280,12 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         resultTotalPower += connectionR3R5.GetPower();
         resultTotalPower += connectionR4R5.GetPower();
 
+        runeBehaviourOne.mySelector.active = runeOne == null;
+        runeBehaviourTwo.mySelector.active = runeTwo == null;
+        runeBehaviourThree.mySelector.active = runeThree == null;
+        runeBehaviourFour.mySelector.active = runeFour == null;
+        runeBehaviourFive.mySelector.active = runeFive == null;
+        
         onRuneChangeEvent?.Invoke();
         onRuneConnectionChangeEvent?.Invoke();
 
@@ -391,14 +445,5 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
             UpdateStats();
         }
-    }
-
-    void Update()
-    {
-        runeBehaviourOne.mySelector.active = runeOne == null;
-        runeBehaviourTwo.mySelector.active = runeTwo == null;
-        runeBehaviourThree.mySelector.active = runeThree == null;
-        runeBehaviourFour.mySelector.active = runeFour == null;
-        runeBehaviourFive.mySelector.active = runeFive == null;
     }
 }

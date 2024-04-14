@@ -544,6 +544,34 @@ PrefabInstance:
       propertyPath: gameState
       value: 
       objectReference: {fileID: 2093978251}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1905512958}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Debug
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SummoningCircleBehaviourScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneActivation.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8958941325185734803, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -681,6 +709,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1905512958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+  m_PrefabInstance: {fileID: 1662849099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c5829b73a00746beb0f1d9e07e16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2079467903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -788,7 +827,7 @@ MonoBehaviour:
   drawsRemaining: 0
   allowCardPickUp: 1
   cardFoilChance: 0.1
-  cardFoilMult: 0.5
+  cardFoilMult: 1.25
   cardBurningMult: 1.25
 --- !u!4 &2093978252
 Transform:
@@ -1161,6 +1200,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3556055557376585854, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3556055557376585854, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
       propertyPath: m_Name
       value: Candle

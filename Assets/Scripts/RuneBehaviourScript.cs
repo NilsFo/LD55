@@ -14,6 +14,20 @@ public class RuneBehaviourScript : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
     }
 
+    private void Start()
+    {
+        summoningCircleBehaviourScript.onRuneActivation.AddListener(OnActivation);
+    }
+
+    public void OnActivation(int index)
+    {
+        if (runeId == index)
+        {
+            //TODO
+            Debug.Log("TODO: Play Animation for Rune Activation!");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PlayingCardBehaviour PlayingCardBehaviour = other.gameObject.GetComponent<PlayingCardBehaviour>();
