@@ -11,8 +11,7 @@ public class PlayingCardHand : MonoBehaviour
     public bool alignZ;
     public float drawDelay = 0.69f;
     private float _drawDelay = 0;
-
-    public List<string> daemonNames;
+    public string currentDemonName;
 
     [Header("Cards in Hand")] public float cardOffset = 1f;
     public List<PlayingCardBehaviour> cardsInHand;
@@ -111,13 +110,52 @@ public class PlayingCardHand : MonoBehaviour
         cardBehaviour.isDaemon = true;
         cardBehaviour.isFoil = false;
 
-        // TODO add name
-        int i = Random.Range(0, daemonNames.Count);
-        cardBehaviour.displayName = daemonNames[i];
         cardBehaviour.basePower = (int)Mathf.Ceil(_gameState.summoningCircle.Value * _gameState.daemonCardPowerMod);
-
+        cardBehaviour.displayName = currentDemonName;
         cardBehaviour.sigilDirection = _gameState.currentLevelSigil;
 
         cardsInHand.Add(cardBehaviour);
     }
+
+    public void OnNewRound()
+    {
+        NextDemonName();
+    }
+
+    public void NextDemonName()
+    {
+        List<string> daemonNames = new List<string>
+        {
+            "Baal the Bile",
+            "The Crimson Carder",
+            "Venomheart the Tormentor",
+            "Blightwing, devourer of Souls",
+            "The Ten of Tormends",
+            "The Queen of Pain",
+            "The Dealer of Doom",
+            "Heart of Hellfire",
+            "The Nine of Nightmares",
+            "The Ace of the Abyss",
+            "Sulfur's Shadow",
+            "Globulus the Glutton",
+            "The Folding Fiend",
+            "The Jack of Judgement",
+            "Beelzebub",
+            "Abaddon",
+            "Asmodeus",
+            "Belphegor",
+            "The Leviathan",
+            "Bathory the Unjust",
+            "Rhadamanthus",
+            "Gorgoroth the Unrepented",
+            "Coagula the Uncooth",
+            "Abraxas",
+            "Geryon"
+        };
+
+        int i = Random.Range(0, daemonNames.Count);
+        currentDemonName = daemonNames[i];
+    }
+    
+    
 }
