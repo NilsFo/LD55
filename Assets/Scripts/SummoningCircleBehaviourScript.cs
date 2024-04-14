@@ -1,8 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SummoningCircleBehaviourScript : MonoBehaviour
 {
+    
+    public UnityEvent onRuneChangeEvent;
+    public UnityEvent onRuneConnectionChangeEvent;
 
     public PlayingCardBehaviour runeOne;
     public PlayingCardBehaviour runeTwo;
@@ -37,8 +41,15 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     List<PlayingCardBehaviour> listRuneThree = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneFour = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneFive = new List<PlayingCardBehaviour>();
-    
-    // Update is called once per frame
+
+    private void Start()
+    {
+        if (onRuneChangeEvent == null)
+            onRuneChangeEvent = new UnityEvent();
+        if (onRuneConnectionChangeEvent == null)
+            onRuneConnectionChangeEvent = new UnityEvent();
+    }
+
     void UpdateStats()
     {
         #region resultRuneOne
@@ -167,34 +178,60 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         #endregion
 
         resultRuneTotal = resultRuneOne + resultRuneTwo + resultRuneThree + resultRuneFour + resultRuneFive;
+        onRuneChangeEvent?.Invoke();
 
         #region Connections
 
         if (runeOne != null)
         {
-            if(runeTwo != null) connectionR1R2 = Vector2.Dot(runeOne.CurrentPower, runeTwo.CurrentPower);
-            if(runeThree != null) connectionR1R3 = Vector2.Dot(runeOne.CurrentPower, runeThree.CurrentPower);
-            if(runeFour != null)  connectionR1R4 = Vector2.Dot(runeOne.CurrentPower, runeFour.CurrentPower);
-            if(runeFive != null)  connectionR1R5 = Vector2.Dot(runeOne.CurrentPower, runeFive.CurrentPower);
+            connectionR1R2 = runeTwo != null ? Vector2.Dot(runeOne.CurrentPower, runeTwo.CurrentPower) : 0f;
+            connectionR1R3 = runeThree != null ? Vector2.Dot(runeOne.CurrentPower, runeThree.CurrentPower) : 0f;
+            connectionR1R4 = runeFour != null ? Vector2.Dot(runeOne.CurrentPower, runeFour.CurrentPower) : 0f;
+            connectionR1R5 = runeFive != null ? Vector2.Dot(runeOne.CurrentPower, runeFive.CurrentPower) : 0f;
+        }
+        else
+        {
+            connectionR1R2 = 0f;
+            connectionR1R3 = 0f;
+            connectionR1R4 = 0f;
+            connectionR1R5 = 0f;
         }
 
         if (runeTwo != null)
         {
-            if(runeThree != null) connectionR2R3 = Vector2.Dot(runeTwo.CurrentPower, runeThree.CurrentPower);
-            if(runeFour != null) connectionR2R4 = Vector2.Dot(runeTwo.CurrentPower, runeFour.CurrentPower);
-            if(runeFive != null) connectionR2R5 = Vector2.Dot(runeTwo.CurrentPower, runeFive.CurrentPower);
+            connectionR2R3 = runeThree != null ? Vector2.Dot(runeTwo.CurrentPower, runeThree.CurrentPower) : 0f;
+            connectionR2R4 = runeFour != null ? Vector2.Dot(runeTwo.CurrentPower, runeFour.CurrentPower) : 0f;
+            connectionR2R5 = runeFive != null ? Vector2.Dot(runeTwo.CurrentPower, runeFive.CurrentPower) : 0f;
+        }
+        else
+        {
+            connectionR2R3 = 0f;
+            connectionR2R4 = 0f;
+            connectionR2R5 = 0f;
         }
 
         if (runeThree != null)
         {
-            if(runeFour != null) connectionR3R4 = Vector2.Dot(runeThree.CurrentPower, runeFour.CurrentPower);
-            if(runeFive != null) connectionR3R5 = Vector2.Dot(runeThree.CurrentPower, runeFive.CurrentPower);
+            connectionR3R4 = runeFour != null ? Vector2.Dot(runeThree.CurrentPower, runeFour.CurrentPower) : 0f;
+            connectionR3R5 = runeFive != null ? Vector2.Dot(runeThree.CurrentPower, runeFive.CurrentPower) : 0f;
+        }
+        else
+        {
+            connectionR3R4 = 0f;
+            connectionR3R5 = 0f;
         }
 
-        if (runeFour != null && runeFive != null)
+        if (runeFour != null)
         {
-            connectionR4R5 = Vector2.Dot(runeFour.CurrentPower, runeFive.CurrentPower);
+            connectionR4R5 = runeFive != null ? Vector2.Dot(runeFour.CurrentPower, runeFive.CurrentPower) : 0f;
         }
+        else
+        {
+            connectionR4R5 = 0f;
+        }
+        
+        onRuneConnectionChangeEvent?.Invoke();
+        
         #endregion
     }
 
