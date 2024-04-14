@@ -19,19 +19,19 @@ public class PlayingCardData : ScriptableObject
 
     private void OnValidate()
     {
-        if (power == 0)
-        {
-            Debug.LogError("Power of playing card " + cardName + " is 0!");
-        }
-
-        if (sigilDirection.x == 0 && sigilDirection.y == 0)
-        {
-            Debug.LogError("Direction of playing card " + cardName + " is 0!");
-        }
-
-        if (sigilDirection.magnitude != 1)
-        {
-            Debug.LogError("Magnitude of playing card " + cardName + " is not 1!");
-        }
+        // if (power == 0)
+        // {
+        //     Debug.LogError("Power of playing card " + cardName + " is 0!");
+        // }
+// 
+        // if (sigilDirection.x == 0 && sigilDirection.y == 0)
+        // {
+        //     Debug.LogError("Direction of playing card " + cardName + " is 0!");
+        // }
+// 
+        // if (sigilDirection.magnitude != 1)
+        // {
+        //     Debug.LogError("Magnitude of playing card " + cardName + " is not 1!");
+        // }
     }
 }
