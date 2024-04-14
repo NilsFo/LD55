@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,12 +16,21 @@ public class ResultScoreIndicator : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
         _text = GetComponent<TMP_Text>();
         _summonCircle = FindObjectOfType<SummoningCircleBehaviourScript>();
-        _summonCircle.onRuneChangeEvent.AddListener(UpdateText);
+        _summonCircle.onRuneLineActivation.AddListener(UpdateText);
+
+        _gameState.onRoundEnd.AddListener(ResetText);
+        
+        _text.text = "";
     }
 
     // Update is called once per frame
     void UpdateText()
     {
-        _text.text = "Result: " + _summonCircle.Value;
+        _text.text = "Result: " + _summonCircle.animationResult;
+    }
+
+    public void ResetText()
+    {
+        _text.text = "";
     }
 }

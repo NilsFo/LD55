@@ -7,6 +7,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 {
     public UnityEvent onRuneChangeEvent;
     public UnityEvent onRuneConnectionChangeEvent;
+    public UnityEvent onRuneLineActivation;
     public UnityEvent onRuneLineActivationEnding;
     
     [Header("Hookup")] 
@@ -78,16 +79,20 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             onRuneConnectionChangeEvent = new UnityEvent();
         if (onRuneLineActivationEnding == null)
             onRuneLineActivationEnding = new UnityEvent();
+        if (onRuneLineActivation == null)
+            onRuneLineActivation = new UnityEvent();
     }
 
     private void Start()
     {
         PlayAnimation();
+        
+        //gameState.onRoundEnd.AddListener(ResetAnimation);
     }
 
     void Update()
     {
-        if (isPlaying && _currentAnimationState < 10)
+        if (isPlaying && _currentAnimationState <= 10)
         {
             _currentTimer += Time.deltaTime;
             if (_currentTimer >= stepTimer)
@@ -97,9 +102,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
                 if (_currentAnimationState <= 10)
                 {
                     UpdateAnimationResult(_currentAnimationState);
+                    onRuneLineActivation?.Invoke();
                 }
                 else
                 {
+                    UpdateAnimationResult(_currentAnimationState);
                     onRuneLineActivationEnding?.Invoke();
                 }
             }
@@ -169,6 +176,10 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             deltaPower = animationResult - deltaPower;
             connectionR1R4.SetHighlight(deltaPower);
         }
+        else if(index == 11)
+        {
+            animationResult = Value;
+        }
     }
     
     public void PlayAnimation()
@@ -177,6 +188,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         _currentTimer = 0f;
         _currentAnimationState = 0;
         animationResult = 0f;
+        onRuneLineActivation?.Invoke();
     }
     
     public void ResetAnimation()
