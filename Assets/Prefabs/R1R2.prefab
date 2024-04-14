@@ -355,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeOne: {fileID: 0}
   runeTwo: {fileID: 0}
+  myConnectionParticleManager: {fileID: 0}
   text: {fileID: 4260769361499654883}
   lineRenderer: {fileID: 8223568533289381652}
   color: {r: 1, g: 0, b: 0, a: 1}

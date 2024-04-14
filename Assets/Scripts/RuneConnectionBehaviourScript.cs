@@ -6,6 +6,7 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 {
     public GameObject runeOne;
     public GameObject runeTwo;
+    public ConnectionParticleManager myConnectionParticleManager;
     
     public TMP_Text text;
 
@@ -29,6 +30,11 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
         UpdateColor();
 
         text.text = "";
+    }
+
+    private void Update()
+    {
+        myConnectionParticleManager.intensity = potencie / 2;
     }
 
     public void UpdateConnection(float newPower, float newpotencie)

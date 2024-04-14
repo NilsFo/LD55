@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5661307824763794521}
   - component: {fileID: 501658072622246773}
   - component: {fileID: 4001288732621818354}
+  - component: {fileID: 1532738917414049311}
   m_Layer: 0
   m_Name: ConnectionParticles
   m_TagString: Untagged
@@ -4839,3 +4840,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1532738917414049311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882723389581803198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd3ec8fcc70d9347831f6aea9289840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myParticles: {fileID: 501658072622246773}
+  intensity: 0
+  emissionMin: 0
+  emissionMax: 120
