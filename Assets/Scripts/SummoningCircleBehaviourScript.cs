@@ -67,141 +67,28 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     void UpdateStats()
     {
-        #region resultRuneOne
-        //V1 = + r1 + r2 + r5 - r4 - r3
         resultRuneOne = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneOne += runeOne.GetSigilDirection();
-        }
-        if (runeTwo != null)
-        {
-            resultRuneOne += runeTwo.GetSigilDirection();
-        }
-        if (runeThree != null)
-        {
-            resultRuneOne -= runeThree.GetSigilDirection();
-        }
-        if (runeFour != null)
-        {
-            resultRuneOne -= runeFour.GetSigilDirection();
-        }
-        if (runeFive != null)
-        {
-            resultRuneOne += runeFive.GetSigilDirection();
-        }
-        
-        resultRuneOne = resultRuneOne.normalized;
-        #endregion
-        
-        #region resultRuneTwo
-        //V2 = + r2 + r3 + r1 - r4 - r5
         resultRuneTwo = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneTwo += runeOne.GetSigilDirection();
-        }
-        if (runeTwo != null)
-        {
-            resultRuneTwo += runeTwo.GetSigilDirection();
-        }
-        if (runeThree != null)
-        {
-            resultRuneTwo += runeThree.GetSigilDirection();
-        }
-        if (runeFour != null)
-        {
-            resultRuneTwo -= runeFour.GetSigilDirection();
-        }
-        if (runeFive != null)
-        {
-            resultRuneTwo -= runeFive.GetSigilDirection();
-        }
-        
-        resultRuneTwo = resultRuneTwo.normalized;
-        #endregion
-        
-        #region resultRuneThree
-        //V3 = + r3 + r4 + r2 - r5 - r1
         resultRuneThree = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneThree -= runeOne.GetSigilDirection();
-        }
-        if (runeTwo != null)
-        {
-            resultRuneThree += runeTwo.GetSigilDirection();
-        }
-        if (runeThree != null)
-        {
-            resultRuneThree += runeThree.GetSigilDirection();
-        }
-        if (runeFour != null)
-        {
-            resultRuneThree += runeFour.GetSigilDirection();
-        }
-        if (runeFive != null)
-        {
-            resultRuneThree -= runeFive.GetSigilDirection();
-        }
-
-        resultRuneThree = resultRuneThree.normalized;
-        #endregion
-        
-        #region resultRuneFour
-        //V4 = + r4 + r5 + r3 - r2 - r1
         resultRuneFour = Vector2.zero;
-        if (runeOne != null)
-        {
-            resultRuneFour -= runeOne.GetSigilDirection();
-        }
-        if (runeTwo != null)
-        {
-            resultRuneFour -= runeTwo.GetSigilDirection();
-        }
-        if (runeThree != null)
-        {
-            resultRuneFour += runeThree.GetSigilDirection();
-        }
-        if (runeFour != null)
-        {
-            resultRuneFour += runeFour.GetSigilDirection();
-        }
-        if (runeFive != null)
-        {
-            resultRuneFour += runeFive.GetSigilDirection();
-        }
-
-        resultRuneFour = resultRuneFour.normalized;
-        #endregion
-        
-        #region resultRuneFive
-        //V5 = + r5 + r4 + r1 - r2 - r3
         resultRuneFive = Vector2.zero;
+        
         if (runeOne != null)
-        {
-            resultRuneFive += runeOne.GetSigilDirection();
-        }
+            resultRuneOne = runeOne.GetSigilDirection() * runeOne.GetPower();
+        
         if (runeTwo != null)
-        {
-            resultRuneFive -= runeTwo.GetSigilDirection();
-        }
+            resultRuneTwo = runeTwo.GetSigilDirection() * runeTwo.GetPower();
+
         if (runeThree != null)
-        {
-            resultRuneFive -= runeThree.GetSigilDirection();
-        }
+            resultRuneThree = runeThree.GetSigilDirection() * runeThree.GetPower();
+        
         if (runeFour != null)
-        {
-            resultRuneFive += runeFour.GetSigilDirection();
-        }
+            resultRuneFour = runeFour.GetSigilDirection() * runeFour.GetPower();
+
         if (runeFive != null)
-        {
-            resultRuneFive += runeFive.GetSigilDirection();
-        }
+            resultRuneFive = runeFive.GetSigilDirection() * runeFive.GetPower();
 
-        resultRuneFive = resultRuneFive.normalized;
-        #endregion
-
+        
         resultRuneTotal = resultRuneOne + resultRuneTwo + resultRuneThree + resultRuneFour + resultRuneFive;
         resultRuneTotal = resultRuneTotal.normalized;
         

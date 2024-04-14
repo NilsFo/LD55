@@ -21,6 +21,6 @@ public class PowerScoreIndicator : MonoBehaviour
     // Update is called once per frame
     void UpdateText()
     {
-        _text.text = "Power Score: " + _summonCircle.resultRuneTotal;
+        _text.text = "Power Score: " + _summonCircle.resultTotalPower;
     }
 }
