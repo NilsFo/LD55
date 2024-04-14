@@ -185,6 +185,17 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         _currentTimer = 0f;
         _currentAnimationState = 0;
         animationResult = 0f;
+        
+        connectionR1R2.ResetHighlight();
+        connectionR1R3.ResetHighlight();
+        connectionR1R4.ResetHighlight();
+        connectionR1R5.ResetHighlight();
+        connectionR2R3.ResetHighlight();
+        connectionR2R4.ResetHighlight();
+        connectionR2R5.ResetHighlight();
+        connectionR3R4.ResetHighlight();
+        connectionR3R5.ResetHighlight();
+        connectionR4R5.ResetHighlight();
     }
     
     void UpdateStats()
