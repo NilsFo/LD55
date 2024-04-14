@@ -26,7 +26,7 @@ public class GameState : MonoBehaviour
     [Header("World Hookup")] public Camera camera;
     public PlayingCardHand handGameObject;
     public PlayingCardDeck deckGameObject;
-    public GameObject mouseSelectTargetObj;
+    public SelectorTarget mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
     public Vector3 mouseCardPlaneTargetPos;
 
@@ -45,6 +45,9 @@ public class GameState : MonoBehaviour
     [Header("Gameplay Rules")] public int handSize = 5;
     public int drawsRemaining;
     public bool allowCardPickUp = true;
+    [Range(0, 1)] public float cardFoilChance = 0.1f;
+    [Range(0, 2)] public float cardFoilMult = 1.25f;
+    [Range(0, 2)] public float cardBurningMult = 1.25f;
 
     private void Awake()
     {
@@ -61,6 +64,7 @@ public class GameState : MonoBehaviour
         {
             onRoundEnd = new UnityEvent();
         }
+
         EndRound();
     }
 
@@ -98,9 +102,9 @@ public class GameState : MonoBehaviour
                 {
                     SelectorTarget selectable = raycastHit.transform.gameObject.GetComponent<SelectorTarget>();
                     CardHoverPlane hoverTarget = raycastHit.transform.gameObject.GetComponent<CardHoverPlane>();
-                    if (selectable != null && selectable.active)
+                    if (selectable != null && selectable.active && selectable.enabled)
                     {
-                        mouseSelectTargetObj = selectable.gameObject;
+                        mouseSelectTargetObj = selectable;
                         mouseSelectTargetPos = raycastHit.point;
                     }
 
@@ -116,6 +120,7 @@ public class GameState : MonoBehaviour
                     if (mouseSelectTargetObj != null)
                     {
                         draggingCard.PlaceOnTable();
+                        // Debug.LogError("Illegal placement on table!");
                     }
                     else
                     {
@@ -162,7 +167,6 @@ public class GameState : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)
@@ -176,7 +180,6 @@ public class GameState : MonoBehaviour
             Gizmos.DrawSphere(mouseCardPlaneTargetPos, 0.1f);
         }
     }
-
 #endif
 
     private void OnNewPlayingState()
@@ -240,7 +243,7 @@ public class GameState : MonoBehaviour
         // Listeners
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
-        
+
         // Cleanup
         PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
         foreach (PlayingCardBehaviour card in cards)

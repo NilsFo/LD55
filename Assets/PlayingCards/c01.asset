@@ -16,4 +16,4 @@ MonoBehaviour:
   sigilDirection: {x: 1, y: 1}
   power: 2
   sprite: {fileID: 21300000, guid: 9a4fd8b0d80c0934dbddac4244b449db, type: 3}
-  rarity: 15
+  rarity: 10
