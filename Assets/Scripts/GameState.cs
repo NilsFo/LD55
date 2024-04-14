@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameState : MonoBehaviour
 {
@@ -18,13 +19,14 @@ public class GameState : MonoBehaviour
         Unknown,
         Playing,
         Paused,
+        EndOfRound,
         GameOver
     }
 
     [Header("World Hookup")] public Camera camera;
     public PlayingCardHand handGameObject;
     public PlayingCardDeck deckGameObject;
-    public GameObject mouseSelectTargetObj;
+    public SelectorTarget mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
     public Vector3 mouseCardPlaneTargetPos;
 
@@ -38,6 +40,15 @@ public class GameState : MonoBehaviour
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
 
+    [Header("Listeners")] public UnityEvent onRoundEnd;
+
+    [Header("Gameplay Rules")] public int handSize = 5;
+    public int drawsRemaining;
+    public bool allowCardPickUp = true;
+    [Range(0, 1)] public float cardFoilChance = 0.1f;
+    [Range(0, 2)] public float cardFoilMult = 1.25f;
+    [Range(0, 2)] public float cardBurningMult = 1.25f;
+
     private void Awake()
     {
         playingState = PlayingState.Default;
@@ -49,11 +60,18 @@ public class GameState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (onRoundEnd == null)
+        {
+            onRoundEnd = new UnityEvent();
+        }
+
+        EndRound();
     }
 
     // Update is called once per frame
     void Update()
     {
+        drawsRemaining = Mathf.Max(drawsRemaining, 0);
         _draggingDoubleClickTimer -= Time.deltaTime;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastResults = Physics.RaycastAll(ray);
@@ -73,7 +91,7 @@ public class GameState : MonoBehaviour
         mouseSelectTargetObj = null;
         mouseCardPlaneTargetPos = Vector3.zero;
         mouseSelectTargetPos = Vector3.zero;
-        
+
         switch (playingState)
         {
             case PlayingState.Unknown:
@@ -84,15 +102,15 @@ public class GameState : MonoBehaviour
                 {
                     SelectorTarget selectable = raycastHit.transform.gameObject.GetComponent<SelectorTarget>();
                     CardHoverPlane hoverTarget = raycastHit.transform.gameObject.GetComponent<CardHoverPlane>();
-                    if (selectable != null)
+                    if (selectable != null && selectable.active && selectable.enabled)
                     {
-                        mouseSelectTargetObj = selectable.gameObject;
+                        mouseSelectTargetObj = selectable;
                         mouseSelectTargetPos = raycastHit.point;
                     }
 
                     if (hoverTarget != null)
                     {
-                        print("hover hit");
+                        // print("hover hit");
                         mouseCardPlaneTargetPos = raycastHit.point;
                     }
                 }
@@ -102,6 +120,7 @@ public class GameState : MonoBehaviour
                     if (mouseSelectTargetObj != null)
                     {
                         draggingCard.PlaceOnTable();
+                        // Debug.LogError("Illegal placement on table!");
                     }
                     else
                     {
@@ -148,21 +167,19 @@ public class GameState : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)
         {
             Debug.DrawLine(Vector3.zero, GetMouseWorldPosition(), Color.green);
-            
+
             Gizmos.color = Color.blue;
             Gizmos.DrawSphere(mouseSelectTargetPos, 0.1f);
-            
+
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(mouseCardPlaneTargetPos, 0.1f);
         }
     }
-
 #endif
 
     private void OnNewPlayingState()
@@ -176,6 +193,9 @@ public class GameState : MonoBehaviour
                 break;
             case PlayingState.Default:
                 break;
+            default:
+                playingState = PlayingState.Unknown;
+                break;
         }
     }
 
@@ -188,6 +208,12 @@ public class GameState : MonoBehaviour
             case LevelState.Playing:
                 break;
             case LevelState.Paused:
+                break;
+            case LevelState.EndOfRound:
+                OnRoundEnd();
+                break;
+            default:
+                levelState = LevelState.Unknown;
                 break;
         }
     }
@@ -205,5 +231,28 @@ public class GameState : MonoBehaviour
         Vector3 worldPosition = camera.ScreenToWorldPoint(mousePos);
 
         return worldPosition;
+    }
+
+    public void EndRound()
+    {
+        levelState = LevelState.EndOfRound;
+    }
+
+    private void OnRoundEnd()
+    {
+        // Listeners
+        onRoundEnd.Invoke();
+        handGameObject.OnEndOfRound();
+
+        // Cleanup
+        PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
+        foreach (PlayingCardBehaviour card in cards)
+        {
+            card.OnRoundEnd();
+        }
+
+        // Init new Round
+        drawsRemaining = handSize;
+        levelState = LevelState.Playing;
     }
 }

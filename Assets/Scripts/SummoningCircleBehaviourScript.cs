@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class SummoningCircleBehaviourScript : MonoBehaviour
 {
-    
     public UnityEvent onRuneChangeEvent;
     public UnityEvent onRuneConnectionChangeEvent;
 
@@ -14,7 +13,13 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public PlayingCardBehaviour runeThree;
     public PlayingCardBehaviour runeFour;
     public PlayingCardBehaviour runeFive;
-    
+
+    public RuneBehaviourScript runeBehaviourOne;
+    public RuneBehaviourScript runeBehaviourTwo;
+    public RuneBehaviourScript runeBehaviourThree;
+    public RuneBehaviourScript runeBehaviourFour;
+    public RuneBehaviourScript runeBehaviourFive;
+
     //Stats
     public Vector2 resultRuneOne;
     public Vector2 resultRuneTwo;
@@ -35,7 +40,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public float connectionR3R4;
     public float connectionR3R5;
     public float connectionR4R5;
-    
+
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneTwo = new List<PlayingCardBehaviour>();
@@ -61,128 +66,158 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     void UpdateStats()
     {
         #region resultRuneOne
+
         //V1 = + r1 + r2 + r5 - r4 - r3
         resultRuneOne = Vector2.zero;
         if (runeOne != null)
         {
             resultRuneOne += runeOne.CurrentPower;
         }
+
         if (runeTwo != null)
         {
             resultRuneOne += runeTwo.CurrentPower;
         }
+
         if (runeThree != null)
         {
             resultRuneOne -= runeThree.CurrentPower;
         }
+
         if (runeFour != null)
         {
             resultRuneOne -= runeFour.CurrentPower;
         }
+
         if (runeFive != null)
         {
             resultRuneOne += runeFive.CurrentPower;
         }
+
         #endregion
-        
+
         #region resultRuneTwo
+
         //V2 = + r2 + r3 + r1 - r4 - r5
         resultRuneTwo = Vector2.zero;
         if (runeOne != null)
         {
             resultRuneTwo += runeOne.CurrentPower;
         }
+
         if (runeTwo != null)
         {
             resultRuneTwo += runeTwo.CurrentPower;
         }
+
         if (runeThree != null)
         {
             resultRuneTwo += runeThree.CurrentPower;
         }
+
         if (runeFour != null)
         {
             resultRuneTwo -= runeFour.CurrentPower;
         }
+
         if (runeFive != null)
         {
             resultRuneTwo -= runeFive.CurrentPower;
         }
+
         #endregion
-        
+
         #region resultRuneThree
+
         //V3 = + r3 + r4 + r2 - r5 - r1
         resultRuneThree = Vector2.zero;
         if (runeOne != null)
         {
             resultRuneThree -= runeOne.CurrentPower;
         }
+
         if (runeTwo != null)
         {
             resultRuneThree += runeTwo.CurrentPower;
         }
+
         if (runeThree != null)
         {
             resultRuneThree += runeThree.CurrentPower;
         }
+
         if (runeFour != null)
         {
             resultRuneThree += runeFour.CurrentPower;
         }
+
         if (runeFive != null)
         {
             resultRuneThree -= runeFive.CurrentPower;
         }
+
         #endregion
-        
+
         #region resultRuneFour
+
         //V4 = + r4 + r5 + r3 - r2 - r1
         resultRuneFour = Vector2.zero;
         if (runeOne != null)
         {
             resultRuneFour -= runeOne.CurrentPower;
         }
+
         if (runeTwo != null)
         {
             resultRuneFour -= runeTwo.CurrentPower;
         }
+
         if (runeThree != null)
         {
             resultRuneFour += runeThree.CurrentPower;
         }
+
         if (runeFour != null)
         {
             resultRuneFour += runeFour.CurrentPower;
         }
+
         if (runeFive != null)
         {
             resultRuneFour += runeFive.CurrentPower;
         }
+
         #endregion
-        
+
         #region resultRuneFive
+
         //V5 = + r5 + r4 + r1 - r2 - r3
         resultRuneFive = Vector2.zero;
         if (runeOne != null)
         {
             resultRuneFive += runeOne.CurrentPower;
         }
+
         if (runeTwo != null)
         {
             resultRuneFive -= runeTwo.CurrentPower;
         }
+
         if (runeThree != null)
         {
             resultRuneFive -= runeThree.CurrentPower;
         }
+
         if (runeFour != null)
         {
             resultRuneFive += runeFour.CurrentPower;
         }
+
         if (runeFive != null)
         {
             resultRuneFive += runeFive.CurrentPower;
         }
+
         #endregion
 
         resultRuneTotal = resultRuneOne + resultRuneTwo + resultRuneThree + resultRuneFour + resultRuneFive;
@@ -237,9 +272,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         {
             connectionR4R5 = 0f;
         }
-        
+
         onRuneConnectionChangeEvent?.Invoke();
-        
+
         #endregion
     }
 
@@ -250,10 +285,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             listRuneOne.Add(newCard);
             return;
         }
+
         runeOne = newCard;
         UpdateStats();
     }
-    
+
     public void SetRuneTwo(PlayingCardBehaviour newCard)
     {
         if (runeTwo != null)
@@ -261,10 +297,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             listRuneTwo.Add(newCard);
             return;
         }
+
         runeTwo = newCard;
         UpdateStats();
     }
-    
+
     public void SetRuneThree(PlayingCardBehaviour newCard)
     {
         if (runeThree != null)
@@ -272,10 +309,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             listRuneThree.Add(newCard);
             return;
         }
+
         runeThree = newCard;
         UpdateStats();
     }
-    
+
     public void SetRuneFour(PlayingCardBehaviour newCard)
     {
         if (runeFour != null)
@@ -283,10 +321,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             listRuneFour.Add(newCard);
             return;
         }
+
         runeFour = newCard;
         UpdateStats();
     }
-    
+
     public void SetRuneFive(PlayingCardBehaviour newCard)
     {
         if (runeFive != null)
@@ -294,10 +333,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             listRuneFive.Add(newCard);
             return;
         }
+
         runeFive = newCard;
         UpdateStats();
     }
-    
+
     public void ClearRuneOne(PlayingCardBehaviour oldCard)
     {
         if (listRuneOne.Contains(oldCard))
@@ -312,10 +352,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
                 runeOne = listRuneOne[0];
                 listRuneOne.RemoveAt(0);
             }
+
             UpdateStats();
         }
     }
-    
+
     public void ClearRuneTwo(PlayingCardBehaviour oldCard)
     {
         if (listRuneTwo.Contains(oldCard))
@@ -330,10 +371,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
                 runeTwo = listRuneTwo[0];
                 listRuneTwo.RemoveAt(0);
             }
+
             UpdateStats();
         }
     }
-    
+
     public void ClearRuneThree(PlayingCardBehaviour oldCard)
     {
         if (listRuneThree.Contains(oldCard))
@@ -348,10 +390,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
                 runeThree = listRuneThree[0];
                 listRuneThree.RemoveAt(0);
             }
+
             UpdateStats();
         }
     }
-    
+
     public void ClearRuneFour(PlayingCardBehaviour oldCard)
     {
         if (listRuneFour.Contains(oldCard))
@@ -366,10 +409,11 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
                 runeFour = listRuneFour[0];
                 listRuneFour.RemoveAt(0);
             }
+
             UpdateStats();
         }
     }
-    
+
     public void ClearRuneFive(PlayingCardBehaviour oldCard)
     {
         if (listRuneFive.Contains(oldCard))
@@ -384,7 +428,17 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
                 runeFive = listRuneFive[0];
                 listRuneFive.RemoveAt(0);
             }
+
             UpdateStats();
         }
+    }
+
+    void Update()
+    {
+        runeBehaviourOne.mySelector.active = runeOne == null;
+        runeBehaviourTwo.mySelector.active = runeTwo == null;
+        runeBehaviourThree.mySelector.active = runeThree == null;
+        runeBehaviourFour.mySelector.active = runeFour == null;
+        runeBehaviourFive.mySelector.active = runeFive == null;
     }
 }

@@ -557,6 +557,15 @@ MonoBehaviour:
   levelState: 1
   draggingCard: {fileID: 0}
   selectedCardOffset: {x: 0, y: 0, z: 0}
+  onRoundEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  handSize: 8
+  drawsRemaining: 0
+  allowCardPickUp: 1
+  cardFoilChance: 0.1
+  cardFoilMult: 0.5
+  cardBurningMult: 1.25
 --- !u!4 &2093978252
 Transform:
   m_ObjectHideFlags: 0
@@ -591,6 +600,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5445869719010638366, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5938711158994851930, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -875,6 +888,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92734f16642abc14d8683d28ecb77eac, type: 3}
+--- !u!1001 &6274335669390547073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.942
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.418
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754063381055646585, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556055557376585854, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: m_Name
+      value: Candle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
 --- !u!1001 &6994392188385764167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -883,6 +953,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2093978251}
+    - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndRound
+      objectReference: {fileID: 0}
+    - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameState, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1996424066124998488, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_Name
       value: UI
@@ -990,3 +1076,4 @@ SceneRoots:
   - {fileID: 65769216}
   - {fileID: 107431031}
   - {fileID: 1662849099}
+  - {fileID: 6274335669390547073}

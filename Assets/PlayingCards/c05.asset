@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345c9701fdc04128b8b40517f6042e95, type: 3}
-  m_Name: card_06
+  m_Name: c05
   m_EditorClassIdentifier: 
-  cardName: Tongue of Dog
-  sigilDirection: {x: 1, y: -1}
+  cardName: Wool of Bat
+  sigilDirection: {x: 0, y: -1}
   power: 2
   sprite: {fileID: 21300000, guid: 9a4fd8b0d80c0934dbddac4244b449db, type: 3}
-  rarity: 10
+  rarity: 15
