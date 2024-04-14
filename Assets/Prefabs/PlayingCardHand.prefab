@@ -47,6 +47,8 @@ MonoBehaviour:
   alignX: 0
   alignY: 0
   alignZ: 1
-  cardsInHand: []
+  drawDelay: 0.42
   cardOffset: 0.8
+  cardsInHand: []
   cardPrefab: {fileID: 5606137317059629792, guid: b71937a60cd9aab46bb13132510029de, type: 3}
+  daemonCreationOrigin: {fileID: 0}

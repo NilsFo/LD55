@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   placeable: 0
+  cardPlacement: {fileID: 0}
   onSelected:
     m_PersistentCalls:
       m_Calls:
@@ -82,7 +83,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_Height: 2.1697571
   m_Direction: 1
   m_Center: {x: 0, y: 0.58487856, z: 0}
@@ -98,3 +99,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e1d14b458ab22b409c0c1e37d773718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usesRemaining: 4
+  attachedObjects: []

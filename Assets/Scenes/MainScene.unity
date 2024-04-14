@@ -794,6 +794,8 @@ MonoBehaviour:
   levelState: 1
   draggingCard: {fileID: 0}
   currentLevelSigil: {x: 0, y: 0}
+  levelCurrent: 0
+  levelMax: 6
   selectedCardOffset: {x: 0, y: 0, z: 0}
   onRoundEnd:
     m_PersistentCalls:
@@ -1214,10 +1216,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle
       objectReference: {fileID: 0}
-    - target: {fileID: 9121755901275526763, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
-      propertyPath: m_Radius
-      value: 0.35
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1237,7 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 2093978251}
     - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndRound
+      value: StartCalculateScores
       objectReference: {fileID: 0}
     - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1253,7 +1251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1996424066124998488, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4253196559529670016, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_Pivot.x
