@@ -47,7 +47,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public float resultTotalPower = 0f;
 
     public float resultMod = 0f;
-    
+
+    public float Value => resultMod * resultTotalPower;
+
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneTwo = new List<PlayingCardBehaviour>();
