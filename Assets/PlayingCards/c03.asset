@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345c9701fdc04128b8b40517f6042e95, type: 3}
   m_Name: c03
   m_EditorClassIdentifier: 
-  cardName: Grandma's Wig
+  cardName: Nightshade
   sigilDirection: {x: 1, y: -1}
   power: 2
   sprite: {fileID: 21300000, guid: 9a4fd8b0d80c0934dbddac4244b449db, type: 3}
