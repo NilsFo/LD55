@@ -3,7 +3,27 @@ guid: 9d9f2ea793edea648aaa6ee5fb4e8b7f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boden
+    second: {fileID: 2100000, guid: 0973a8a6fe8c0e7478274f651e193565, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leder
+    second: {fileID: 2100000, guid: ebee10ed9b805f7418af627399e9ab5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tisch
+    second: {fileID: 2100000, guid: 9f95a75485cedb74895c1c45b404b895, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wand
+    second: {fileID: 2100000, guid: ef02f04b1e831674dbbd59a1a5a88a74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
