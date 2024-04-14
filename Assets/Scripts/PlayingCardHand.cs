@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayingCardHand : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayingCardHand : MonoBehaviour
     public bool alignZ;
     public float drawDelay = 0.69f;
     private float _drawDelay = 0;
+
+    public List<string> daemonNames;
 
     [Header("Cards in Hand")] public float cardOffset = 1f;
     public List<PlayingCardBehaviour> cardsInHand;
@@ -97,22 +100,24 @@ public class PlayingCardHand : MonoBehaviour
 
     public void CreateDaemonCard()
     {
+        // todo only create when sigil matches?
+        
         GameObject playingCardObj = Instantiate(cardPrefab, transform);
         playingCardObj.transform.position = daemonCreationOrigin.position;
-        
+
         PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
         cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
 
         cardBehaviour.isDaemon = true;
-        
+        cardBehaviour.isFoil = false;
+
         // TODO add name
-        cardBehaviour.displayName = "New Daemon";
+        int i = Random.Range(0, daemonNames.Count);
+        cardBehaviour.displayName = daemonNames[i];
         cardBehaviour.basePower = (int)Mathf.Ceil(_gameState.summoningCircle.Value * _gameState.daemonCardPowerMod);
 
         cardBehaviour.sigilDirection = _gameState.currentLevelSigil;
-        
+
         cardsInHand.Add(cardBehaviour);
     }
-
-    
 }
