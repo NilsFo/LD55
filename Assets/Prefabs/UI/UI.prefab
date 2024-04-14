@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 3024795757440547310}
   - component: {fileID: 8370193672753191730}
   - component: {fileID: 3310908460175355050}
+  - component: {fileID: 2178732096268493223}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5686275, g: 0.49803922, b: 0.42745098, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -223,6 +224,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2178732096268493223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641665232648353580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd440678cbec02628335d90fe87e73a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 971679623593439235}
 --- !u!1 &1996424066124998488
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +352,6 @@ GameObject:
   - component: {fileID: 971679623593439235}
   - component: {fileID: 7678486627983991427}
   - component: {fileID: 885186096299715634}
-  - component: {fileID: 7121722874042004876}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -403,18 +416,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7121722874042004876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3165410758278877162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edd440678cbec02628335d90fe87e73a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5479290548747499327
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +561,7 @@ GameObject:
   - component: {fileID: 1314809430662792435}
   - component: {fileID: 103150611139942146}
   - component: {fileID: 4947723483009042161}
+  - component: {fileID: 114527568040868824}
   m_Layer: 5
   m_Name: Sigil
   m_TagString: Untagged
@@ -625,6 +627,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &114527568040868824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681958137684542829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f5045d8297af34caf7acbdf498e0b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dir: {x: 0, y: 0}
+  sigilSprite: {fileID: 4947723483009042161}
+  sigilSprites:
+  - {fileID: -1695734176, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: -245576301, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: -1686981960, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: 2012536609, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: 908912936, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: -1023280596, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: 271063178, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: -1009915674, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: -1190065027, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
 --- !u!1 &7477970508111202335
 GameObject:
   m_ObjectHideFlags: 0

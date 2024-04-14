@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = System.Random;
 
 public class GameState : MonoBehaviour
 {
@@ -38,9 +39,12 @@ public class GameState : MonoBehaviour
     private float _draggingDoubleClickTimer = 0;
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
 
+    [Header("Current Level")] public Vector2 currentLevelSigil;
+
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
 
     [Header("Listeners")] public UnityEvent onRoundEnd;
+    [Header("Listeners")] public UnityEvent onRoundStart;
 
     [Header("Gameplay Rules")] public int handSize = 5;
     public int drawsRemaining;
@@ -60,6 +64,11 @@ public class GameState : MonoBehaviour
         if (onRoundEnd == null)
         {
             onRoundEnd = new UnityEvent();
+        }
+        
+        if (onRoundStart == null)
+        {
+            onRoundStart = new UnityEvent();
         }
         EndRound();
     }
@@ -208,6 +217,7 @@ public class GameState : MonoBehaviour
                 break;
             case LevelState.EndOfRound:
                 OnRoundEnd();
+                OnRoundStart();
                 break;
             default:
                 levelState = LevelState.Unknown;
@@ -251,5 +261,25 @@ public class GameState : MonoBehaviour
         // Init new Round
         drawsRemaining = handSize;
         levelState = LevelState.Playing;
+    }
+
+    private void OnRoundStart()
+    {
+        Random r = new Random();
+        int si = r.Next(8);
+        Vector2[] svec =
+        {
+            new(1, 1),
+            new(0, 1),
+            new(-1, 1),
+            new(-1, 0),
+            new(-1, -1),
+            new(0, -1),
+            new(1, -1),
+            new(1, 0),
+        };
+        currentLevelSigil = svec[si];
+        
+        onRoundStart.Invoke();
     }
 }

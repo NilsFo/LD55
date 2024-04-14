@@ -22,12 +22,12 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
         potencie = newpotencie;
         power = newPower;
         
-        text.text = power.ToString();
+        text.text = GetPower().ToString();
     }
 
     public float GetPower()
     {
-        return power + potencie;
+        return power * potencie;
     }
     
     private void FixedUpdate()

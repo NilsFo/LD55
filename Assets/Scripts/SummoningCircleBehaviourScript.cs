@@ -99,7 +99,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         resultTotalPower = 0f;
         if (runeOne != null && runeTwo != null)
         {
-            float newPower = (runeOne.GetPower() + runeTwo.GetPower()) / 2;
+            float newPower = (runeOne.GetPower() + runeTwo.GetPower());
             float newPotencies = Vector2.Dot(runeOne.GetSigilDirection(), runeTwo.GetSigilDirection());
             connectionR1R2.UpdateConnection(newPower, newPotencies);
         }
@@ -110,8 +110,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeOne != null && runeThree != null)
         {
-            float newPower = (runeOne.GetPower() + runeThree.GetPower()) / 2;
-            float newPotencies = Vector2.Dot(runeOne.GetSigilDirection(), runeThree.GetSigilDirection());
+            float newPower = (runeOne.GetPower() + runeThree.GetPower());
+            float newPotencies = -Vector2.Dot(runeOne.GetSigilDirection(), runeThree.GetSigilDirection());
             connectionR1R3.UpdateConnection(newPower, newPotencies);
         }
         else
@@ -121,8 +121,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeOne != null && runeFour != null)
         {
-            float newPower = (runeOne.GetPower() + runeFour.GetPower()) / 2;
-            float newPotencies = Vector2.Dot(runeOne.GetSigilDirection(), runeFour.GetSigilDirection());
+            float newPower = (runeOne.GetPower() + runeFour.GetPower());
+            float newPotencies = -Vector2.Dot(runeOne.GetSigilDirection(), runeFour.GetSigilDirection());
             connectionR1R4.UpdateConnection(newPower, newPotencies);
         }
         else
@@ -132,7 +132,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeOne != null && runeFive != null)
         {
-            float newPower = (runeOne.GetPower() + runeFive.GetPower()) / 2;
+            float newPower = (runeOne.GetPower() + runeFive.GetPower());
             float newPotencies = Vector2.Dot(runeOne.GetSigilDirection(), runeFive.GetSigilDirection());
             connectionR1R5.UpdateConnection(newPower, newPotencies);
         }
@@ -143,7 +143,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeTwo != null && runeThree != null)
         {
-            float newPower = (runeTwo.GetPower() + runeThree.GetPower()) / 2;
+            float newPower = (runeTwo.GetPower() + runeThree.GetPower());
             float newPotencies = Vector2.Dot(runeTwo.GetSigilDirection(), runeThree.GetSigilDirection());
             connectionR2R3.UpdateConnection(newPower, newPotencies);
         }
@@ -154,8 +154,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeTwo != null && runeFour != null)
         {
-            float newPower = (runeTwo.GetPower() + runeFour.GetPower()) / 2;
-            float newPotencies = Vector2.Dot(runeTwo.GetSigilDirection(), runeFour.GetSigilDirection());
+            float newPower = (runeTwo.GetPower() + runeFour.GetPower());
+            float newPotencies = -Vector2.Dot(runeTwo.GetSigilDirection(), runeFour.GetSigilDirection());
             connectionR2R4.UpdateConnection(newPower, newPotencies);
         }
         else
@@ -165,8 +165,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeTwo != null && runeFive != null)
         {
-            float newPower = (runeTwo.GetPower() + runeFive.GetPower()) / 2;
-            float newPotencies = Vector2.Dot(runeTwo.GetSigilDirection(), runeFive.GetSigilDirection());
+            float newPower = (runeTwo.GetPower() + runeFive.GetPower());
+            float newPotencies = -Vector2.Dot(runeTwo.GetSigilDirection(), runeFive.GetSigilDirection());
             connectionR2R5.UpdateConnection(newPower, newPotencies);
         }
         else
@@ -176,7 +176,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeThree != null && runeFour != null)
         {
-            float newPower = (runeThree.GetPower() + runeFour.GetPower()) / 2;
+            float newPower = (runeThree.GetPower() + runeFour.GetPower());
             float newPotencies = Vector2.Dot(runeThree.GetSigilDirection(), runeFour.GetSigilDirection());
             connectionR3R4.UpdateConnection(newPower, newPotencies);
         }
@@ -187,8 +187,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeThree != null && runeFive != null)
         {
-            float newPower = (runeThree.GetPower() + runeFive.GetPower()) / 2;
-            float newPotencies = Vector2.Dot(runeThree.GetSigilDirection(), runeFive.GetSigilDirection());
+            float newPower = (runeThree.GetPower() + runeFive.GetPower());
+            float newPotencies = -Vector2.Dot(runeThree.GetSigilDirection(), runeFive.GetSigilDirection());
             connectionR3R5.UpdateConnection(newPower, newPotencies);
         }
         else
@@ -198,7 +198,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         if (runeFour != null && runeFive != null)
         {
-            float newPower = (runeFour.GetPower() + runeFive.GetPower()) / 2;
+            float newPower = (runeFour.GetPower() + runeFive.GetPower());
             float newPotencies = Vector2.Dot(runeFour.GetSigilDirection(), runeFive.GetSigilDirection());
             connectionR4R5.UpdateConnection(newPower, newPotencies);
         }
