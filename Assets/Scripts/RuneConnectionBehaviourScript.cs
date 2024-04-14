@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 
         lineRenderer.SetPositions(positions);
         UpdateColor();
+
+        text.text = "";
     }
 
     public void UpdateConnection(float newPower, float newpotencie)
@@ -33,12 +36,12 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
         potencie = newpotencie;
         power = newPower;
         
-        text.text = GetPower().ToString();
+        //text.text = GetPower().ToString();
     }
 
     public float GetPower()
     {
-        return power * potencie;
+        return (float) Math.Round(power * potencie, 2);
     }
 
     public void UpdateColor()
@@ -54,5 +57,15 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
         alphas[1] = new GradientAlphaKey(1.0f, 1.0f);
 
         lineRenderer.colorGradient.SetKeys(colors, alphas);
+    }
+
+    public void SetHighlight(float deltaPower)
+    {
+        text.text = "+"+deltaPower;
+    }
+
+    public void ResetHighlight()
+    {
+        text.text = "";
     }
 }

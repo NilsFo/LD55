@@ -7,8 +7,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 {
     public UnityEvent onRuneChangeEvent;
     public UnityEvent onRuneConnectionChangeEvent;
-    public UnityEvent<int> onRuneActivation;
-    public UnityEvent onRuneActivationEnding;
+    public UnityEvent onRuneLineActivationEnding;
     
     [Header("Hookup")] 
     public GameState gameState;
@@ -42,6 +41,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public bool isPlaying = false;
     public float _currentTimer = 0f;
     public int _currentAnimationState = 0;
+
+    public float animationResult = 0f;
     
     [Header("Stats")]
     public Vector2 resultRuneOne;
@@ -75,10 +76,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             onRuneChangeEvent = new UnityEvent();
         if (onRuneConnectionChangeEvent == null)
             onRuneConnectionChangeEvent = new UnityEvent();
-        if (onRuneActivation == null)
-            onRuneActivation = new UnityEvent<int>();
-        if (onRuneActivationEnding == null)
-            onRuneActivationEnding = new UnityEvent();
+        if (onRuneLineActivationEnding == null)
+            onRuneLineActivationEnding = new UnityEvent();
     }
 
     private void Start()
@@ -88,31 +87,96 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        if (isPlaying && _currentAnimationState < 6)
+        if (isPlaying && _currentAnimationState < 10)
         {
             _currentTimer += Time.deltaTime;
             if (_currentTimer >= stepTimer)
             {
                 _currentTimer -= stepTimer;
                 _currentAnimationState++;
-                if (_currentAnimationState < 5)
+                if (_currentAnimationState <= 10)
                 {
-                    onRuneActivation?.Invoke(_currentAnimationState);
+                    UpdateAnimationResult(_currentAnimationState);
                 }
                 else
                 {
-                    onRuneActivationEnding?.Invoke();
+                    onRuneLineActivationEnding?.Invoke();
                 }
             }
         }
     }
 
+    private void UpdateAnimationResult(int index)
+    {
+        float deltaPower = animationResult;
+        if (index == 1)
+        {
+            animationResult += connectionR1R2.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR1R2.SetHighlight(deltaPower);
+        }
+        else if(index == 2)
+        {
+            animationResult += connectionR2R3.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR2R3.SetHighlight(deltaPower);
+        }
+        else if(index == 3)
+        {
+            animationResult += connectionR3R4.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR3R4.SetHighlight(deltaPower);
+        }
+        else if(index == 4)
+        {
+            animationResult += connectionR4R5.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR4R5.SetHighlight(deltaPower);
+        }
+        else if(index == 5)
+        {
+            animationResult += connectionR1R5.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR1R5.SetHighlight(deltaPower);
+        }
+        else if(index == 6)
+        {
+            animationResult += connectionR1R3.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR1R3.SetHighlight(deltaPower);
+        }
+        else if(index == 7)
+        {
+            animationResult += connectionR3R5.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR3R5.SetHighlight(deltaPower);
+        }
+        else if(index == 8)
+        {
+            animationResult += connectionR2R5.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR2R5.SetHighlight(deltaPower);
+        }
+        else if(index == 9)
+        {
+            animationResult += connectionR2R4.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR2R4.SetHighlight(deltaPower);
+        }
+        else if(index == 10)
+        {
+            animationResult += connectionR1R4.GetPower();
+            deltaPower = animationResult - deltaPower;
+            connectionR1R4.SetHighlight(deltaPower);
+        }
+    }
+    
     public void PlayAnimation()
     {
         isPlaying = true;
         _currentTimer = 0f;
         _currentAnimationState = 0;
-        onRuneActivation?.Invoke(_currentAnimationState);
+        animationResult = 0f;
     }
     
     public void ResetAnimation()
@@ -120,7 +184,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         isPlaying = false;
         _currentTimer = 0f;
         _currentAnimationState = 0;
-        onRuneActivation?.Invoke(_currentAnimationState);
+        animationResult = 0f;
     }
     
     void UpdateStats()
