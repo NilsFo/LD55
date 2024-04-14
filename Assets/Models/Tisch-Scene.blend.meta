@@ -19,6 +19,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Tisch
     second: {fileID: 2100000, guid: 9f95a75485cedb74895c1c45b404b895, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wand
+    second: {fileID: 2100000, guid: ef02f04b1e831674dbbd59a1a5a88a74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
