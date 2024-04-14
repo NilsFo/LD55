@@ -26,7 +26,7 @@ public class CardPool : ScriptableObject
 
         foreach (PlayingCardData card in knownCards)
         {
-            for (int i = 0; i < card.weight; i++)
+            for (int i = 0; i < card.rarity; i++)
             {
                 cardPool.Add(card);
             }

@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handSize: 5
+  alignX: 0
+  alignY: 0
+  alignZ: 1
   cardsInHand: []
   cardOffset: 0.45
   cardPrefab: {fileID: 5606137317059629792, guid: b71937a60cd9aab46bb13132510029de, type: 3}

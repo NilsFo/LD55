@@ -19,10 +19,7 @@ public class PlayingCardDeck : MonoBehaviour
 
     public PlayingCardData NextCard()
     {
-        Debug.Log("Request to draw next card.");
         PlayingCardData cardData = cardPool.Next();
-
-        Debug.Log("Card drawn: " + cardData.cardName);
         return cardData;
     }
 }

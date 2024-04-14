@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,12 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public PlayingCardBehaviour runeThree;
     public PlayingCardBehaviour runeFour;
     public PlayingCardBehaviour runeFive;
+    
+    public RuneBehaviourScript runeBehaviourOne;
+    public RuneBehaviourScript runeBehaviourTwo;
+    public RuneBehaviourScript runeBehaviourThree;
+    public RuneBehaviourScript runeBehaviourFour;
+    public RuneBehaviourScript runeBehaviourFive;
     
     //Stats
     public Vector2 resultRuneOne;
@@ -41,6 +48,13 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     List<PlayingCardBehaviour> listRuneThree = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneFour = new List<PlayingCardBehaviour>();
     List<PlayingCardBehaviour> listRuneFive = new List<PlayingCardBehaviour>();
+
+    private GameState _gameState;
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
+    }
 
     private void Start()
     {
@@ -378,5 +392,14 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             }
             UpdateStats();
         }
+    }
+
+     void Update()
+    {
+        runeBehaviourOne.mySelector.active=listRuneOne.Count==0;
+        runeBehaviourTwo.mySelector.active=listRuneTwo.Count==0;
+        runeBehaviourThree.mySelector.active=listRuneThree.Count==0;
+        runeBehaviourFour.mySelector.active=listRuneFour.Count==0;
+        runeBehaviourFive.mySelector.active=listRuneFive.Count==0;
     }
 }

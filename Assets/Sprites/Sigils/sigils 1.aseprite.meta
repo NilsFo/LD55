@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91402b369d510e24ca8f3fe4ba5db46b
+guid: 3fe26594b665d73479b607471cced8f0
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -75,7 +75,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
+    defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -88,7 +88,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
+    defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638486156431104483
+  platformSettingsDirtyTick: 0
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: cardBack
+  - name: sigils 1_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5034014, y: -0.10909091}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 32
-      height: 51
-    spriteID: de61ea6e570cbf54eb2e8e9d35983e92
+      width: 147
+      height: 55
+    spriteID: 03d599cb0a31b754e8569f7f399eb677
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,51 +141,55 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: sigils 1_Frame_1
+    originalName: 
+    pivot: {x: 0.5034014, y: -0.11320755}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 67
+      width: 147
+      height: 53
+    spriteID: 5b7713cdb7ad60f4892da757a9c93cd9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 67}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1453534299
-    name: cardBack
+    guid: 1831105856
+    name: sigils 1
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: cardBack
+    - name: sigils 1_Frame_0
       frameIndex: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 32
-        height: 51
-      spriteId: de61ea6e570cbf54eb2e8e9d35983e92
+        x: 6
+        y: 6
+        width: 147
+        height: 55
+      spriteId: 03d599cb0a31b754e8569f7f399eb677
+    - name: sigils 1_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 6
+        y: 6
+        width: 147
+        height: 53
+      spriteId: 5b7713cdb7ad60f4892da757a9c93cd9
     linkedCells: []
     parentIndex: -1
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 51}
+  canvasSize: {x: 160, y: 64}
