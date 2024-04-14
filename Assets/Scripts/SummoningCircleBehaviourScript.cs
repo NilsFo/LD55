@@ -396,10 +396,10 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
      void Update()
     {
-        runeBehaviourOne.mySelector.active=listRuneOne.Count==0;
-        runeBehaviourTwo.mySelector.active=listRuneTwo.Count==0;
-        runeBehaviourThree.mySelector.active=listRuneThree.Count==0;
-        runeBehaviourFour.mySelector.active=listRuneFour.Count==0;
-        runeBehaviourFive.mySelector.active=listRuneFive.Count==0;
+        runeBehaviourOne.mySelector.active=runeOne==null;
+        runeBehaviourTwo.mySelector.active=runeTwo==null;
+        runeBehaviourThree.mySelector.active=runeThree==null;
+        runeBehaviourFour.mySelector.active=runeFour==null;
+        runeBehaviourFive.mySelector.active=runeFive==null;
     }
 }

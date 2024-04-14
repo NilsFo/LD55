@@ -43,6 +43,7 @@ public class GameState : MonoBehaviour
     [Header("Listeners")] public UnityEvent onRoundEnd;
 
     [Header("Gameplay Rules")] public int handSize = 5;
+    public int drawsRemaining;
     public bool allowCardPickUp = true;
 
     private void Awake()
@@ -60,11 +61,13 @@ public class GameState : MonoBehaviour
         {
             onRoundEnd = new UnityEvent();
         }
+        EndRound();
     }
 
     // Update is called once per frame
     void Update()
     {
+        drawsRemaining = Mathf.Max(drawsRemaining, 0);
         _draggingDoubleClickTimer -= Time.deltaTime;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastResults = Physics.RaycastAll(ray);
@@ -234,7 +237,19 @@ public class GameState : MonoBehaviour
 
     private void OnRoundEnd()
     {
+        // Listeners
         onRoundEnd.Invoke();
+        handGameObject.OnEndOfRound();
+        
+        // Cleanup
+        PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
+        foreach (PlayingCardBehaviour card in cards)
+        {
+            card.OnRoundEnd();
+        }
+
+        // Init new Round
+        drawsRemaining = handSize;
         levelState = LevelState.Playing;
     }
 }
