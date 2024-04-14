@@ -106,7 +106,7 @@ public class GameState : MonoBehaviour
 
                     if (hoverTarget != null)
                     {
-                        print("hover hit");
+                        // print("hover hit");
                         mouseCardPlaneTargetPos = raycastHit.point;
                     }
                 }
