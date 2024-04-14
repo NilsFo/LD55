@@ -154,12 +154,23 @@ MonoBehaviour:
   nameTF: {fileID: 3513926771319305681}
   powerTF: {fileID: 3370018613180732031}
   artworkImg: {fileID: 5710767141008191957}
+  backgroundImg: {fileID: 748455911499143897}
   sigil: {fileID: 224092408958359558}
   drawAnimationDuration: 0.5
+  displayName: 
+  basePower: 0
+  sigilDirection: {x: 0, y: 0}
+  sprite: {fileID: 0}
+  titleTextColorDefault: {r: 0.23529412, g: 0.2, b: 0.29803923, a: 1}
+  titleTextColorFoil: {r: 0.16470589, g: 0.28627452, b: 0.16078432, a: 1}
+  titleTextColorDemonic: {r: 0.44705883, g: 0.21176471, b: 0.15294118, a: 1}
+  cardBackgroundDefault: {fileID: 21300000, guid: 4230af36cc5970f41bc8ea2a62f34ca2, type: 3}
+  cardBackgroundSinged: {fileID: 21300000, guid: 970b35572bada51fab04d8f351ada0ed, type: 3}
   playingCardState: 0
   isBurned: 0
   isBloodSoaked: 0
   isFoil: 0
+  isDaemon: 0
   movementSpeed: 5
   rotationSpeed: 10
   selectionHoverDistance: 0.8

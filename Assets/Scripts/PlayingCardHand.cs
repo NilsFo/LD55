@@ -87,7 +87,7 @@ public class PlayingCardHand : MonoBehaviour
 
     public void OnEndOfRound()
     {
-        cardsInHand.Clear();
+        // cardsInHand.Clear();
     }
     
 }

@@ -28,6 +28,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     [Header("Card visual design")] public TMP_Text nameTF;
     public TMP_Text powerTF;
     public UnityEngine.UI.Image artworkImg;
+    public UnityEngine.UI.Image backgroundImg;
     public Sigil sigil;
     public float drawAnimationDuration = .5f;
 
@@ -35,6 +36,13 @@ public class PlayingCardBehaviour : MonoBehaviour
     public int basePower;
     public Vector2 sigilDirection;
     public Sprite sprite;
+
+    [Header("Card visual defaults")] 
+    public Color titleTextColorDefault = new Color(60/255f,51/255f,76/255f);
+    public Color titleTextColorFoil = new Color(42/255f,73/255f,41/255f);
+    public Color titleTextColorDemonic = new Color(114/255f,54/255f,39/255f);
+    public Sprite cardBackgroundDefault;
+    public Sprite cardBackgroundSinged;
 
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState;
     private PlayingCardState _playingCardState;
@@ -101,14 +109,14 @@ public class PlayingCardBehaviour : MonoBehaviour
                 transform.DORotateQuaternion(
                     Quaternion.LookRotation(
                         _gameState.camera.transform.forward,
-                        Vector3.right), 
+                        Vector3.right),
                     drawAnimationDuration).Play();
             }
             else if (_playingCardState == PlayingCardState.Selected)
             {
-                
+
                 transform.DORotateQuaternion(
-                    Quaternion.LookRotation(Vector3.down, Vector3.right), 
+                    Quaternion.LookRotation(Vector3.down, Vector3.right),
                     drawAnimationDuration).Play();
             }
         }
@@ -141,7 +149,8 @@ public class PlayingCardBehaviour : MonoBehaviour
                 // Updating mouse pos if selected
 
                 Vector3 mousePos = _gameState.mouseCardPlaneTargetPos;
-                if(_gameState.mouseSelectHasTarget) {
+                if (_gameState.mouseSelectHasTarget)
+                {
                     mousePos += new Vector3(0, -selectionHoverDistance, 0);
                 }
                 transform.position += (mousePos - transform.position) * (10f * Time.deltaTime);
@@ -174,13 +183,29 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
 
         // Updating card art
+        UpdateVisuals();
+
+        gameObject.name = GetName() + ": " + GetPower() + " -> " + GetSigilDirection();
+    }
+
+    private void UpdateVisuals()
+    {
         nameTF.text = GetName();
         powerTF.text = GetPower().ToString();
         artworkImg.sprite = sprite;
         sigil.dir = GetSigilDirection();
         sigil.UpdateSigilSprite();
+        if(isBurned)
+            backgroundImg.sprite = cardBackgroundSinged;
+        else 
+            backgroundImg.sprite = cardBackgroundDefault;
 
-        gameObject.name = GetName() + ": " + GetPower() + " -> " + GetSigilDirection();
+        if(isFoil)
+            nameTF.color = titleTextColorFoil;
+        else if(isDaemon)
+            nameTF.color = titleTextColorDemonic;
+        else 
+            nameTF.color = titleTextColorDefault;
     }
 
     public void OnClick()

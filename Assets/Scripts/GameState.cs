@@ -262,9 +262,6 @@ public class GameState : MonoBehaviour
             card.OnRoundEnd();
         }
 
-        // Init new Round
-        drawsRemaining = handSize;
-        levelState = LevelState.Playing;
     }
 
     private void OnRoundStart()
@@ -284,6 +281,10 @@ public class GameState : MonoBehaviour
         };
         currentLevelSigil = svec[si];
         
+        // Init new Round
+        drawsRemaining = handSize - handGameObject.CardsInHandCount;
+        levelState = LevelState.Playing;
+
         onRoundStart.Invoke();
     }
 }
