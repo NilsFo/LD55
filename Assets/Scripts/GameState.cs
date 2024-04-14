@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
@@ -50,7 +51,8 @@ public class GameState : MonoBehaviour
     public float daemonCardPowerMod = 1/10f;
 
     [Header("Listeners")] public UnityEvent onRoundEnd;
-    [Header("Listeners")] public UnityEvent onRoundStart;
+    public UnityEvent onRoundStart;
+    public UnityEvent onRoundCalculation;
 
     [Header("Gameplay Rules")] public int handSize = 5;
     public int drawsRemaining;
@@ -81,8 +83,12 @@ public class GameState : MonoBehaviour
             onRoundStart = new UnityEvent();
         }
 
+        if (onRoundCalculation == null)
+        {
+            onRoundCalculation = new UnityEvent();
+        }
+        
         OnRoundBegin();
-        EndRound();
     }
 
     // Update is called once per frame
@@ -228,7 +234,7 @@ public class GameState : MonoBehaviour
             case LevelState.Paused:
                 break;
             case LevelState.Calculating:
-                levelState = LevelState.EndOfRound;
+                onRoundCalculation?.Invoke();
                 break;
             case LevelState.EndOfRound:
                 OnRoundEnd();
@@ -268,8 +274,6 @@ public class GameState : MonoBehaviour
     {
         Debug.Log("Calculating scores...");
         levelState=LevelState.Calculating;
-
-        handGameObject.CreateDaemonCard();
     }
 
     private void OnRoundBegin(){
@@ -282,6 +286,8 @@ public class GameState : MonoBehaviour
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
 
+        handGameObject.CreateDaemonCard();
+
         // Cleanup
         PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
         foreach (PlayingCardBehaviour card in cards)
@@ -289,6 +295,11 @@ public class GameState : MonoBehaviour
             card.OnRoundEnd();
         }
 
+        levelCurrent++;
+        levelState=LevelState.Playing;
+        OnRoundStart();
+        print("Level: "+levelCurrent+"/"+levelMax);
+        
     }
 
     private void OnRoundStart()
