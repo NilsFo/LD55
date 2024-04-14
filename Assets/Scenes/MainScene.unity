@@ -523,6 +523,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &945396043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6897608190266541825, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+  m_PrefabInstance: {fileID: 1301062511954187956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1132157220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5938711158994851930, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
@@ -681,6 +686,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1876721699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2448816159213963987, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+  m_PrefabInstance: {fileID: 6274335669390547073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1d14b458ab22b409c0c1e37d773718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2079467903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -783,7 +799,19 @@ MonoBehaviour:
       m_Calls: []
   onRoundStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1876721699}
+        m_TargetAssemblyTypeName: Candle, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   handSize: 8
   drawsRemaining: 0
   allowCardPickUp: 1
@@ -867,6 +895,10 @@ PrefabInstance:
     - target: {fileID: 5938711158994851930, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6897608190266541825, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8239901426167252099, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
       propertyPath: m_Name
@@ -1161,6 +1193,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2448816159213963987, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+      propertyPath: myLight
+      value: 
+      objectReference: {fileID: 945396043}
     - target: {fileID: 3556055557376585854, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
       propertyPath: m_Name
       value: Candle

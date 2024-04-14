@@ -9,8 +9,9 @@ public class PlayingCardHand : MonoBehaviour
     public bool alignY;
     public bool alignZ;
 
-    [Header("Cards in Hand")] public List<PlayingCardBehaviour> cardsInHand;
+    [Header("Cards in Hand")] 
     public float cardOffset = 1f;
+    public List<PlayingCardBehaviour> cardsInHand;
 
     [Header("Hookup")] public GameObject cardPrefab;
 

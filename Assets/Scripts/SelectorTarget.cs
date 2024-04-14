@@ -33,4 +33,6 @@ public class SelectorTarget : MonoBehaviour
     {
         onSelected.Invoke(card);
     }
+    
+    
 }
