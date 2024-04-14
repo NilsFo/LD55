@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
@@ -48,7 +49,8 @@ public class GameState : MonoBehaviour
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
 
     [Header("Listeners")] public UnityEvent onRoundEnd;
-    [Header("Listeners")] public UnityEvent onRoundStart;
+    public UnityEvent onRoundStart;
+    public UnityEvent onRoundCalculation;
 
     [Header("Gameplay Rules")] public int handSize = 5;
     public int drawsRemaining;
@@ -78,6 +80,12 @@ public class GameState : MonoBehaviour
         {
             onRoundStart = new UnityEvent();
         }
+
+        if (onRoundCalculation == null)
+        {
+            onRoundCalculation = new UnityEvent();
+        }
+        
         EndRound();
     }
 
@@ -224,7 +232,7 @@ public class GameState : MonoBehaviour
             case LevelState.Paused:
                 break;
             case LevelState.Calculating:
-                levelState = LevelState.EndOfRound;
+                onRoundCalculation?.Invoke();
                 break;
             case LevelState.EndOfRound:
                 OnRoundEnd();

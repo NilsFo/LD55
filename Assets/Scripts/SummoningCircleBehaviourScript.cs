@@ -85,9 +85,13 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     private void Start()
     {
-        PlayAnimation();
+        gameState.onRoundCalculation.AddListener(PlayAnimation);
+        gameState.onRoundEnd.AddListener(ResetAnimation);
         
-        //gameState.onRoundEnd.AddListener(ResetAnimation);
+        onRuneLineActivationEnding.AddListener(() =>
+        {
+            gameState.levelState = GameState.LevelState.EndOfRound;
+        });
     }
 
     void Update()
