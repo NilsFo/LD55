@@ -5,30 +5,11 @@ using UnityEngine.Events;
 
 public class SummoningCircleBehaviourScript : MonoBehaviour
 {
-    
     public UnityEvent onRuneChangeEvent;
     public UnityEvent onRuneConnectionChangeEvent;
 
-    public PlayingCardBehaviour runeOne;
-    public PlayingCardBehaviour runeTwo;
-    public PlayingCardBehaviour runeThree;
-    public PlayingCardBehaviour runeFour;
-    public PlayingCardBehaviour runeFive;
-    
-    public RuneBehaviourScript runeBehaviourOne;
-    public RuneBehaviourScript runeBehaviourTwo;
-    public RuneBehaviourScript runeBehaviourThree;
-    public RuneBehaviourScript runeBehaviourFour;
-    public RuneBehaviourScript runeBehaviourFive;
-    
-    //Stats
-    public Vector2 resultRuneOne;
-    public Vector2 resultRuneTwo;
-    public Vector2 resultRuneThree;
-    public Vector2 resultRuneFour;
-    public Vector2 resultRuneFive;
-
-    public Vector2 resultRuneTotal;
+    [Header("Hookup")] 
+    public GameState gameState;
     
     public RuneConnectionBehaviourScript connectionR1R2;
     public RuneConnectionBehaviourScript connectionR1R3;
@@ -41,7 +22,31 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public RuneConnectionBehaviourScript connectionR3R5;
     public RuneConnectionBehaviourScript connectionR4R5;
 
+    public RuneBehaviourScript runeBehaviourOne;
+    public RuneBehaviourScript runeBehaviourTwo;
+    public RuneBehaviourScript runeBehaviourThree;
+    public RuneBehaviourScript runeBehaviourFour;
+    public RuneBehaviourScript runeBehaviourFive;
+    
+    [Header("Card Live Pointer")]
+    public PlayingCardBehaviour runeOne;
+    public PlayingCardBehaviour runeTwo;
+    public PlayingCardBehaviour runeThree;
+    public PlayingCardBehaviour runeFour;
+    public PlayingCardBehaviour runeFive;
+    
+    [Header("Stats")]
+    public Vector2 resultRuneOne;
+    public Vector2 resultRuneTwo;
+    public Vector2 resultRuneThree;
+    public Vector2 resultRuneFour;
+    public Vector2 resultRuneFive;
+
+    public Vector2 resultRuneTotal;
+
     public float resultTotalPower = 0f;
+
+    public float resultMod = 0f;
     
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
@@ -91,6 +96,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         resultRuneTotal = resultRuneOne + resultRuneTwo + resultRuneThree + resultRuneFour + resultRuneFive;
         resultRuneTotal = resultRuneTotal.normalized;
+
+        resultMod = (Vector2.Dot(gameState.currentLevelSigil.normalized, resultRuneTotal)+1);
         
         onRuneChangeEvent?.Invoke();
 

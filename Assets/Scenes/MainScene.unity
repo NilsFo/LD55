@@ -540,6 +540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SummoningCircle
       objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: gameState
+      value: 
+      objectReference: {fileID: 2093978251}
     - target: {fileID: 8958941325185734803, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.26
@@ -772,8 +776,12 @@ MonoBehaviour:
   playingState: 1
   levelState: 1
   draggingCard: {fileID: 0}
+  currentLevelSigil: {x: 0, y: 0}
   selectedCardOffset: {x: 0, y: 0, z: 0}
   onRoundEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onRoundStart:
     m_PersistentCalls:
       m_Calls: []
   handSize: 8
