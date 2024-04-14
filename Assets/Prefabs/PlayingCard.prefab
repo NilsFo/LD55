@@ -155,10 +155,14 @@ MonoBehaviour:
   powerTF: {fileID: 3370018613180732031}
   artworkImg: {fileID: 5710767141008191957}
   sigil: {fileID: 224092408958359558}
+  drawAnimationDuration: 0.5
   playingCardState: 0
   isBurned: 0
   isBloodSoaked: 0
+  isFoil: 0
   movementSpeed: 5
+  rotationSpeed: 10
+  selectionHoverDistance: 0.8
   inTransition: 0
 --- !u!65 &3094548340809106592
 BoxCollider:

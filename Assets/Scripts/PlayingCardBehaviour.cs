@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,6 +29,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     public TMP_Text powerTF;
     public UnityEngine.UI.Image artworkImg;
     public Sigil sigil;
+    public float drawAnimationDuration = .5f;
 
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState;
     private PlayingCardState _playingCardState;
@@ -37,6 +39,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     [Header("Parameters")] public float movementSpeed = 7;
     public float rotationSpeed = 10;
+    public float selectionHoverDistance = 0.6f;
 
     [Header("Readonly")] public bool inTransition;
     
@@ -70,14 +73,39 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             _playingCardState = playingCardState;
             Debug.Log("New card state: " + playingCardState);
+            if (_playingCardState == PlayingCardState.Drawing)
+            {
+                var tween = transform.DOMove(handWorldPos, drawAnimationDuration).SetEase(Ease.OutCubic);
+                tween.OnUpdate(() => { tween.SetTarget(handWorldPos); });
+                tween.OnComplete(() =>
+                {
+                    Debug.Log("Tween complete");
+                    playingCardState = PlayingCardState.InHand;
+                });
+                tween.Play();
+
+                transform.DORotateQuaternion(
+                    Quaternion.LookRotation(
+                        _gameState.camera.transform.forward,
+                        Vector3.right), 
+                    drawAnimationDuration).Play();
+            }
+            else if (_playingCardState == PlayingCardState.Selected)
+            {
+                
+                transform.DORotateQuaternion(
+                    Quaternion.LookRotation(Vector3.down, Vector3.right), 
+                    drawAnimationDuration).Play();
+            }
         }
 
+        transform.DOPlay();
         var rot = transform.rotation.eulerAngles;
         switch (playingCardState)
         {
             case PlayingCardState.Drawing:
-                transform.position =
-                    Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);
+                /*transform.position =
+                    Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);*/
                 inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
                 break;
             case PlayingCardState.DrawAnimation:
@@ -89,18 +117,20 @@ public class PlayingCardBehaviour : MonoBehaviour
                 inTransition = !(Vector3.Distance(transform.position, playedWorldPos) <= 0.01f);
 
                 // rotation
-                var f =transform.forward;
+                var f = transform.forward;
                 var r = -Vector3.up;
-                var l =Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
+                var l = Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
                 transform.rotation=Quaternion.LookRotation(l,Vector3.right);
 
                 break;
             case PlayingCardState.Selected:
                 // Updating mouse pos if selected
-                // Vector3 mousePos = _gameState.GetMouseWorldPosition();
-                // Vector3 offset = _gameState.selectedCardOffset;
-                // Vector3 pos = mousePos + offset;
-                // transform.position = pos;
+
+                Vector3 mousePos = _gameState.mouseCardPlaneTargetPos;
+                if(_gameState.mouseSelectHasTarget) {
+                    mousePos += new Vector3(0, -selectionHoverDistance, 0);
+                }
+                transform.position += (mousePos - transform.position) * (10f * Time.deltaTime);
                 break;
             case PlayingCardState.InHand:
                 transform.position =
@@ -158,7 +188,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             // Returning card to hand
             if (playingCardState == PlayingCardState.Played && _gameState.allowCardPickUp)
             {
-                ReturnToHand();
+                DragCard();
             }
         }
     }
@@ -166,12 +196,13 @@ public class PlayingCardBehaviour : MonoBehaviour
     public void ReturnToHand()
     {
         Debug.Log("Returning to hand: " + name);
-        playingCardState = PlayingCardState.InHand;
+        playingCardState = PlayingCardState.Drawing;
+        
         _gameState.playingState = GameState.PlayingState.Default;
-
         if (!_gameState.handGameObject.cardsInHand.Contains(this))
         {
             _gameState.handGameObject.cardsInHand.Add(this);
+            handWorldPos = _gameState.handGameObject.GetDesiredCardPosition(_gameState.handGameObject.cardsInHand.Count - 1);
         }
     }
 
@@ -194,7 +225,7 @@ public class PlayingCardBehaviour : MonoBehaviour
         _gameState.mouseSelectTargetObj.Select(this);
 
         // Updating stuff
-        playedWorldPos = _gameState.mouseSelectTargetPos;
+        playedWorldPos = _gameState.mouseSelectTargetObj.transform.position;
         SelectorTarget targetObj = _gameState.mouseSelectTargetObj;
 
         if (targetObj.placeable)

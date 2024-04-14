@@ -67,6 +67,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
+  placeable: 1
+  cardPlacement: {fileID: 0}
+  onSelected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6885540856615268574
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,8 +125,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.44941562, z: 1}
+  m_Center: {x: 0, y: -0.2752922, z: 0}
 --- !u!114 &5897801401526303358
 MonoBehaviour:
   m_ObjectHideFlags: 0
