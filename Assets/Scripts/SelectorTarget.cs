@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,8 @@ public class SelectorTarget : MonoBehaviour
 {
     public bool active=true;
     public bool placeable=true;
+
+    public Transform cardPlacement;
     
     public UnityEvent<PlayingCardBehaviour> onSelected;
 
@@ -16,6 +19,11 @@ public class SelectorTarget : MonoBehaviour
         if (onSelected == null)
         {
             onSelected = new UnityEvent<PlayingCardBehaviour>();
+        }
+
+        if (cardPlacement == null)
+        {
+            cardPlacement = transform;
         }
     }
 

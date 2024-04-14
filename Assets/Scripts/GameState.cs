@@ -27,6 +27,7 @@ public class GameState : MonoBehaviour
     [Header("World Hookup")] public Camera camera;
     public PlayingCardHand handGameObject;
     public PlayingCardDeck deckGameObject;
+    public bool mouseSelectHasTarget;
     public SelectorTarget mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
     public Vector3 mouseCardPlaneTargetPos;
@@ -96,6 +97,7 @@ public class GameState : MonoBehaviour
             _playingState = playingState;
         }
 
+        mouseSelectHasTarget = false;
         mouseSelectTargetObj = null;
         mouseCardPlaneTargetPos = Vector3.zero;
         mouseSelectTargetPos = Vector3.zero;
@@ -112,8 +114,9 @@ public class GameState : MonoBehaviour
                     CardHoverPlane hoverTarget = raycastHit.transform.gameObject.GetComponent<CardHoverPlane>();
                     if (selectable != null && selectable.active && selectable.enabled)
                     {
+                        mouseSelectHasTarget = true;
                         mouseSelectTargetObj = selectable;
-                        mouseSelectTargetPos = raycastHit.point;
+                        mouseSelectTargetPos = selectable.cardPlacement.position;
                     }
 
                     if (hoverTarget != null)

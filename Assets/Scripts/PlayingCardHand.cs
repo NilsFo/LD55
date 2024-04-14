@@ -9,8 +9,9 @@ public class PlayingCardHand : MonoBehaviour
     public bool alignY;
     public bool alignZ;
 
-    [Header("Cards in Hand")] public List<PlayingCardBehaviour> cardsInHand;
+    [Header("Cards in Hand")] 
     public float cardOffset = 1f;
+    public List<PlayingCardBehaviour> cardsInHand;
 
     [Header("Hookup")] public GameObject cardPrefab;
 
@@ -41,7 +42,7 @@ public class PlayingCardHand : MonoBehaviour
 
             PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
             cardBehaviour.playingCardData = cardDataData;
-            cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.InHand;
+            cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
 
             cardsInHand.Add(cardBehaviour);
             _gameState.drawsRemaining--;
@@ -57,9 +58,10 @@ public class PlayingCardHand : MonoBehaviour
 
     public Vector3 GetDesiredCardPosition(int index)
     {
-        int centerIndex = CardsInHandCount / 2;
+        int futureCardsInHand = CardsInHandCount + _gameState.drawsRemaining;
+        int centerIndex = futureCardsInHand / 2;
         float oddOffset = 0;
-        if (CardsInHandCount % 2 == 0)
+        if (futureCardsInHand % 2 == 0)
         {
             oddOffset = cardOffset / 2;
         }
