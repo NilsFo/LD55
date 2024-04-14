@@ -36,10 +36,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     [Header("Parameters")] public float movementSpeed = 5;
 
     [Header("Readonly")] public bool inTransition;
-
-    // Power
-    public Vector2 CurrentPower => GetSigilDirection();
-
+    
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -171,7 +168,7 @@ public class PlayingCardBehaviour : MonoBehaviour
         _gameState.handGameObject.cardsInHand.Remove(this);
     }
 
-    private Vector2 GetSigilDirection()
+    public Vector2 GetSigilDirection()
     {
         if (playingCardData == null)
         {
@@ -180,6 +177,11 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         Vector2 v = playingCardData.sigilDirection;
         return v.normalized;
+    }
+
+    public float GetPower()
+    {
+        return playingCardData.power;
     }
 
     private void OnMouseUp()
