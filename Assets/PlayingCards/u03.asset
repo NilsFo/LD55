@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345c9701fdc04128b8b40517f6042e95, type: 3}
   m_Name: u03
   m_EditorClassIdentifier: 
-  cardName: Sulfur
+  cardName: Incense of the Damned
   sigilDirection: {x: 1, y: -1}
   power: 4
-  sprite: {fileID: 21300000, guid: 9a4fd8b0d80c0934dbddac4244b449db, type: 3}
+  sprite: {fileID: -1420724399, guid: 7b0eb5447ca873a4d8505a61604691ed, type: 3}
   rarity: 7

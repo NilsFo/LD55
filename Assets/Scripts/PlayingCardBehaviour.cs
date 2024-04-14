@@ -150,7 +150,7 @@ public class PlayingCardBehaviour : MonoBehaviour
                 Vector3 mousePos = _gameState.mouseCardPlaneTargetPos;
                 if (_gameState.mouseSelectHasTarget)
                 {
-                    mousePos += new Vector3(0, -selectionHoverDistance, 0);
+                    mousePos += _gameState.camera.transform.forward * selectionHoverDistance;
                 }
 
                 transform.position += (mousePos - transform.position) * (10f * Time.deltaTime);
