@@ -22,6 +22,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     public Vector3 handWorldPos;
     private GameState _gameState;
     public Vector3 playedWorldPos;
+    private GameState _gamestate;
 
     [Header("Card visual design")] public TMP_Text nameTF;
     public TMP_Text powerTF;
@@ -49,6 +50,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     void Start()
     {
         _playingCardState = playingCardState;
+        _gameState = FindObjectOfType<GameState>();
     }
 
     // Update is called once per frame
@@ -66,6 +68,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             Debug.Log("New card state: " + playingCardState);
         }
 
+        var rot = transform.rotation.eulerAngles;
         switch (playingCardState)
         {
             case PlayingCardState.Drawing:
@@ -80,6 +83,13 @@ public class PlayingCardBehaviour : MonoBehaviour
                 transform.position =
                     Vector3.MoveTowards(transform.position, playedWorldPos, Time.deltaTime * movementSpeed);
                 inTransition = !(Vector3.Distance(transform.position, playedWorldPos) <= 0.01f);
+
+                // rotation
+                var f =transform.forward*-1;
+                var r = Vector3.up;
+                var l =Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
+                transform.rotation=Quaternion.LookRotation(l,Vector3.up);
+
                 break;
             case PlayingCardState.Selected:
                 // Updating mouse pos if selected
@@ -92,6 +102,11 @@ public class PlayingCardBehaviour : MonoBehaviour
                 transform.position =
                     Vector3.MoveTowards(transform.position, handWorldPos, Time.deltaTime * movementSpeed);
                 inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
+
+                // rotation
+                transform.rotation = Quaternion.Euler(Vector3.MoveTowards(rot,
+                    _gameState.camera.transform.rotation.eulerAngles, Time.deltaTime * movementSpeed));
+
                 break;
             default:
                 playingCardState = PlayingCardState.Unknown;
