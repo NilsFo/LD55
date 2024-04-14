@@ -28,8 +28,8 @@ public class PlayingCardBehaviour : MonoBehaviour
     public UnityEngine.UI.Image artworkImg;
     public Sigil sigil;
 
-    [Header("Gameplay Modifiers")] public PlayingCardState playingCardState,
-        private PlayingCardState _playingCardState;
+    [Header("Gameplay Modifiers")] public PlayingCardState playingCardState;
+    private PlayingCardState _playingCardState;
     public bool isBurned;
     public bool isBloodSoaked;
 
@@ -54,12 +54,12 @@ public class PlayingCardBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playingCardState==PlayingCardState.Unknown)
+        if (playingCardState == PlayingCardState.Unknown)
         {
             Debug.LogError("Unknown card state");
             return;
-        } 
-        
+        }
+
         if (_playingCardState != playingCardState)
         {
             _playingCardState = playingCardState;
@@ -195,5 +195,4 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    
 }
