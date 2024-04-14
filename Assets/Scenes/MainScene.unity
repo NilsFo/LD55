@@ -932,6 +932,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8205304185499545187, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e76c558909d6a3443abbd7b237f01c89, type: 2}
     - target: {fileID: 8239901426167252099, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
       propertyPath: m_Name
       value: Board

@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Gargoyle
+    second: {fileID: 2100000, guid: e76c558909d6a3443abbd7b237f01c89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Kreide
     second: {fileID: 2100000, guid: 2a0fdd270da1b6643876d501573fbb7d, type: 2}
   - first:
@@ -19,6 +24,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Leder
     second: {fileID: 2100000, guid: ebee10ed9b805f7418af627399e9ab5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 41a09cb6a3d77464e96e7e402671bcc7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
