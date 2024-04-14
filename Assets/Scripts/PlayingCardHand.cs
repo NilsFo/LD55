@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class PlayingCardHand : MonoBehaviour
 {
-    [Header("Gameplay config")] public int handSize = 5;
-    public bool alignX;
+    [Header("Gameplay config")] public bool alignX;
     public bool alignY;
     public bool alignZ;
 
@@ -34,7 +33,7 @@ public class PlayingCardHand : MonoBehaviour
     void Update()
     {
         // Drawing next card?
-        if (CardsInHandCount < handSize)
+        if (_gameState.drawsRemaining > 0)
         {
             PlayingCardData cardDataData = _gameState.deckGameObject.NextCard();
             GameObject playingCardObj = Instantiate(cardPrefab, transform);
@@ -45,6 +44,7 @@ public class PlayingCardHand : MonoBehaviour
             cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.InHand;
 
             cardsInHand.Add(cardBehaviour);
+            _gameState.drawsRemaining--;
         }
 
         // Updating card Positions
@@ -82,4 +82,10 @@ public class PlayingCardHand : MonoBehaviour
 
         return pos;
     }
+
+    public void OnEndOfRound()
+    {
+        cardsInHand.Clear();
+    }
+    
 }

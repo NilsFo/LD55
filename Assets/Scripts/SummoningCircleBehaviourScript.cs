@@ -15,6 +15,12 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public PlayingCardBehaviour runeFour;
     public PlayingCardBehaviour runeFive;
     
+    public RuneBehaviourScript runeBehaviourOne;
+    public RuneBehaviourScript runeBehaviourTwo;
+    public RuneBehaviourScript runeBehaviourThree;
+    public RuneBehaviourScript runeBehaviourFour;
+    public RuneBehaviourScript runeBehaviourFive;
+    
     //Stats
     public Vector2 resultRuneOne;
     public Vector2 resultRuneTwo;
@@ -386,5 +392,14 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             }
             UpdateStats();
         }
+    }
+
+     void Update()
+    {
+        runeBehaviourOne.mySelector.active=runeOne==null;
+        runeBehaviourTwo.mySelector.active=runeTwo==null;
+        runeBehaviourThree.mySelector.active=runeThree==null;
+        runeBehaviourFour.mySelector.active=runeFour==null;
+        runeBehaviourFive.mySelector.active=runeFive==null;
     }
 }

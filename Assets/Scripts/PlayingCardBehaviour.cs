@@ -10,6 +10,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 {
     public enum PlayingCardState
     {
+        Unknown,
         DrawAnimation,
         Drawing,
         InHand,
@@ -27,7 +28,8 @@ public class PlayingCardBehaviour : MonoBehaviour
     public UnityEngine.UI.Image artworkImg;
     public Sigil sigil;
 
-    [Header("Gameplay Modifiers")] public PlayingCardState playingCardState, _playingCardState;
+    [Header("Gameplay Modifiers")] public PlayingCardState playingCardState,
+        private PlayingCardState _playingCardState;
     public bool isBurned;
     public bool isBloodSoaked;
 
@@ -52,6 +54,12 @@ public class PlayingCardBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playingCardState==PlayingCardState.Unknown)
+        {
+            Debug.LogError("Unknown card state");
+            return;
+        } 
+        
         if (_playingCardState != playingCardState)
         {
             _playingCardState = playingCardState;
@@ -86,6 +94,7 @@ public class PlayingCardBehaviour : MonoBehaviour
                 inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
                 break;
             default:
+                playingCardState = PlayingCardState.Unknown;
                 break;
         }
 
@@ -112,8 +121,8 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
     }
 
-    public void GetSigilSprite(Vector2 dir) {
-
+    public void GetSigilSprite(Vector2 dir)
+    {
     }
 
     public void OnClick()
@@ -128,10 +137,10 @@ public class PlayingCardBehaviour : MonoBehaviour
             }
 
             // Returning card to hand
-            // if (playingCardState == PlayingCardState.Played)
-            // {
-            // ReturnToHand();
-            // }
+            if (playingCardState == PlayingCardState.Played && _gameState.allowCardPickUp)
+            {
+                ReturnToHand();
+            }
         }
     }
 
@@ -176,4 +185,15 @@ public class PlayingCardBehaviour : MonoBehaviour
     private void OnMouseUp()
     {
     }
+
+    public void OnRoundEnd()
+    {
+        DestroyCard();
+    }
+
+    public void DestroyCard()
+    {
+        Destroy(gameObject);
+    }
+    
 }

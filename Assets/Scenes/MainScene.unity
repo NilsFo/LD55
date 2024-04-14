@@ -560,6 +560,9 @@ MonoBehaviour:
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
+  handSize: 8
+  drawsRemaining: 0
+  allowCardPickUp: 1
 --- !u!4 &2093978252
 Transform:
   m_ObjectHideFlags: 0
@@ -594,6 +597,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5445869719010638366, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5938711158994851930, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

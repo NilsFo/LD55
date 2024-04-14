@@ -5,6 +5,7 @@ public class RuneBehaviourScript : MonoBehaviour
 {
     public SummoningCircleBehaviourScript summoningCircleBehaviourScript;
     public int runeId;
+    public SelectorTarget mySelector;
 
     private GameState _gameState;
 
