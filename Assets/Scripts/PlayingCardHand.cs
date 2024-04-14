@@ -8,13 +8,14 @@ public class PlayingCardHand : MonoBehaviour
     [Header("Gameplay config")] public bool alignX;
     public bool alignY;
     public bool alignZ;
+    public float drawDelay = 0.69f;
+    private float _drawDelay = 0;
 
-    [Header("Cards in Hand")] 
-    public float cardOffset = 1f;
+    [Header("Cards in Hand")] public float cardOffset = 1f;
     public List<PlayingCardBehaviour> cardsInHand;
 
     [Header("Hookup")] public GameObject cardPrefab;
-
+    public Transform daemonCreationOrigin;
     private GameState _gameState;
 
     // Properties
@@ -28,13 +29,16 @@ public class PlayingCardHand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _drawDelay = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        _drawDelay += Time.deltaTime;
+
         // Drawing next card?
-        if (_gameState.drawsRemaining > 0)
+        if (_gameState.drawsRemaining > 0 && _drawDelay > drawDelay)
         {
             PlayingCardData cardDataData = _gameState.deckGameObject.NextCard();
             GameObject playingCardObj = Instantiate(cardPrefab, transform);
@@ -46,6 +50,7 @@ public class PlayingCardHand : MonoBehaviour
 
             cardsInHand.Add(cardBehaviour);
             _gameState.drawsRemaining--;
+            _drawDelay = 0;
         }
 
         // Updating card Positions
@@ -89,5 +94,25 @@ public class PlayingCardHand : MonoBehaviour
     {
         // cardsInHand.Clear();
     }
+
+    public void CreateDaemonCard()
+    {
+        GameObject playingCardObj = Instantiate(cardPrefab, transform);
+        playingCardObj.transform.position = daemonCreationOrigin.position;
+        
+        PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
+        cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
+
+        cardBehaviour.isDaemon = true;
+        
+        // TODO add name
+        cardBehaviour.displayName = "New Daemon";
+        cardBehaviour.basePower = (int)Mathf.Ceil(_gameState.summoningCircle.Value * _gameState.daemonCardPowerMod);
+
+        cardBehaviour.sigilDirection = _gameState.currentLevelSigil;
+        
+        cardsInHand.Add(cardBehaviour);
+    }
+
     
 }

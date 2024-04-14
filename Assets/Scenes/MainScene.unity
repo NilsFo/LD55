@@ -599,6 +599,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &524473363 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3138780983353239011, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+  m_PrefabInstance: {fileID: 1662849099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &671934612
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +867,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788324579}
   m_CullTransparentMesh: 1
+--- !u!114 &872839833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+  m_PrefabInstance: {fileID: 1662849099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241c5829b73a00746beb0f1d9e07e16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &906472606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayingCardHand
       objectReference: {fileID: 0}
+    - target: {fileID: 8151375006285106321, guid: 052b817be5b017749919f761254b3a37, type: 3}
+      propertyPath: daemonCreationOrigin
+      value: 
+      objectReference: {fileID: 524473363}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1328,6 +1348,8 @@ MonoBehaviour:
   camera: {fileID: 671934614}
   handGameObject: {fileID: 28977153}
   deckGameObject: {fileID: 2106481489}
+  summoningCircle: {fileID: 872839833}
+  mouseSelectHasTarget: 0
   mouseSelectTargetObj: {fileID: 0}
   mouseSelectTargetPos: {x: 0, y: 0, z: 0}
   mouseCardPlaneTargetPos: {x: 0, y: 0, z: 0}
@@ -1335,7 +1357,10 @@ MonoBehaviour:
   levelState: 1
   draggingCard: {fileID: 0}
   currentLevelSigil: {x: 0, y: 0}
+  levelCurrent: 0
+  levelMax: 6
   selectedCardOffset: {x: 0, y: 0, z: 0}
+  daemonCardPowerMod: 0.1
   onRoundEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -1755,10 +1780,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle
       objectReference: {fileID: 0}
-    - target: {fileID: 9121755901275526763, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
-      propertyPath: m_Radius
-      value: 0.35
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1778,7 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 2093978251}
     - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndRound
+      value: StartCalculateScores
       objectReference: {fileID: 0}
     - target: {fileID: 237034673263304697, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1794,7 +1815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1996424066124998488, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4253196559529670016, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
       propertyPath: m_Pivot.x

@@ -21,12 +21,14 @@ public class GameState : MonoBehaviour
         Playing,
         Paused,
         EndOfRound,
+        Calculating,
         GameOver
     }
 
     [Header("World Hookup")] public Camera camera;
     public PlayingCardHand handGameObject;
     public PlayingCardDeck deckGameObject;
+    public SummoningCircleBehaviourScript summoningCircle;
     public bool mouseSelectHasTarget;
     public SelectorTarget mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
@@ -41,8 +43,11 @@ public class GameState : MonoBehaviour
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
 
     [Header("Current Level")] public Vector2 currentLevelSigil;
+    public int levelCurrent=0;
+    public int levelMax = 6;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
+    public float daemonCardPowerMod = 1/10f;
 
     [Header("Listeners")] public UnityEvent onRoundEnd;
     [Header("Listeners")] public UnityEvent onRoundStart;
@@ -65,6 +70,7 @@ public class GameState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelCurrent = 1;
         if (onRoundEnd == null)
         {
             onRoundEnd = new UnityEvent();
@@ -74,6 +80,8 @@ public class GameState : MonoBehaviour
         {
             onRoundStart = new UnityEvent();
         }
+
+        OnRoundBegin();
         EndRound();
     }
 
@@ -219,13 +227,20 @@ public class GameState : MonoBehaviour
                 break;
             case LevelState.Paused:
                 break;
+            case LevelState.Calculating:
+                levelState = LevelState.EndOfRound;
+                break;
             case LevelState.EndOfRound:
                 OnRoundEnd();
-                OnRoundStart();
                 break;
             default:
                 levelState = LevelState.Unknown;
                 break;
+        }
+
+        if (_levelState==LevelState.EndOfRound)
+        {
+            OnRoundBegin();
         }
     }
 
@@ -244,9 +259,21 @@ public class GameState : MonoBehaviour
         return worldPosition;
     }
 
-    public void EndRound()
+    private void EndRound()
     {
         levelState = LevelState.EndOfRound;
+    }
+
+    public void StartCalculateScores()
+    {
+        Debug.Log("Calculating scores...");
+        levelState=LevelState.Calculating;
+
+        handGameObject.CreateDaemonCard();
+    }
+
+    private void OnRoundBegin(){
+            OnRoundStart();
     }
 
     private void OnRoundEnd()

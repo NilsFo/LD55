@@ -114,7 +114,6 @@ public class PlayingCardBehaviour : MonoBehaviour
             }
             else if (_playingCardState == PlayingCardState.Selected)
             {
-
                 transform.DORotateQuaternion(
                     Quaternion.LookRotation(Vector3.down, Vector3.right),
                     drawAnimationDuration).Play();
@@ -153,6 +152,7 @@ public class PlayingCardBehaviour : MonoBehaviour
                 {
                     mousePos += new Vector3(0, -selectionHoverDistance, 0);
                 }
+
                 transform.position += (mousePos - transform.position) * (10f * Time.deltaTime);
                 break;
             case PlayingCardState.InHand:
@@ -192,7 +192,12 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         nameTF.text = GetName();
         powerTF.text = GetPower().ToString();
-        artworkImg.sprite = sprite;
+        if(sprite != null) {
+            artworkImg.sprite = sprite;
+            artworkImg.enabled = true;
+        }
+        else
+            artworkImg.enabled = false;
         sigil.dir = GetSigilDirection();
         sigil.UpdateSigilSprite();
         if(isBurned)
@@ -210,7 +215,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     public void OnClick()
     {
-        print("card click");
+        Debug.Log("Clicked on: " + name);
         if (_gameState.playingState == GameState.PlayingState.Default)
         {
             // Placing card on board
@@ -231,12 +236,13 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         Debug.Log("Returning to hand: " + name);
         playingCardState = PlayingCardState.Drawing;
-        
+
         _gameState.playingState = GameState.PlayingState.Default;
         if (!_gameState.handGameObject.cardsInHand.Contains(this))
         {
             _gameState.handGameObject.cardsInHand.Add(this);
-            handWorldPos = _gameState.handGameObject.GetDesiredCardPosition(_gameState.handGameObject.cardsInHand.Count - 1);
+            handWorldPos =
+                _gameState.handGameObject.GetDesiredCardPosition(_gameState.handGameObject.cardsInHand.Count - 1);
         }
     }
 
@@ -278,6 +284,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         if (playingCardState == PlayingCardState.Played)
         {
+            Debug.Log("Removing played card " + name);  
             DestroyCard();
         }
     }
@@ -288,6 +295,7 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             _gameState.playingState = GameState.PlayingState.Default;
         }
+
         _gameState.handGameObject.cardsInHand.Remove(this);
 
         Destroy(gameObject);
