@@ -31,18 +31,24 @@ public class PlayingCardBehaviour : MonoBehaviour
     public Sigil sigil;
     public float drawAnimationDuration = .5f;
 
+    [Header("Card visual values")] public string displayName;
+    public int basePower;
+    public Vector2 sigilDirection;
+    public Sprite sprite;
+
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState;
     private PlayingCardState _playingCardState;
     public bool isBurned = false;
     public bool isBloodSoaked = false;
     public bool isFoil = false;
+    public bool isDaemon = false;
 
     [Header("Parameters")] public float movementSpeed = 7;
     public float rotationSpeed = 10;
     public float selectionHoverDistance = 0.6f;
 
     [Header("Readonly")] public bool inTransition;
-    
+
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -53,6 +59,14 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         _playingCardState = playingCardState;
         _gameState = FindObjectOfType<GameState>();
+
+        if (playingCardData != null)
+        {
+            displayName = playingCardData.cardName;
+            basePower = playingCardData.PowerScala();
+            sprite = playingCardData.sprite;
+            sigilDirection = playingCardData.sigilDirection;
+        }
 
         if (Random.Range(0f, 1f) <= _gameState.cardFoilChance)
         {
@@ -120,7 +134,7 @@ public class PlayingCardBehaviour : MonoBehaviour
                 var f = transform.forward;
                 var r = -Vector3.up;
                 var l = Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
-                transform.rotation=Quaternion.LookRotation(l,Vector3.right);
+                transform.rotation = Quaternion.LookRotation(l, Vector3.right);
 
                 break;
             case PlayingCardState.Selected:
@@ -160,18 +174,13 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
 
         // Updating card art
-        if (playingCardData != null)
-        {
-            nameTF.text = playingCardData.cardName;
-            powerTF.text = GetPower().ToString();
-            artworkImg.sprite = playingCardData.sprite;
-            sigil.dir = GetSigilDirection();
-            sigil.UpdateSigilSprite();
-        }
-    }
+        nameTF.text = GetName();
+        powerTF.text = GetPower().ToString();
+        artworkImg.sprite = sprite;
+        sigil.dir = GetSigilDirection();
+        sigil.UpdateSigilSprite();
 
-    public void GetSigilSprite(Vector2 dir)
-    {
+        gameObject.name = GetName() + ": " + GetPower() + " -> " + GetSigilDirection();
     }
 
     public void OnClick()
@@ -220,7 +229,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             Debug.LogWarning("Cannot place. Nothing selected.");
             return;
         }
-        
+
         // Notifying listeners
         _gameState.mouseSelectTargetObj.Select(this);
 
@@ -234,26 +243,18 @@ public class PlayingCardBehaviour : MonoBehaviour
             playingCardState = PlayingCardState.Played;
             _gameState.handGameObject.cardsInHand.Remove(this);
         }
-    }
-
-    public Vector2 GetSigilDirection()
-    {
-        if (playingCardData == null)
+        else
         {
-            return Vector2.zero;
+            ReturnToHand();
         }
-
-        Vector2 v = playingCardData.sigilDirection;
-        return v.normalized;
-    }
-
-    private void OnMouseUp()
-    {
     }
 
     public void OnRoundEnd()
     {
-        DestroyCard();
+        if (playingCardState == PlayingCardState.Played)
+        {
+            DestroyCard();
+        }
     }
 
     public void DestroyCard()
@@ -262,29 +263,52 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             _gameState.playingState = GameState.PlayingState.Default;
         }
-
-        if (_gameState.handGameObject.cardsInHand.Contains(this))
-        {
-            _gameState.handGameObject.cardsInHand.Remove(this);
-        }
+        _gameState.handGameObject.cardsInHand.Remove(this);
 
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        _gameState.handGameObject.cardsInHand.Remove(this);
+    }
+
     public float GetPower()
     {
-        float basePower = playingCardData.PowerScala();
+        float power = basePower;
 
         if (isFoil)
         {
-            basePower += Mathf.CeilToInt(((float)basePower * _gameState.cardFoilMult));
+            power += Mathf.CeilToInt(((float)power * _gameState.cardFoilMult));
         }
 
         if (isBurned)
         {
-            basePower += Mathf.CeilToInt(((float)basePower * _gameState.cardBurningMult));
+            power += Mathf.CeilToInt(((float)power * _gameState.cardBurningMult));
         }
 
-        return basePower;
+        return power;
+    }
+
+    public Vector2 GetSigilDirection()
+    {
+        Vector2 v = sigilDirection;
+        return v.normalized;
+    }
+
+    public string GetName()
+    {
+        string name = displayName;
+        if (isBurned)
+        {
+            name = "Singed " + name;
+        }
+
+        if (isFoil)
+        {
+            name = name + "+";
+        }
+
+        return name;
     }
 }
