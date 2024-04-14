@@ -82,10 +82,10 @@ public class PlayingCardBehaviour : MonoBehaviour
                 inTransition = !(Vector3.Distance(transform.position, playedWorldPos) <= 0.01f);
 
                 // rotation
-                var f =transform.forward*-1;
-                var r = Vector3.up;
+                var f =transform.forward;
+                var r = -Vector3.up;
                 var l =Vector3.RotateTowards(f, r, Time.deltaTime * movementSpeed, 0.0f);
-                transform.rotation=Quaternion.LookRotation(l,Vector3.up);
+                transform.rotation=Quaternion.LookRotation(l,Vector3.right);
 
                 break;
             case PlayingCardState.Selected:
