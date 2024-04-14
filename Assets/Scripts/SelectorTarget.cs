@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class SelectorTarget : MonoBehaviour
 {
-    public bool active=true;
-    public bool placeable=true;
-    
+    public bool active = true;
+    public bool placeable = true;
+
     public UnityEvent<PlayingCardBehaviour> onSelected;
 
     // Start is called before the first frame update
@@ -33,6 +33,4 @@ public class SelectorTarget : MonoBehaviour
     {
         onSelected.Invoke(card);
     }
-    
-    
 }

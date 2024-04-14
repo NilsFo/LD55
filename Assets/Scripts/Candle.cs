@@ -7,7 +7,7 @@ public class Candle : MonoBehaviour
     private GameState _gameState;
     public int usesRemaining = 4;
     private int _usesOriginal;
-    public GameObject myLight;
+    public List<GameObject> attachedObjects;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,10 @@ public class Candle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myLight.SetActive(usesRemaining != 0);
+        foreach (GameObject obj in attachedObjects)
+        {
+            obj.SetActive(usesRemaining != 0);
+        }
     }
 
     public void OnBurn(PlayingCardBehaviour playingCardBehaviour)
