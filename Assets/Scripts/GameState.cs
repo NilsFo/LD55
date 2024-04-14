@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
