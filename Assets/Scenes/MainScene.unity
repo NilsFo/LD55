@@ -1654,7 +1654,7 @@ MonoBehaviour:
   cardFoilMult: 1.25
   cardBurningMult: 0.5
   specialCardDrawChance: 1
-  specialCardMax: 4
+  specialCardMax: 0
 --- !u!4 &2093978252
 Transform:
   m_ObjectHideFlags: 0
@@ -2462,6 +2462,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Book
       objectReference: {fileID: 0}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 1710754076, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: -887193113, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: -897632056, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[5]
+      value: 
+      objectReference: {fileID: -1067619509, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: -577728779, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[7]
+      value: 
+      objectReference: {fileID: -893602576, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6130979207485967626, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: sigilSprites.Array.data[8]
+      value: 
+      objectReference: {fileID: 130602035, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
     - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
