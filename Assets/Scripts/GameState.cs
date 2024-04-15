@@ -50,6 +50,7 @@ public class GameState : MonoBehaviour
     private PlayingState _playingState;
     public LevelState levelState = LevelState.Playing;
     private LevelState _levelState;
+    public bool demonCaptureCorrect;
     public PlayingCardBehaviour draggingCard;
     private float _draggingDoubleClickTimer = 0;
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
@@ -115,6 +116,7 @@ public class GameState : MonoBehaviour
 
     public void StartGame()
     {
+        ResetMetrics();
         OnRoundBegin();
     }
 
@@ -310,9 +312,11 @@ public class GameState : MonoBehaviour
                 break;
             case LevelState.Calculating:
                 onRoundCalculation?.Invoke();
+                demonCaptureCorrect = IsSigilMatching();
                 tutorialBook.Hide();
                 break;
             case LevelState.EndOfRound:
+                demonCaptureCorrect = false;
                 tutorialBook.Hide();
                 OnRoundEnd();
                 break;
@@ -396,13 +400,11 @@ public class GameState : MonoBehaviour
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
 
-        // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
-
         // Cleanup
-
         levelCurrent++;
         if (levelCurrent >= levelMax)
         {
+            highScore = (int)MathF.Max(highScore, score);
             levelState = LevelState.GameOver;
         }
         else
@@ -423,7 +425,6 @@ public class GameState : MonoBehaviour
 
     public void CreateDemonCards()
     {
-
         PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
         foreach (PlayingCardBehaviour card in cards)
         {
@@ -455,6 +456,7 @@ public class GameState : MonoBehaviour
         };
         currentLevelSigil = svec[si];
         demonCreationCount = 1;
+        demonCaptureCorrect = false;
 
         // Init new Round
         drawsRemaining = handSize - handGameObject.CardsInHandCount;
@@ -484,6 +486,7 @@ public class GameState : MonoBehaviour
             playingCardBehaviour.DestroyCard();
         }
 
+        demonCaptureCorrect = false;
         score = 0;
         levelCurrent = 1;
         demomCreationCount = 0;

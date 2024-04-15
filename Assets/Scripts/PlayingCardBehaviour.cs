@@ -78,7 +78,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     [Header("Readonly")] public bool inTransition;
 
     [Header("Hooks")] public UnityEvent<PlayingCardBehaviour> onDestroy;
-    
+
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -253,12 +253,13 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     public void OnClick()
     {
-        if (_gameState.levelState != GameState.LevelState.Playing && !(_gameState.levelState == GameState.LevelState.Summoning && isDaemon))
+        if (_gameState.levelState != GameState.LevelState.Playing &&
+            !(_gameState.levelState == GameState.LevelState.Summoning && isDaemon))
         {
             Debug.LogWarning("Cannot select this card. Wrong game state.");
             return;
         }
-        
+
         Debug.Log("Clicked on: " + name);
         if (_gameState.playingState == GameState.PlayingState.Default)
         {
@@ -273,23 +274,31 @@ public class PlayingCardBehaviour : MonoBehaviour
             {
                 DragCard();
             }
-        } 
-        if (playingCardState == PlayingCardState.DrawAnimation && isDaemon) {
-            if(_gameState.IsSigilMatching()) {
+        }
+
+        if (playingCardState == PlayingCardState.DrawAnimation && isDaemon)
+        {
+            if (_gameState.demonCaptureCorrect)
+            {
                 playingCardState = PlayingCardState.Drawing;
-            } else {
+            }
+            else
+            {
                 DestroyCard();
             }
 
-            var otherDaemon = _gameState.handGameObject.cardsInHand.Find((card) => card.isDaemon && card.playingCardState == PlayingCardState.DrawAnimation);
-            if(otherDaemon == null) {
+            var otherDaemon = _gameState.handGameObject.cardsInHand.Find((card) =>
+                card.isDaemon && card.playingCardState == PlayingCardState.DrawAnimation);
+            if (otherDaemon == null)
+            {
                 // No other daemons, start next round
                 Invoke("EndTheRound", 1f);
             }
         }
     }
 
-    private void EndTheRound() {
+    private void EndTheRound()
+    {
         _gameState.levelState = GameState.LevelState.EndOfRound;
     }
 
@@ -370,7 +379,8 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         burnMask.enabled = true;
         burnMask.rectTransform.DOSizeDelta(Vector2.zero, 1.2f)
-            .OnComplete(() => {
+            .OnComplete(() =>
+            {
                 onDestroy?.Invoke(this);
                 Destroy(gameObject);
             })
