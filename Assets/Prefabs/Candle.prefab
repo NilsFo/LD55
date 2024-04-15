@@ -100,4 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usesRemaining: 4
+  infiniteUses: 1
+  canDestroyCards: 0
+  canBuffCards: 1
   attachedObjects: []

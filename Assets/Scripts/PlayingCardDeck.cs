@@ -6,6 +6,10 @@ using UnityEngine.Serialization;
 public class PlayingCardDeck : MonoBehaviour
 {
     public CardPool cardPool;
+    public CardPool cardPoolSpecial;
+
+    public string lastDrawnCardName="";
+    public string lastDrawnCardNameSpecial="";
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,24 @@ public class PlayingCardDeck : MonoBehaviour
     public PlayingCardData NextCard()
     {
         PlayingCardData cardData = cardPool.Next();
+        if (cardData.cardName==lastDrawnCardName)
+        {
+            return NextCard();
+        }
+
+        lastDrawnCardName = cardData.cardName;
+        return cardData;
+    }
+
+    public PlayingCardData NextSpecialCard()
+    {
+        PlayingCardData cardData = cardPoolSpecial.Next();
+        if (cardData.cardName==lastDrawnCardNameSpecial)
+        {
+            return NextSpecialCard();
+        }
+
+        lastDrawnCardNameSpecial = cardData.cardName;
         return cardData;
     }
 }

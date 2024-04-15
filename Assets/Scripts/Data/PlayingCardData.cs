@@ -9,6 +9,7 @@ public class PlayingCardData : ScriptableObject
     public Vector2Int sigilDirection;
     public int power;
     public Sprite sprite;
+    public PlayingCardBehaviour.PlayingCardEffect cardEffect = PlayingCardBehaviour.PlayingCardEffect.None;
 
     public int rarity = 10;
 

@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPool: {fileID: 11400000, guid: fb6ab35fab690444ea064bd4bd5c5a6d, type: 2}
+  cardPoolSpecial: {fileID: 11400000, guid: 29d2ab8ccd8bfa54fbaca9286d9eab25, type: 2}
+  lastDrawnCardName: 
+  lastDrawnCardNameSpecial: 
