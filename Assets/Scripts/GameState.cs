@@ -118,7 +118,7 @@ public class GameState : MonoBehaviour
         _draggingDoubleClickTimer -= Time.deltaTime;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastResults = Physics.RaycastAll(ray);
-
+        
         // Updating music
         musicManager.Play(0);
         MusicManager.userDesiredMasterVolume = volumeSlider.value;
@@ -328,6 +328,7 @@ public class GameState : MonoBehaviour
         // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
         int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
         int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
+        print("result rune: "+resultRuneTotalIndex+". current level: "+currentLevelSigilIndex);
 
         if (resultRuneTotalIndex == currentLevelSigilIndex)
         {
