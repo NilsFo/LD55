@@ -11,6 +11,8 @@ public class Candle : MonoBehaviour
     public bool canBuffCards = false;
     private int _usesOriginal;
     public List<GameObject> attachedObjects;
+    
+    public AudioClip cardBurnedClip;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,10 @@ public class Candle : MonoBehaviour
         {
             if (canBuffCards)
             {
+                if(!playingCardBehaviour.isBurned){
+                 _gameState.musicManager.CreateAudioClip(cardBurnedClip,_gameState.transform.position,respectBinning:false);
+                }
+            
                 playingCardBehaviour.isBurned = true;
             }
         }

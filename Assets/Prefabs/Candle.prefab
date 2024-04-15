@@ -104,3 +104,4 @@ MonoBehaviour:
   canDestroyCards: 0
   canBuffCards: 1
   attachedObjects: []
+  cardBurnedClip: {fileID: 8300000, guid: f14a91471d9ee104a9b6ca83a5fe1164, type: 3}

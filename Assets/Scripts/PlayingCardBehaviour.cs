@@ -79,6 +79,12 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     [Header("Hooks")] public UnityEvent<PlayingCardBehaviour> onDestroy;
 
+    [Header("SFX")] public AudioClip cardReturnToHandClip;
+    public AudioClip cardDragClip;
+    public AudioClip placeOnTableSound;
+    public AudioClip demonDestroyed;
+    public AudioClip normalCardDestroyed;
+    
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -284,6 +290,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             }
             else
             {
+                _gameState.musicManager.CreateAudioClip(demonDestroyed,_gameState.transform.position,respectBinning:false);
                 DestroyCard();
             }
 
@@ -319,6 +326,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     public void DragCard()
     {
         Debug.Log("card selected: " + name);
+        _gameState.musicManager.CreateAudioClip(cardDragClip, _gameState.transform.position, respectBinning: false);
         _gameState.DragCard(this);
         playingCardState = PlayingCardState.Selected;
     }
@@ -340,6 +348,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         if (targetObj.placeable)
         {
+            _gameState.musicManager.CreateAudioClip(placeOnTableSound,_gameState.transform.position,respectBinning:false);
             _gameState.playingState = GameState.PlayingState.Default;
             playingCardState = PlayingCardState.Played;
             _gameState.handGameObject.cardsInHand.Remove(this);
@@ -374,6 +383,11 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
 
         playingCardState = PlayingCardState.Destroyed;
+
+        if (!isDaemon)
+        {
+            _gameState.musicManager.CreateAudioClip(normalCardDestroyed,_gameState.transform.position,respectBinning:true);
+        }
 
         _gameState.handGameObject.cardsInHand.Remove(this);
 

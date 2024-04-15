@@ -9,6 +9,8 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
     public GameObject runeTwo;
     public ConnectionParticleManager myConnectionParticleManager;
     public MeshRenderer myChalkMesh;
+    public AudioClip blingSound;
+    private GameState _gameState;
     
     public TMP_Text text;
     
@@ -30,6 +32,7 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 
         UpdateColor();
 
+        _gameState = FindObjectOfType<GameState>();
         text.text = "";
     }
 
@@ -72,6 +75,8 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
             toBookTween.Play();
         });
         upTween.Play();
+
+        _gameState.musicManager.CreateAudioClip(blingSound,_gameState.transform.position);
         
         if(myChalkMesh != null)
             myChalkMesh.material.DOColor(new Color(1,0,1,255), Shader.PropertyToID("_EmissionColor"), .2f).SetLoops(2, LoopType.Yoyo).Play();

@@ -185,6 +185,11 @@ MonoBehaviour:
   onDestroy:
     m_PersistentCalls:
       m_Calls: []
+  cardReturnToHandClip: {fileID: 8300000, guid: f1cb16a263051484f97b1664f1bdb241, type: 3}
+  cardDragClip: {fileID: 8300000, guid: f1cb16a263051484f97b1664f1bdb241, type: 3}
+  placeOnTableSound: {fileID: 8300000, guid: bf58db1f423de0e449b408fc5cf95ff1, type: 3}
+  demonDestroyed: {fileID: 8300000, guid: bc068068eb7c9a04991d8db1c02b8a6a, type: 3}
+  normalCardDestroyed: {fileID: 8300000, guid: f14a91471d9ee104a9b6ca83a5fe1164, type: 3}
 --- !u!65 &3094548340809106592
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -52,6 +52,7 @@ MonoBehaviour:
   lastDrawnCardNameSpecial: 
   cardSpawnPoint: {fileID: 7401914853718298432}
   cardDrawAnimPoint: {fileID: 7717311983877235568}
+  drawSoundClip: {fileID: 8300000, guid: 5060d5ac665c340458ce7cc10dae280f, type: 3}
 --- !u!1 &7441702608640803146
 GameObject:
   m_ObjectHideFlags: 0
