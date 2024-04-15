@@ -425,6 +425,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
 
         runeOne = newCard;
+        runeOne.onDestroy.AddListener(ClearRuneOne);
         UpdateStats();
     }
 
@@ -437,6 +438,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
 
         runeTwo = newCard;
+        runeTwo.onDestroy.AddListener(ClearRuneTwo);
         UpdateStats();
     }
 
@@ -449,6 +451,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
 
         runeThree = newCard;
+        runeThree.onDestroy.AddListener(ClearRuneThree);
         UpdateStats();
     }
 
@@ -461,6 +464,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
 
         runeFour = newCard;
+        runeFour.onDestroy.AddListener(ClearRuneFour);
         UpdateStats();
     }
 
@@ -473,6 +477,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
 
         runeFive = newCard;
+        runeFive.onDestroy.AddListener(ClearRuneFive);
         UpdateStats();
     }
 
@@ -485,6 +490,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         else if (runeOne == oldCard)
         {
             ResetRuneEffect(oldCard);
+            runeOne.onDestroy.RemoveListener(ClearRuneOne);
             runeOne = null;
             if (listRuneOne.Count > 0)
             {
@@ -505,6 +511,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         else if (runeTwo == oldCard)
         {
             ResetRuneEffect(oldCard);
+            runeTwo.onDestroy.RemoveListener(ClearRuneTwo);
             runeTwo = null;
             if (listRuneTwo.Count > 0)
             {
@@ -525,6 +532,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         else if (runeThree == oldCard)
         {
             ResetRuneEffect(oldCard);
+            runeThree.onDestroy.RemoveListener(ClearRuneThree);
             runeThree = null;
             if (listRuneThree.Count > 0)
             {
@@ -545,6 +553,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         else if (runeFour == oldCard)
         {
             ResetRuneEffect(oldCard);
+            runeFour.onDestroy.RemoveListener(ClearRuneFour);
             runeFour = null;
             if (listRuneFour.Count > 0)
             {
@@ -565,6 +574,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         else if (runeFive == oldCard)
         {
             ResetRuneEffect(oldCard);
+            runeFive.onDestroy.RemoveListener(ClearRuneFive);
             runeFive = null;
             if (listRuneFive.Count > 0)
             {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
@@ -71,10 +72,15 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     [Header("Readonly")] public bool inTransition;
 
+    [Header("Hooks")] public UnityEvent<PlayingCardBehaviour> onDestroy;
+    
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
         cardEffect = PlayingCardEffect.None;
+
+        if (onDestroy == null)
+            onDestroy = new UnityEvent<PlayingCardBehaviour>();
     }
 
     // Start is called before the first frame update
@@ -330,6 +336,8 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         _gameState.handGameObject.cardsInHand.Remove(this);
 
+        onDestroy?.Invoke(this);
+        
         Destroy(gameObject);
     }
 
