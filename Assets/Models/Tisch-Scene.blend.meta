@@ -62,6 +62,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 169409a3b7c3eae279c2565559801f68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Tisch
     second: {fileID: 2100000, guid: 9f95a75485cedb74895c1c45b404b895, type: 2}
   - first:
