@@ -50,6 +50,7 @@ public class GameState : MonoBehaviour
     private PlayingState _playingState;
     public LevelState levelState = LevelState.Playing;
     private LevelState _levelState;
+    public bool demonCaptureCorrect;
     public PlayingCardBehaviour draggingCard;
     private float _draggingDoubleClickTimer = 0;
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
@@ -115,6 +116,7 @@ public class GameState : MonoBehaviour
 
     public void StartGame()
     {
+        ResetMetrics();
         OnRoundBegin();
     }
 
@@ -211,17 +213,17 @@ public class GameState : MonoBehaviour
                 break;
         }
 
-        mainMenuPL.SetActive(false);
-        helpPL.SetActive(false);
-        endScreenPL.SetActive(false);
-        inGameBookPages.SetActive(false);
         switch (levelState)
         {
             case LevelState.GameOver:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
                 inGameBookPages.SetActive(false);
                 endScreenPL.SetActive(true);
                 break;
             case LevelState.MainMenu:
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 mainMenuPL.SetActive(true);
                 inGameBookPages.SetActive(false);
                 break;
@@ -229,20 +231,35 @@ public class GameState : MonoBehaviour
                 Debug.LogError("Unknown level state");
                 return;
             case LevelState.Playing:
-                Time.timeScale = 1;
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
+                Time.timeScale = 1;
                 break;
             case LevelState.Paused:
-                Time.timeScale = 0;
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
+                Time.timeScale = 0;
                 break;
             case LevelState.Calculating:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
             case LevelState.Summoning:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
             case LevelState.EndOfRound:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
         }
@@ -295,9 +312,11 @@ public class GameState : MonoBehaviour
                 break;
             case LevelState.Calculating:
                 onRoundCalculation?.Invoke();
+                demonCaptureCorrect = IsSigilMatching();
                 tutorialBook.Hide();
                 break;
             case LevelState.EndOfRound:
+                demonCaptureCorrect = false;
                 tutorialBook.Hide();
                 OnRoundEnd();
                 break;
@@ -381,13 +400,11 @@ public class GameState : MonoBehaviour
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
 
-        // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
-
         // Cleanup
-
         levelCurrent++;
         if (levelCurrent >= levelMax)
         {
+            highScore = (int)MathF.Max(highScore, score);
             levelState = LevelState.GameOver;
         }
         else
@@ -408,7 +425,6 @@ public class GameState : MonoBehaviour
 
     public void CreateDemonCards()
     {
-
         PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
         foreach (PlayingCardBehaviour card in cards)
         {
@@ -440,6 +456,7 @@ public class GameState : MonoBehaviour
         };
         currentLevelSigil = svec[si];
         demonCreationCount = 1;
+        demonCaptureCorrect = false;
 
         // Init new Round
         drawsRemaining = handSize - handGameObject.CardsInHandCount;
@@ -469,6 +486,7 @@ public class GameState : MonoBehaviour
             playingCardBehaviour.DestroyCard();
         }
 
+        demonCaptureCorrect = false;
         score = 0;
         levelCurrent = 1;
         demomCreationCount = 0;
