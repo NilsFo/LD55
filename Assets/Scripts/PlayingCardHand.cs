@@ -79,10 +79,12 @@ public class PlayingCardHand : MonoBehaviour
         PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
         cardBehaviour.playingCardData = cardDataData;
         cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
-        var moveTween = playingCardObj.transform.DOMove(_gameState.deckGameObject.cardDrawAnimPoint.position, .5f).SetEase(Ease.OutQuad);
-        moveTween.OnComplete(() => {cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.Drawing;});
+        var moveTween = playingCardObj.transform.DOMove(_gameState.deckGameObject.cardDrawAnimPoint.position, .5f)
+            .SetEase(Ease.OutQuad);
+        moveTween.OnComplete(() => { cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.Drawing; });
         moveTween.Play();
-        playingCardObj.transform.DORotateQuaternion(_gameState.deckGameObject.cardDrawAnimPoint.rotation, .5f).SetEase(Ease.OutQuad).Play();
+        playingCardObj.transform.DORotateQuaternion(_gameState.deckGameObject.cardDrawAnimPoint.rotation, .5f)
+            .SetEase(Ease.OutQuad).Play();
 
         cardsInHand.Add(cardBehaviour);
     }
@@ -136,8 +138,6 @@ public class PlayingCardHand : MonoBehaviour
 
     public void CreateDaemonCard(float offset = 0)
     {
-        // todo only create when sigil matches?
-
         GameObject playingCardObj = Instantiate(cardPrefab, transform);
         playingCardObj.transform.position = daemonCreationOrigin.position + new Vector3(0, 0, -offset);
 
@@ -152,6 +152,7 @@ public class PlayingCardHand : MonoBehaviour
         cardBehaviour.displayName = currentDemonName;
         cardBehaviour.sigilDirection = _gameState.currentLevelSigil;
 
+        _gameState.demomCreationCount += 1;
         cardsInHand.Add(cardBehaviour);
     }
 
@@ -194,6 +195,4 @@ public class PlayingCardHand : MonoBehaviour
         int i = Random.Range(0, daemonNames.Count);
         currentDemonName = daemonNames[i];
     }
-
-    
 }
