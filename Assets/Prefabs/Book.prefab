@@ -113,8 +113,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290695118
+  m_fontColor: {r: 0.80784315, g: 0.8117647, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -170,12 +170,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: -19.639458, z: 0, w: -11.945775}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4810935331192777007}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!114 &8055750199959211175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6923820066326386739
 CanvasRenderer:
@@ -248,14 +248,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.80871844, g: 0.8113208, b: 0.746262, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 908912936, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  m_Sprite: {fileID: 1533367192, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -280,15 +280,15 @@ MonoBehaviour:
   dir: {x: 0, y: 0}
   sigilSprite: {fileID: 8111984994275843931}
   sigilSprites:
-  - {fileID: -1695734176, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: -245576301, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: -1686981960, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: 2012536609, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: 908912936, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: -1023280596, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: 271063178, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: -1009915674, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
-  - {fileID: -1190065027, guid: 31bb94e3590514046b405f0b9a5fb4b2, type: 3}
+  - {fileID: 1260493453, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: -897632056, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: 1710754076, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: -887193113, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: 1533367192, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: 130602035, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: -1067619509, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: -577728779, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+  - {fileID: -893602576, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
 --- !u!1 &3252945506126033990
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,8 +363,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290695118
+  m_fontColor: {r: 0.80784315, g: 0.8117647, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -601,8 +601,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290695118
+  m_fontColor: {r: 0.80784315, g: 0.8117647, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 3.2161827, y: 9.820282, z: 4.202572, w: 3.763626}
+  m_margin: {x: 8.69, y: 9.820282, z: 8.92, w: 3.763626}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -772,8 +772,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290695118
+  m_fontColor: {r: 0.80784315, g: 0.8117647, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -829,12 +829,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 11.232149, z: 0, w: -11.945775}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7191493482969745348}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!114 &8738290302611521712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,8 +988,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290695118
+  m_fontColor: {r: 0.80784315, g: 0.8117647, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1045,12 +1045,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4460086897998211219}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!114 &7359437805336399830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,8 +1172,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290695118
+  m_fontColor: {r: 0.80784315, g: 0.8117647, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1229,12 +1229,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7813013166414666736}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!114 &4310915980969191599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,7 +1703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6147772, g: 0.09815953, b: 0.09815953, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

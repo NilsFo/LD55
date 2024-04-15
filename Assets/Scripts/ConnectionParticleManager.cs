@@ -8,6 +8,7 @@ public class ConnectionParticleManager : MonoBehaviour
 
     [Header("Particle Intensity")] [Range(0f, 1f)]
     public float intensity = 0f;
+    public Color emissionColor = Color.red;
 
     [Header("Config")] public int emissionMin = 5;
     public int emissionMax = 120;
@@ -24,6 +25,8 @@ public class ConnectionParticleManager : MonoBehaviour
         float f = Mathf.Clamp(intensity, 0f, 1f);
 
         ParticleSystem.EmissionModule myParticlesEmission = myParticles.emission;
-        myParticlesEmission.rate = Mathf.Lerp(emissionMin,emissionMax,f);
+        myParticlesEmission.rateOverTime = Mathf.Lerp(emissionMin, emissionMax, f*f);
+        ParticleSystem.MainModule main = myParticles.main;
+        main.startColor = emissionColor;
     }
 }
