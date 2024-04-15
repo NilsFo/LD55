@@ -235,9 +235,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         if (runeOne != null && runeThree != null) UpdateRuneEffect(runeOne, runeThree);
         if (runeOne != null && runeFour != null) UpdateRuneEffect(runeOne, runeFour);
         if (runeOne != null && runeFive != null) UpdateRuneEffect(runeOne, runeFive);
-        if (runeTwo != null && runeThree != null) UpdateRuneEffect(runeOne, runeThree);
-        if (runeTwo != null && runeFour != null) UpdateRuneEffect(runeOne, runeFour);
-        if (runeTwo != null && runeFive != null) UpdateRuneEffect(runeOne, runeFive);
+        if (runeTwo != null && runeThree != null) UpdateRuneEffect(runeTwo, runeThree);
+        if (runeTwo != null && runeFour != null) UpdateRuneEffect(runeTwo, runeFour);
+        if (runeTwo != null && runeFive != null) UpdateRuneEffect(runeTwo, runeFive);
         if (runeThree != null && runeFour != null) UpdateRuneEffect(runeThree, runeFour);
         if (runeThree != null && runeFive != null) UpdateRuneEffect(runeThree, runeFive);
         if (runeFour != null && runeFive != null) UpdateRuneEffect(runeFour, runeFive);
