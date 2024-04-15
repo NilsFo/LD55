@@ -9,10 +9,10 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
     public ConnectionParticleManager myConnectionParticleManager;
     
     public TMP_Text text;
-
-    public LineRenderer lineRenderer;
     
     public Color color = Color.red;
+
+    public Gradient colorGradient;
     
     public float power;
     public float potencie;
@@ -26,7 +26,6 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
         positions[0] = new Vector3(runeOne.transform.position.x, runeOne.transform.position.y - 0.5f, runeOne.transform.position.z);
         positions[1] = new Vector3(runeTwo.transform.position.x, runeTwo.transform.position.y - 0.5f, runeTwo.transform.position.z);
 
-        lineRenderer.SetPositions(positions);
         UpdateColor();
 
         text.text = "";
@@ -35,6 +34,8 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
     private void Update()
     {
         myConnectionParticleManager.intensity = potencie / 2;
+
+        UpdateColor();
     }
 
     public void UpdateConnection(float newPower, float newpotencie)
@@ -53,17 +54,7 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 
     public void UpdateColor()
     {
-        // Blend color from red at 0% to blue at 100%
-        var colors = new GradientColorKey[2];
-        colors[0] = new GradientColorKey(color, 1.0f);
-        colors[1] = new GradientColorKey(color, 1.0f);
-
-        // Blend alpha from opaque at 0% to transparent at 100%
-        var alphas = new GradientAlphaKey[2];
-        alphas[0] = new GradientAlphaKey(1.0f, 0.0f);
-        alphas[1] = new GradientAlphaKey(1.0f, 1.0f);
-
-        lineRenderer.colorGradient.SetKeys(colors, alphas);
+        myConnectionParticleManager.emissionColor = colorGradient.Evaluate(potencie / 2);
     }
 
     public void SetHighlight(float deltaPower)
