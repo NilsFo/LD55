@@ -46,6 +46,8 @@ public class GameState : MonoBehaviour
     public int levelCurrent=0;
     public int levelMax = 6;
 
+    public int score = 0;
+
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
     public float daemonCardPowerMod = 1/10f;
 

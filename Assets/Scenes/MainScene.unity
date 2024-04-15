@@ -731,33 +731,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1071366335965193939, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 949371219413744600, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 938727730646986063, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3572889823082255083, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 7990079085745422494, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 951920949288349999, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 7491519447682738301, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2817816272186360538, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4667720539917679112, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2327322605056574322, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
 --- !u!114 &1662849100 stripped
 MonoBehaviour:
@@ -1051,6 +1024,7 @@ MonoBehaviour:
   currentLevelSigil: {x: 0, y: 0}
   levelCurrent: 0
   levelMax: 6
+  score: 0
   selectedCardOffset: {x: 0, y: 0, z: 0}
   daemonCardPowerMod: 0.1
   onRoundEnd:
@@ -1693,6 +1667,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 5068303708615857902, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1007444948954567220, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4410594256718489147, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
