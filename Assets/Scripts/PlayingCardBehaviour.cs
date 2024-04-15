@@ -61,9 +61,9 @@ public class PlayingCardBehaviour : MonoBehaviour
     public bool isDaemon = false;
 
     [Header("Card Effects")] public PlayingCardEffect cardEffect;
-    public float powerMod = 1f;
-    public bool returnToHand = false;
     public bool IsEffectCard => cardEffect != PlayingCardEffect.None;
+    public float powerMod = 1f;
+    public bool returnToHandAtEndOfRound = false;
 
     [Header("Parameters")] public float movementSpeed = 7;
     public float rotationSpeed = 10;
@@ -101,7 +101,6 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             isFoil = false;
         }
-        
     }
 
     // Update is called once per frame
@@ -215,7 +214,7 @@ public class PlayingCardBehaviour : MonoBehaviour
         nameTF.text = GetName();
         powerTF.text = GetPower().ToString();
         descriptionTF.text = GetEffectDescription();
-        
+
         if (sprite != null)
         {
             artworkImg.sprite = sprite;
@@ -311,7 +310,14 @@ public class PlayingCardBehaviour : MonoBehaviour
         if (playingCardState == PlayingCardState.Played)
         {
             Debug.Log("Removing played card " + name);
-            DestroyCard();
+            if (returnToHandAtEndOfRound)
+            {
+                ReturnToHand();
+            }
+            else
+            {
+                DestroyCard();
+            }
         }
     }
 
@@ -346,7 +352,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             power += Mathf.CeilToInt(((float)power * _gameState.cardBurningMult));
         }
 
-        return Mathf.CeilToInt(power + powerMod);
+        return power;
     }
 
     public Vector2 GetSigilDirection()
@@ -370,7 +376,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         return name;
     }
-    
+
     public string GetEffectDescription()
     {
         switch (cardEffect)
@@ -390,6 +396,4 @@ public class PlayingCardBehaviour : MonoBehaviour
                 return "<unknown>";
         }
     }
-    
-    
 }

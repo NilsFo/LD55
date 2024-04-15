@@ -45,7 +45,7 @@ public class GameState : MonoBehaviour
     [Header("Current Level")] public Vector2 currentLevelSigil;
     public int levelCurrent = 0;
     public int levelMax = 6;
-    public bool giveDoubleDaemon = false;
+    public int demonCreationCount = 1;
     public int score = 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
@@ -290,7 +290,10 @@ public class GameState : MonoBehaviour
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
 
-        handGameObject.CreateDaemonCard();
+        for (var i = 0; i < demonCreationCount; i++)
+        {
+            handGameObject.CreateDaemonCard();
+        }
 
         // Cleanup
         PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
@@ -321,6 +324,7 @@ public class GameState : MonoBehaviour
             new(1, 0),
         };
         currentLevelSigil = svec[si];
+        demonCreationCount = 1;
 
         // Init new Round
         drawsRemaining = handSize - handGameObject.CardsInHandCount;

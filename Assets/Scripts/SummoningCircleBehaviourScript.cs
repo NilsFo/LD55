@@ -224,7 +224,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     
     void UpdateStats()
     {
-        gameState.giveDoubleDaemon = true;
+        gameState.demonCreationCount = 2;
+        // TODO update this
+        
         if (runeOne != null) ResetRuneEffect(runeOne);
         if (runeTwo != null) ResetRuneEffect(runeTwo);
         if (runeThree != null) ResetRuneEffect(runeThree);
@@ -573,20 +575,22 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     {
         if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
         {
-            gameState.giveDoubleDaemon = true;
+            gameState.demonCreationCount = 2;
+            // TODO affect
         }
         if (r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
         {
-            gameState.giveDoubleDaemon = true;
+            gameState.demonCreationCount = 2;
+            // TODO affect
         }
         
         if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.ReturnToHand)
         {
-            r2.returnToHand = true;
+            r2.returnToHandAtEndOfRound = true;
         }
         if (r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.ReturnToHand)
         {
-            r1.returnToHand = true;
+            r1.returnToHandAtEndOfRound = true;
         }
         
         if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentDemonDoublePoints && r2.isDaemon)
@@ -612,6 +616,6 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public void ResetRuneEffect(PlayingCardBehaviour r1)
     {
         r1.powerMod = 1f;
-        r1.returnToHand = false;
+        r1.returnToHandAtEndOfRound = false;
     }
 }
