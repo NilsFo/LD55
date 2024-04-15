@@ -2384,6 +2384,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Book
       objectReference: {fileID: 0}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2093978251}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartCalculateScores
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameState, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6941393334535564362, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -2401,10 +2429,10 @@ PrefabInstance:
     - {fileID: 5226967887582021737, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5068303708615857902, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 308724841317700772, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 1007444948954567220, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 5068303708615857902, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 4410594256718489147, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
