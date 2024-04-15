@@ -18,7 +18,8 @@ public class PlayingCardBehaviour : MonoBehaviour
         Drawing,
         InHand,
         Selected,
-        Played
+        Played,
+        Destroyed
     }
 
     public enum PlayingCardEffect
@@ -158,11 +159,6 @@ public class PlayingCardBehaviour : MonoBehaviour
                 break;
             case PlayingCardState.DrawAnimation:
                 //playingCardState = PlayingCardState.Drawing;
-                if (isDaemon)
-                {
-                    Debug.LogWarning("Demons have no draw animation!");
-                    playingCardState = PlayingCardState.InHand;
-                }
                 break;
             case PlayingCardState.Played:
                 transform.position =
@@ -251,7 +247,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     public void OnClick()
     {
-        if (_gameState.levelState != GameState.LevelState.Playing)
+        if (_gameState.levelState != GameState.LevelState.Playing && !(_gameState.levelState == GameState.LevelState.Summoning && isDaemon))
         {
             Debug.LogWarning("Cannot select this card. Wrong game state.");
             return;
@@ -271,7 +267,24 @@ public class PlayingCardBehaviour : MonoBehaviour
             {
                 DragCard();
             }
+        } 
+        if (playingCardState == PlayingCardState.DrawAnimation && isDaemon) {
+            if(_gameState.IsSigilMatching()) {
+                playingCardState = PlayingCardState.Drawing;
+            } else {
+                DestroyCard();
+            }
+
+            var otherDaemon = _gameState.handGameObject.cardsInHand.Find((card) => card.isDaemon && card.playingCardState == PlayingCardState.DrawAnimation);
+            if(otherDaemon == null) {
+                // No other daemons, start next round
+                Invoke("EndTheRound", 1f);
+            }
         }
+    }
+
+    private void EndTheRound() {
+        _gameState.levelState = GameState.LevelState.EndOfRound;
     }
 
     public void ReturnToHand()
@@ -344,6 +357,8 @@ public class PlayingCardBehaviour : MonoBehaviour
         {
             _gameState.playingState = GameState.PlayingState.Default;
         }
+
+        playingCardState = PlayingCardState.Destroyed;
 
         _gameState.handGameObject.cardsInHand.Remove(this);
 

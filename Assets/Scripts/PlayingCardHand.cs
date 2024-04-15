@@ -134,12 +134,12 @@ public class PlayingCardHand : MonoBehaviour
         // cardsInHand.Clear();
     }
 
-    public void CreateDaemonCard()
+    public void CreateDaemonCard(float offset = 0)
     {
         // todo only create when sigil matches?
 
         GameObject playingCardObj = Instantiate(cardPrefab, transform);
-        playingCardObj.transform.position = daemonCreationOrigin.position;
+        playingCardObj.transform.position = daemonCreationOrigin.position + new Vector3(0, 0, -offset);
 
         PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
         cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
