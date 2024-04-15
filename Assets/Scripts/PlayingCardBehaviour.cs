@@ -19,6 +19,15 @@ public class PlayingCardBehaviour : MonoBehaviour
         Selected,
         Played
     }
+    
+    public enum PlayingCardEffect
+    {
+        None,
+        GivesAdjacentSigilDoublePoints,
+        ReturnToHand,
+        GivesAdjacentDemonDoublePoints,
+        GivesDoubleDemon
+    }
 
     [Header("World Hookup")] public PlayingCardData playingCardData;
     public Vector3 handWorldPos;
@@ -43,13 +52,15 @@ public class PlayingCardBehaviour : MonoBehaviour
     public Color titleTextColorDemonic = new Color(114/255f,54/255f,39/255f);
     public Sprite cardBackgroundDefault;
     public Sprite cardBackgroundSinged;
-
+    
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState;
     private PlayingCardState _playingCardState;
     public bool isBurned = false;
     public bool isBloodSoaked = false;
     public bool isFoil = false;
     public bool isDaemon = false;
+
+    [Header("Card Effects")] public PlayingCardEffect cardEffect; 
 
     [Header("Parameters")] public float movementSpeed = 7;
     public float rotationSpeed = 10;
