@@ -360,7 +360,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             power = Mathf.CeilToInt(((float)power * _gameState.cardBurningMult));
         }
 
-        return (int)Mathf.CeilToInt(MathF.Max(power, 0));
+        return (int)Mathf.CeilToInt(MathF.Max(power + powerMod, 0));
     }
 
     public Vector2 GetSigilDirection()
