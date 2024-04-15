@@ -632,7 +632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5774103798707804443}
   - component: {fileID: 9128783103901375471}
-  - component: {fileID: 6000554638192840187}
+  - component: {fileID: 7414318043414464052}
   - component: {fileID: 448956508329045197}
   m_Layer: 5
   m_Name: 'Score:'
@@ -668,7 +668,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5177002844389770299}
   m_CullTransparentMesh: 1
---- !u!114 &6000554638192840187
+--- !u!114 &7414318043414464052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5177002844389770299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c49e5e9ed93f66458a6464465d00b24, type: 3}
+  m_Script: {fileID: 11500000, guid: f0156045f50562e46b778e77ae68889a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefix: 'Your Score is:'
