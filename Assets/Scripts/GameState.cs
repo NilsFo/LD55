@@ -45,7 +45,7 @@ public class GameState : MonoBehaviour
     [Header("Current Level")] public Vector2 currentLevelSigil;
     public int levelCurrent=0;
     public int levelMax = 6;
-
+    public bool giveDoubleDaemon = false;
     public int score = 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;

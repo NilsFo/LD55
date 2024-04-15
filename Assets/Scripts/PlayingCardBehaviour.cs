@@ -60,7 +60,10 @@ public class PlayingCardBehaviour : MonoBehaviour
     public bool isFoil = false;
     public bool isDaemon = false;
 
-    [Header("Card Effects")] public PlayingCardEffect cardEffect; 
+    [Header("Card Effects")] 
+    public PlayingCardEffect cardEffect;
+    public float powerMod = 1f;
+    public bool returnToHand = false;
 
     [Header("Parameters")] public float movementSpeed = 7;
     public float rotationSpeed = 10;
@@ -331,7 +334,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             power += Mathf.CeilToInt(((float)power * _gameState.cardBurningMult));
         }
 
-        return power;
+        return Mathf.CeilToInt(power + powerMod);
     }
 
     public Vector2 GetSigilDirection()
