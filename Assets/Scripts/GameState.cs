@@ -345,9 +345,16 @@ public class GameState : MonoBehaviour
         }
 
         levelCurrent++;
+        if (levelCurrent>=levelMax)
+        {
+            levelState = LevelState.GameOver;
+        }
+        else
+        {
         levelState = LevelState.Playing;
         OnRoundStart();
         print("Level: " + levelCurrent + "/" + levelMax);
+        }
     }
 
     private void OnRoundStart()
