@@ -61,7 +61,7 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 
     public void SetHighlight(float deltaPower, Vector3 targetPos, Color color)
     {
-        text.text = "+"+(float) Math.Round(deltaPower, 1);
+        text.text = "" + (float) Math.Round(deltaPower, 1);
         text.color = color;
         text.enabled = true;
         text.transform.position = transform.position;
