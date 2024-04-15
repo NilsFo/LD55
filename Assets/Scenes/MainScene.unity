@@ -1699,7 +1699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c4a288500ad55469ccd791119bd9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temporalAudioPlayerPrefab: {fileID: 0}
+  temporalAudioPlayerPrefab: {fileID: 9040386523256603517, guid: f03e50874d003ae41a5e293ed8e01343, type: 3}
   baselineMusicVolume: 1
   baselineSoundVolume: 1
   baselineMasterVolume: 1
@@ -2666,10 +2666,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3252945506126033990, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3853254572701305242, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: highscoreTF
       value: 
       objectReference: {fileID: 1205718176}
+    - target: {fileID: 4213344966860396451, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4610286731402954856, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9590712
@@ -2714,6 +2722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Book
       objectReference: {fileID: 0}
+    - target: {fileID: 6131022488338956049, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2745,6 +2757,10 @@ PrefabInstance:
     - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209296796558081265, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
