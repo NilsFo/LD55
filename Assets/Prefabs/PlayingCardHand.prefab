@@ -48,32 +48,8 @@ MonoBehaviour:
   alignY: 0
   alignZ: 1
   drawDelay: 0.42
-  daemonNames:
-  - Baal the Bile
-  - The Crimson Carder
-  - Venomheart the Tormentor
-  - Blightwing, devourer of Souls
-  - The Ten of Tormends
-  - The Queen of Pain
-  - The Dealer of Doom
-  - Heart of Hellfire
-  - The Nine of Nightmares
-  - The Ace of the Abyss
-  - Sulfur's Shadow
-  - Globulus the Glutton
-  - The Folding Fiend
-  - The Jack of Judgement
-  - Beelzebub
-  - Abaddon
-  - Asmodeus
-  - Belphegor
-  - The Leviathan
-  - Bathory
-  - Rhadamanthus
-  - Gorgoroth
-  - Coagula
-  - Abraxas
-  - Geryon
+  currentDemonName: 
+  daemonSprite: {fileID: 1799026787, guid: 7b0eb5447ca873a4d8505a61604691ed, type: 3}
   cardOffset: 0.8
   cardsInHand: []
   cardPrefab: {fileID: 5606137317059629792, guid: b71937a60cd9aab46bb13132510029de, type: 3}

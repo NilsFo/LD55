@@ -11,6 +11,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public UnityEvent onRuneLineActivation;
     public UnityEvent onRuneLineActivationEnding;
     
+    public UnityEvent onRuneCircleActivate;
+    public UnityEvent onRuneCircleDeactivate;
+    
     [Header("Hookup")] 
     public GameState gameState;
     
@@ -65,6 +68,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     public float resultMod = 0f;
 
+    public bool isActive = false;
+    
     public float Value => (float) Math.Round(resultTotalPower, 0);
 
     //Queue
@@ -88,6 +93,10 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
             onRuneLineActivationEnding = new UnityEvent();
         if (onRuneLineActivation == null)
             onRuneLineActivation = new UnityEvent();
+        if (onRuneCircleActivate == null)
+            onRuneCircleActivate = new UnityEvent();
+        if (onRuneCircleDeactivate == null)
+            onRuneCircleDeactivate = new UnityEvent();
     }
 
     private void Start()
@@ -97,7 +106,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         onRuneLineActivationEnding.AddListener(() =>
         {
-            Invoke("StartNextRound", 7f);
+            Invoke("StartNextRound", 1f);
         });
     }
 
@@ -248,6 +257,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     
     void UpdateStats()
     {
+        int countRune = 0;
         gameState.demonCreationCount = 1; //Reset GameState Card-Effect
         
         if (runeOne != null) ResetRuneEffect(runeOne);
@@ -280,19 +290,34 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         resultRuneFive = Vector2.zero;
         
         if (runeOne != null)
+        {
             resultRuneOne = runeOne.GetSigilDirection() * runeOne.GetPower();
+            countRune++;
+        }
         
         if (runeTwo != null)
+        {
             resultRuneTwo = runeTwo.GetSigilDirection() * runeTwo.GetPower();
+            countRune++;
+        }
 
         if (runeThree != null)
+        {
             resultRuneThree = runeThree.GetSigilDirection() * runeThree.GetPower();
+            countRune++;
+        }
         
         if (runeFour != null)
+        {
             resultRuneFour = runeFour.GetSigilDirection() * runeFour.GetPower();
+            countRune++;
+        }
 
-        if (runeFive != null) 
+        if (runeFive != null)
+        {
             resultRuneFive = runeFive.GetSigilDirection() * runeFive.GetPower();
+            countRune++;
+        }
 
         
         resultRuneTotal = resultRuneOne + resultRuneTwo + resultRuneThree + resultRuneFour + resultRuneFive;
@@ -437,6 +462,17 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         onRuneChangeEvent?.Invoke();
         onRuneConnectionChangeEvent?.Invoke();
 
+        if (!isActive && countRune == 5)
+        {
+            isActive = true;
+            onRuneCircleActivate?.Invoke();
+        }
+        else if(isActive && countRune < 5)
+        {
+            isActive = false;
+            onRuneCircleDeactivate?.Invoke();
+        }
+        
         #endregion
     }
 
