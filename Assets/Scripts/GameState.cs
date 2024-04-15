@@ -80,6 +80,8 @@ public class GameState : MonoBehaviour
     [Range(0, 1)] public float specialCardDrawChance = 0.1f;
     [Range(0, 10)] public int specialCardMax = 2;
 
+    [Header("Audio")] public List<AudioClip> cardSounds;
+
     private void Awake()
     {
         playingState = PlayingState.Default;
@@ -203,8 +205,8 @@ public class GameState : MonoBehaviour
                 }
 
                 if (targetedCard != null && Input.GetMouseButtonDown(0) &&
-                    (levelState == LevelState.Playing || levelState == LevelState.Summoning) 
-                    )
+                    (levelState == LevelState.Playing || levelState == LevelState.Summoning)
+                   )
                 {
                     _draggingDoubleClickTimer = 0.1f;
                     targetedCard.OnClick();
@@ -415,7 +417,8 @@ public class GameState : MonoBehaviour
         }
     }
 
-    public bool IsSigilMatching() {
+    public bool IsSigilMatching()
+    {
         int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
         int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
         print("result rune: " + resultRuneTotalIndex + ". current level: " + currentLevelSigilIndex);
@@ -430,7 +433,7 @@ public class GameState : MonoBehaviour
         {
             card.OnRoundEnd();
         }
-        
+
         float offset = 0;
         for (var i = 0; i < demonCreationCount; i++)
         {
@@ -510,5 +513,11 @@ public class GameState : MonoBehaviour
     public void OnGameEnd()
     {
         highScore = (int)MathF.Max(highScore, score);
+    }
+
+    public void PlayCardSound()
+    {
+        int i = UnityEngine.Random.Range(0, cardSounds.Count);
+        musicManager.CreateAudioClip(cardSounds[i], camera.transform.position, respectBinning: false);
     }
 }

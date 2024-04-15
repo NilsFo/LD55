@@ -192,7 +192,7 @@ public class MusicManager : MonoBehaviour
         Vector3 position,
         float pitchRange = 0.0f,
         float soundVolume = 1.0f,
-        bool threeDimensional = true,
+        bool threeDimensional = false,
         bool respectBinning = false)
     {
         // Registering in the jail

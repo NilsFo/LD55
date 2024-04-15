@@ -79,6 +79,11 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     [Header("Hooks")] public UnityEvent<PlayingCardBehaviour> onDestroy;
 
+    [Header("SFX")] public AudioClip cardReturnToHandClip;
+    public AudioClip cardDragClip;
+    public AudioClip placeOnTableSound;
+    
+    
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -319,6 +324,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     public void DragCard()
     {
         Debug.Log("card selected: " + name);
+        _gameState.musicManager.CreateAudioClip(cardDragClip, _gameState.transform.position, respectBinning: false);
         _gameState.DragCard(this);
         playingCardState = PlayingCardState.Selected;
     }
@@ -340,6 +346,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         if (targetObj.placeable)
         {
+            _gameState.musicManager.CreateAudioClip(placeOnTableSound,_gameState.transform.position,respectBinning:false);
             _gameState.playingState = GameState.PlayingState.Default;
             playingCardState = PlayingCardState.Played;
             _gameState.handGameObject.cardsInHand.Remove(this);

@@ -14,9 +14,13 @@ public class PlayingCardDeck : MonoBehaviour
     public Transform cardSpawnPoint;
     public Transform cardDrawAnimPoint;
 
+    public AudioClip drawSoundClip;
+    private GameState _gameState;
+
     // Start is called before the first frame update
     void Start()
     {
+        _gameState = FindObjectOfType<GameState>();
     }
 
     // Update is called once per frame
@@ -32,6 +36,7 @@ public class PlayingCardDeck : MonoBehaviour
             return NextCard();
         }
 
+        _gameState.musicManager.CreateAudioClip(drawSoundClip,_gameState.transform.position,respectBinning:false);
         lastDrawnCardName = cardData.cardName;
         return cardData;
     }
@@ -44,7 +49,8 @@ public class PlayingCardDeck : MonoBehaviour
             return NextSpecialCard();
         }
 
-        lastDrawnCardNameSpecial = cardData.cardName;
+        _gameState.PlayCardSound();
+        _gameState.musicManager.CreateAudioClip(drawSoundClip,_gameState.transform.position,respectBinning:false);
         return cardData;
     }
 }
