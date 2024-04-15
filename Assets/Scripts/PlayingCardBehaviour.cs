@@ -19,7 +19,7 @@ public class PlayingCardBehaviour : MonoBehaviour
         Selected,
         Played
     }
-    
+
     public enum PlayingCardEffect
     {
         None,
@@ -36,6 +36,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     [Header("Card visual design")] public TMP_Text nameTF;
     public TMP_Text powerTF;
+    public TMP_Text descriptionTF;
     public UnityEngine.UI.Image artworkImg;
     public UnityEngine.UI.Image backgroundImg;
     public Sigil sigil;
@@ -46,13 +47,12 @@ public class PlayingCardBehaviour : MonoBehaviour
     public Vector2 sigilDirection;
     public Sprite sprite;
 
-    [Header("Card visual defaults")] 
-    public Color titleTextColorDefault = new Color(60/255f,51/255f,76/255f);
-    public Color titleTextColorFoil = new Color(42/255f,73/255f,41/255f);
-    public Color titleTextColorDemonic = new Color(114/255f,54/255f,39/255f);
+    [Header("Card visual defaults")] public Color titleTextColorDefault = new Color(60 / 255f, 51 / 255f, 76 / 255f);
+    public Color titleTextColorFoil = new Color(42 / 255f, 73 / 255f, 41 / 255f);
+    public Color titleTextColorDemonic = new Color(114 / 255f, 54 / 255f, 39 / 255f);
     public Sprite cardBackgroundDefault;
     public Sprite cardBackgroundSinged;
-    
+
     [Header("Gameplay Modifiers")] public PlayingCardState playingCardState;
     private PlayingCardState _playingCardState;
     public bool isBurned = false;
@@ -60,7 +60,8 @@ public class PlayingCardBehaviour : MonoBehaviour
     public bool isFoil = false;
     public bool isDaemon = false;
 
-    [Header("Card Effects")] public PlayingCardEffect cardEffect; 
+    [Header("Card Effects")] public PlayingCardEffect cardEffect;
+    public bool IsEffectCard => cardEffect != PlayingCardEffect.None;
 
     [Header("Parameters")] public float movementSpeed = 7;
     public float rotationSpeed = 10;
@@ -71,6 +72,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
+        cardEffect = PlayingCardEffect.None;
     }
 
     // Start is called before the first frame update
@@ -85,12 +87,19 @@ public class PlayingCardBehaviour : MonoBehaviour
             basePower = playingCardData.PowerScala();
             sprite = playingCardData.sprite;
             sigilDirection = playingCardData.sigilDirection;
+            cardEffect = playingCardData.cardEffect;
         }
 
         if (Random.Range(0f, 1f) <= _gameState.cardFoilChance)
         {
             isFoil = true;
         }
+
+        if (IsEffectCard || isDaemon)
+        {
+            isFoil = false;
+        }
+        
     }
 
     // Update is called once per frame
@@ -203,24 +212,28 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         nameTF.text = GetName();
         powerTF.text = GetPower().ToString();
-        if(sprite != null) {
+        descriptionTF.text = GetEffectDescription();
+        
+        if (sprite != null)
+        {
             artworkImg.sprite = sprite;
             artworkImg.enabled = true;
         }
         else
             artworkImg.enabled = false;
+
         sigil.dir = GetSigilDirection();
         sigil.UpdateSigilSprite();
-        if(isBurned)
+        if (isBurned)
             backgroundImg.sprite = cardBackgroundSinged;
-        else 
+        else
             backgroundImg.sprite = cardBackgroundDefault;
 
-        if(isFoil)
+        if (isFoil)
             nameTF.color = titleTextColorFoil;
-        else if(isDaemon)
+        else if (isDaemon)
             nameTF.color = titleTextColorDemonic;
-        else 
+        else
             nameTF.color = titleTextColorDefault;
     }
 
@@ -295,7 +308,7 @@ public class PlayingCardBehaviour : MonoBehaviour
     {
         if (playingCardState == PlayingCardState.Played)
         {
-            Debug.Log("Removing played card " + name);  
+            Debug.Log("Removing played card " + name);
             DestroyCard();
         }
     }
@@ -355,4 +368,26 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         return name;
     }
+    
+    public string GetEffectDescription()
+    {
+        switch (cardEffect)
+        {
+            case PlayingCardEffect.None:
+                return "";
+            case PlayingCardEffect.GivesDoubleDemon:
+                return "Double demon, if summoned";
+            case PlayingCardEffect.ReturnToHand:
+                return "Return cards to hand (except this)";
+            case PlayingCardEffect.GivesAdjacentDemonDoublePoints:
+                return "Boosts adjacent demon cards.";
+            case PlayingCardEffect.GivesAdjacentSigilDoublePoints:
+                return "Boosts adjacent cards with aligned sigils.";
+            default:
+                Debug.LogWarning("Error! Unknown card state!");
+                return "<unknown>";
+        }
+    }
+    
+    
 }

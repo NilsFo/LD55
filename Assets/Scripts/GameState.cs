@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour
         CardDrag
     }
 
-    public enum LevelState
+    public enum LevelState 
     {
         Unknown,
         Playing,
@@ -43,13 +43,13 @@ public class GameState : MonoBehaviour
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
 
     [Header("Current Level")] public Vector2 currentLevelSigil;
-    public int levelCurrent=0;
+    public int levelCurrent = 0;
     public int levelMax = 6;
 
     public int score = 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
-    public float daemonCardPowerMod = 1/10f;
+    public float daemonCardPowerMod = 1 / 10f;
 
     [Header("Listeners")] public UnityEvent onRoundEnd;
     public UnityEvent onRoundStart;
@@ -61,6 +61,8 @@ public class GameState : MonoBehaviour
     [Range(0, 1)] public float cardFoilChance = 0.1f;
     [Range(0, 2)] public float cardFoilMult = 1.25f;
     [Range(0, 2)] public float cardBurningMult = 1.25f;
+    [Range(0, 1)] public float specialCardDrawChance = 0.1f;
+    [Range(0, 10)] public int specialCardMax = 2;
 
     private void Awake()
     {
@@ -78,7 +80,7 @@ public class GameState : MonoBehaviour
         {
             onRoundEnd = new UnityEvent();
         }
-        
+
         if (onRoundStart == null)
         {
             onRoundStart = new UnityEvent();
@@ -88,7 +90,7 @@ public class GameState : MonoBehaviour
         {
             onRoundCalculation = new UnityEvent();
         }
-        
+
         OnRoundBegin();
     }
 
@@ -245,7 +247,7 @@ public class GameState : MonoBehaviour
                 break;
         }
 
-        if (_levelState==LevelState.EndOfRound)
+        if (_levelState == LevelState.EndOfRound)
         {
             OnRoundBegin();
         }
@@ -274,11 +276,12 @@ public class GameState : MonoBehaviour
     public void StartCalculateScores()
     {
         Debug.Log("Calculating scores...");
-        levelState=LevelState.Calculating;
+        levelState = LevelState.Calculating;
     }
 
-    private void OnRoundBegin(){
-            OnRoundStart();
+    private void OnRoundBegin()
+    {
+        OnRoundStart();
     }
 
     private void OnRoundEnd()
@@ -297,10 +300,9 @@ public class GameState : MonoBehaviour
         }
 
         levelCurrent++;
-        levelState=LevelState.Playing;
+        levelState = LevelState.Playing;
         OnRoundStart();
-        print("Level: "+levelCurrent+"/"+levelMax);
-        
+        print("Level: " + levelCurrent + "/" + levelMax);
     }
 
     private void OnRoundStart()
@@ -319,7 +321,7 @@ public class GameState : MonoBehaviour
             new(1, 0),
         };
         currentLevelSigil = svec[si];
-        
+
         // Init new Round
         drawsRemaining = handSize - handGameObject.CardsInHandCount;
         levelState = LevelState.Playing;

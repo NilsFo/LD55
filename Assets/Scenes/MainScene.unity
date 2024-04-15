@@ -1066,6 +1066,8 @@ MonoBehaviour:
   cardFoilChance: 0.1
   cardFoilMult: 0.5
   cardBurningMult: 1.25
+  specialCardDrawChance: 0.15
+  specialCardMax: 2
 --- !u!4 &2093978252
 Transform:
   m_ObjectHideFlags: 0

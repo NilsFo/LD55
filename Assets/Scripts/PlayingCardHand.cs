@@ -42,15 +42,7 @@ public class PlayingCardHand : MonoBehaviour
         // Drawing next card?
         if (_gameState.drawsRemaining > 0 && _drawDelay > drawDelay)
         {
-            PlayingCardData cardDataData = _gameState.deckGameObject.NextCard();
-            GameObject playingCardObj = Instantiate(cardPrefab, transform);
-            playingCardObj.transform.position = _gameState.deckGameObject.transform.position;
-
-            PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
-            cardBehaviour.playingCardData = cardDataData;
-            cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
-
-            cardsInHand.Add(cardBehaviour);
+            DrawNextCard();
             _gameState.drawsRemaining--;
             _drawDelay = 0;
         }
@@ -61,6 +53,43 @@ public class PlayingCardHand : MonoBehaviour
             PlayingCardBehaviour card = cardsInHand[i];
             card.handWorldPos = GetDesiredCardPosition(i);
         }
+    }
+
+    public void DrawNextCard()
+    {
+        PlayingCardData cardDataData;
+        float roll = Random.Range(0f, 1f);
+
+        // roll for special card
+        if (cardsInHand.Count < _gameState.specialCardMax && roll <= _gameState.specialCardDrawChance)
+        {
+            cardDataData = _gameState.deckGameObject.NextSpecialCard();
+        }
+        else
+        {
+            cardDataData = _gameState.deckGameObject.NextCard();
+        }
+
+        GameObject playingCardObj = Instantiate(cardPrefab, transform);
+        playingCardObj.transform.position = _gameState.deckGameObject.transform.position;
+
+        PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
+        cardBehaviour.playingCardData = cardDataData;
+        cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
+        cardsInHand.Add(cardBehaviour);
+    }
+
+    public bool HasSpecialCardInHand()
+    {
+        foreach (PlayingCardBehaviour card in cardsInHand)
+        {
+            if (card.IsEffectCard)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public Vector3 GetDesiredCardPosition(int index)
@@ -100,7 +129,7 @@ public class PlayingCardHand : MonoBehaviour
     public void CreateDaemonCard()
     {
         // todo only create when sigil matches?
-        
+
         GameObject playingCardObj = Instantiate(cardPrefab, transform);
         playingCardObj.transform.position = daemonCreationOrigin.position;
 
@@ -156,6 +185,6 @@ public class PlayingCardHand : MonoBehaviour
         int i = Random.Range(0, daemonNames.Count);
         currentDemonName = daemonNames[i];
     }
-    
+
     
 }
