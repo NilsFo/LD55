@@ -47,4 +47,40 @@ public class Sigil : MonoBehaviour
 		}
 
 	}
+
+	public static int GetIndex(Vector2 input)
+	{
+		int d = -1;
+		
+		if(input.y > 0.5 && Mathf.Abs(input.x) < 0.5) {
+			d = 0;
+		}
+		else if(input.y < -0.5 && Mathf.Abs(input.x) < 0.5) {
+			d = 1;
+		}
+		else if(input.x < -0.5 && 0.5 > Mathf.Abs(input.y)) {
+			d = 2;
+		}
+		else if(input.x > 0.5 && 0.5 > Mathf.Abs(input.y)) {
+			d = 3;
+		}
+		else if(input.x > 0 && input.y < 0) {
+			d = 5;
+		}
+		else if(input.x < 0 && input.y < 0) {
+			d = 6;
+		}
+		else if(input.x < 0 && input.y > 0) {
+			d = 7;
+		}
+		else if(input.x > 0 && input.y > 0) {
+			d = 8;
+		}
+		else {
+			d = 4;
+		}
+
+		return d;
+	}
+	
 }

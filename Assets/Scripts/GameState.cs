@@ -18,6 +18,7 @@ public class GameState : MonoBehaviour
     public enum LevelState 
     {
         Unknown,
+        MainMenu,
         Playing,
         Paused,
         EndOfRound,
@@ -67,7 +68,7 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         playingState = PlayingState.Default;
-        levelState = LevelState.Playing;
+        levelState = LevelState.MainMenu;
         _playingState = playingState;
         _levelState = levelState;
     }
@@ -91,6 +92,11 @@ public class GameState : MonoBehaviour
             onRoundCalculation = new UnityEvent();
         }
 
+    }
+
+    public void StartGame()
+    {
+        
         OnRoundBegin();
     }
 
@@ -290,9 +296,16 @@ public class GameState : MonoBehaviour
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
 
-        for (var i = 0; i < demonCreationCount; i++)
+        // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
+        int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
+        int currentLevelSigilIndex= Sigil.GetIndex(currentLevelSigil);
+        
+        if (resultRuneTotalIndex==currentLevelSigilIndex)
         {
-            handGameObject.CreateDaemonCard();
+            for (var i = 0; i < demonCreationCount; i++)
+            {
+                handGameObject.CreateDaemonCard();
+            }
         }
 
         // Cleanup

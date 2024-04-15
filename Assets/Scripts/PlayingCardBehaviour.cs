@@ -399,7 +399,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             case PlayingCardEffect.None:
                 return "";
             case PlayingCardEffect.GivesDoubleDemon:
-                return "Double demon, if summoned";
+                return "Summon +1 demon";
             case PlayingCardEffect.ReturnToHand:
                 return "Return cards to hand (except this)";
             case PlayingCardEffect.GivesAdjacentDemonDoublePoints:
