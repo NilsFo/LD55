@@ -44,6 +44,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public int _currentAnimationState = 0;
 
     public float animationResult = 0f;
+
+    public Transform bookResultTransform;
     
     [Header("Stats")]
     public Vector2 resultRuneOne;
@@ -128,61 +130,71 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         {
             animationResult += connectionR1R2.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR1R2.SetHighlight(deltaPower);
+            Color c = connectionR1R2.GetColor();
+            connectionR1R2.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 2)
         {
             animationResult += connectionR2R3.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR2R3.SetHighlight(deltaPower);
+            Color c = connectionR2R3.GetColor();
+            connectionR2R3.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 3)
         {
             animationResult += connectionR3R4.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR3R4.SetHighlight(deltaPower);
+            Color c = connectionR3R4.GetColor();
+            connectionR3R4.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 4)
         {
             animationResult += connectionR4R5.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR4R5.SetHighlight(deltaPower);
+            Color c = connectionR4R5.GetColor();
+            connectionR4R5.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 5)
         {
             animationResult += connectionR1R5.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR1R5.SetHighlight(deltaPower);
+            Color c = connectionR1R5.GetColor();
+            connectionR1R5.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 6)
         {
             animationResult += connectionR1R3.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR1R3.SetHighlight(deltaPower);
+            Color c = connectionR1R3.GetColor();
+            connectionR1R3.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 7)
         {
             animationResult += connectionR3R5.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR3R5.SetHighlight(deltaPower);
+            Color c = connectionR3R5.GetColor();
+            connectionR3R5.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 8)
         {
             animationResult += connectionR2R5.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR2R5.SetHighlight(deltaPower);
+            Color c = connectionR2R5.GetColor();
+            connectionR2R5.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 9)
         {
             animationResult += connectionR2R4.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR2R4.SetHighlight(deltaPower);
+            Color c = connectionR2R4.GetColor();
+            connectionR2R4.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 10)
         {
             animationResult += connectionR1R4.GetPower();
             deltaPower = animationResult - deltaPower;
-            connectionR1R4.SetHighlight(deltaPower);
+            Color c = connectionR1R4.GetColor();
+            connectionR1R4.SetHighlight(deltaPower, bookResultTransform.position, c);
         }
         else if(index == 11)
         {

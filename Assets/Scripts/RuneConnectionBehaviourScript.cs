@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -54,13 +55,26 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
 
     public void UpdateColor()
     {
-        myConnectionParticleManager.emissionColor = colorGradient.Evaluate(potencie / 2);
+        myConnectionParticleManager.emissionColor = GetColor();
     }
 
-    public void SetHighlight(float deltaPower)
+    public void SetHighlight(float deltaPower, Vector3 targetPos, Color color)
     {
         text.text = "+"+(float) Math.Round(deltaPower, 2);
-        text.color = Color.green;
+        text.color = color;
+        text.enabled = true;
+        text.transform.position = transform.position;
+        var upTween = text.transform.DOMove(transform.position + Vector3.up, .2f).From(transform.position).SetEase(Ease.OutCubic);
+        upTween.OnComplete(() => {
+            var toBookTween = text.transform.DOMove(targetPos, 0.4f).SetDelay(0.4f).SetEase(Ease.InOutCubic);
+            toBookTween.OnComplete(() => text.enabled = false);
+            toBookTween.Play();
+        });
+        upTween.Play();
+    }
+
+    public Color GetColor() {
+        return colorGradient.Evaluate(potencie / 2);
     }
 
     public void ResetHighlight()
