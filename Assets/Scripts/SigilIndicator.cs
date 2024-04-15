@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SigilIndicator : MonoBehaviour
 {
     private SummoningCircleBehaviourScript _summoningCircle;
     private GameState _gameState;
 
-    public Image indicator;
+    public UnityEngine.UI.Image indicator;
 
     private Sigil _sigil;
+    public UnityEngine.UI.Image sigilImg;
 
     private Vector2 sigilTarget;
 
@@ -43,5 +45,11 @@ public class SigilIndicator : MonoBehaviour
     void Update() {
         indicator.transform.localPosition = Vector2.Lerp(indicator.transform.localPosition, new Vector3(sigilTarget.x, sigilTarget.y, 0), 2f * Time.deltaTime);
         indicator.color = Color.Lerp(defaultColor, highlightColor, _colorLerpVal);
+        var v = new Vector2(indicator.transform.localPosition.x, indicator.transform.localPosition.y) / 20f;
+        if(Sigil.GetIndex(v) == Sigil.GetIndex(_gameState.currentLevelSigil)) {
+            sigilImg.color = Color.Lerp(sigilImg.color, highlightColor, 4f * Time.deltaTime);
+        } else {
+            sigilImg.color = Color.Lerp(sigilImg.color, defaultColor, 4f * Time.deltaTime);
+        }
     }
 }

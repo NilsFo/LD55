@@ -106,7 +106,9 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         onRuneLineActivationEnding.AddListener(() =>
         {
-            Invoke("StartNextRound", 1f);
+            gameState.levelState = GameState.LevelState.Summoning;
+            gameState.CreateDemonCards();
+            // Invoke("StartNextRound", 1f);
         });
     }
 

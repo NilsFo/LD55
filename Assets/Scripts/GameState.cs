@@ -24,6 +24,7 @@ public class GameState : MonoBehaviour
         Paused,
         EndOfRound,
         Calculating,
+        Summoning,
         GameOver
     }
 
@@ -195,7 +196,7 @@ public class GameState : MonoBehaviour
                 }
 
                 if (targetedCard != null && Input.GetMouseButtonDown(0) &&
-                    levelState == LevelState.Playing
+                    (levelState == LevelState.Playing || levelState == LevelState.Summoning) 
                     )
                 {
                     _draggingDoubleClickTimer = 0.1f;
@@ -283,6 +284,8 @@ public class GameState : MonoBehaviour
                 break;
             case LevelState.Unknown:
                 break;
+            case LevelState.Summoning:
+                break;
             default:
                 levelState = LevelState.Unknown;
                 break;
@@ -337,17 +340,6 @@ public class GameState : MonoBehaviour
         handGameObject.OnEndOfRound();
 
         // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
-        int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
-        int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
-        print("result rune: " + resultRuneTotalIndex + ". current level: " + currentLevelSigilIndex);
-
-        if (resultRuneTotalIndex == currentLevelSigilIndex)
-        {
-            for (var i = 0; i < demonCreationCount; i++)
-            {
-                handGameObject.CreateDaemonCard();
-            }
-        }
 
         // Cleanup
         PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
@@ -366,6 +358,24 @@ public class GameState : MonoBehaviour
             levelState = LevelState.Playing;
             OnRoundStart();
             print("Level: " + levelCurrent + "/" + levelMax);
+        }
+    }
+
+    public bool IsSigilMatching() {
+        int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
+        int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
+        print("result rune: " + resultRuneTotalIndex + ". current level: " + currentLevelSigilIndex);
+
+        return resultRuneTotalIndex == currentLevelSigilIndex;
+    }
+
+    public void CreateDemonCards()
+    {
+        float offset = 0;
+        for (var i = 0; i < demonCreationCount; i++)
+        {
+            handGameObject.CreateDaemonCard(offset);
+            offset += 0.3f;
         }
     }
 
