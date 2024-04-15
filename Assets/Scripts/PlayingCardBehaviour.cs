@@ -386,7 +386,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         if (isFoil)
         {
-            name = name + "+";
+            name = name + "";
         }
 
         return name;

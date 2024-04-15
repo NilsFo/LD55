@@ -1366,6 +1366,9 @@ MonoBehaviour:
   mouseSelectTargetObj: {fileID: 0}
   mouseSelectTargetPos: {x: 0, y: 0, z: 0}
   mouseCardPlaneTargetPos: {x: 0, y: 0, z: 0}
+  mainMenuPL: {fileID: 0}
+  helpPL: {fileID: 0}
+  endScreenPL: {fileID: 0}
   playingState: 1
   levelState: 1
   draggingCard: {fileID: 0}

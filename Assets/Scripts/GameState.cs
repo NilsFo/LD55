@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour
         CardDrag
     }
 
-    public enum LevelState 
+    public enum LevelState
     {
         Unknown,
         MainMenu,
@@ -34,6 +34,10 @@ public class GameState : MonoBehaviour
     public SelectorTarget mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
     public Vector3 mouseCardPlaneTargetPos;
+
+    [Header("UI Hookup")] public GameObject mainMenuPL;
+    public GameObject helpPL;
+    public GameObject endScreenPL;
 
     [Header("States")] public PlayingState playingState = PlayingState.Default;
     private PlayingState _playingState;
@@ -91,12 +95,10 @@ public class GameState : MonoBehaviour
         {
             onRoundCalculation = new UnityEvent();
         }
-
     }
 
     public void StartGame()
     {
-        
         OnRoundBegin();
     }
 
@@ -185,8 +187,17 @@ public class GameState : MonoBehaviour
                 break;
         }
 
+        mainMenuPL.SetActive(false);
+        helpPL.SetActive(false);
+        endScreenPL.SetActive(false);
         switch (levelState)
         {
+            case LevelState.GameOver:
+                endScreenPL.SetActive(true);
+                break;
+            case LevelState.MainMenu:
+                mainMenuPL.SetActive(true);
+                break;
             case LevelState.Unknown:
                 Debug.LogError("Unknown level state");
                 return;
@@ -298,9 +309,9 @@ public class GameState : MonoBehaviour
 
         // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
         int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
-        int currentLevelSigilIndex= Sigil.GetIndex(currentLevelSigil);
-        
-        if (resultRuneTotalIndex==currentLevelSigilIndex)
+        int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
+
+        if (resultRuneTotalIndex == currentLevelSigilIndex)
         {
             for (var i = 0; i < demonCreationCount; i++)
             {
