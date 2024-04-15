@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -64,7 +65,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     public float resultMod = 0f;
 
-    public float Value => (float) Math.Round(resultMod * resultTotalPower, 0);
+    public float Value => (float) Math.Round(resultTotalPower, 0);
 
     //Queue
     List<PlayingCardBehaviour> listRuneOne = new List<PlayingCardBehaviour>();
@@ -106,14 +107,14 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        if (isPlaying && _currentAnimationState <= 10)
+        if (isPlaying && _currentAnimationState <= 11)
         {
             _currentTimer += Time.deltaTime;
             if (_currentTimer >= stepTimer)
             {
                 _currentTimer -= stepTimer;
                 _currentAnimationState++;
-                if (_currentAnimationState <= 10)
+                if (_currentAnimationState <= 11)
                 {
                     UpdateAnimationResult(_currentAnimationState);
                     onRuneLineActivation?.Invoke();
@@ -127,82 +128,94 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
     }
 
+    private float _previousAnimValue;
     private void UpdateAnimationResult(int index)
     {
-        float deltaPower = animationResult;
         if (index == 1)
         {
-            animationResult += connectionR1R2.GetPower();
-            deltaPower = animationResult - deltaPower;
+            _previousAnimValue = connectionR1R2.GetPower();
             Color c = connectionR1R2.GetColor();
-            connectionR1R2.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR1R2.SetHighlight(_previousAnimValue, bookResultTransform.position, c);
         }
         else if(index == 2)
         {
-            animationResult += connectionR2R3.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR2R3.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR2R3.GetColor();
-            connectionR2R3.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR2R3.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 3)
         {
-            animationResult += connectionR3R4.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR3R4.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR3R4.GetColor();
-            connectionR3R4.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR3R4.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 4)
         {
-            animationResult += connectionR4R5.GetPower();
-            deltaPower = animationResult - deltaPower;
+
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR4R5.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR4R5.GetColor();
-            connectionR4R5.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR4R5.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 5)
         {
-            animationResult += connectionR1R5.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR1R5.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR1R5.GetColor();
-            connectionR1R5.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR1R5.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 6)
         {
-            animationResult += connectionR1R3.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR1R3.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR1R3.GetColor();
-            connectionR1R3.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR1R3.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 7)
         {
-            animationResult += connectionR3R5.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR3R5.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR3R5.GetColor();
-            connectionR3R5.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR3R5.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 8)
         {
-            animationResult += connectionR2R5.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR2R5.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR2R5.GetColor();
-            connectionR2R5.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR2R5.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 9)
         {
-            animationResult += connectionR2R4.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR2R4.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR2R4.GetColor();
-            connectionR2R4.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR2R4.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 10)
         {
-            animationResult += connectionR1R4.GetPower();
-            deltaPower = animationResult - deltaPower;
+            animationResult += _previousAnimValue;
+            float currentPower = connectionR1R4.GetPower();
+            _previousAnimValue = currentPower;
             Color c = connectionR1R4.GetColor();
-            connectionR1R4.SetHighlight(deltaPower, bookResultTransform.position, c);
+            connectionR1R4.SetHighlight(currentPower, bookResultTransform.position, c);
         }
         else if(index == 11)
         {
+            animationResult += _previousAnimValue;
+        } else if(index == 12) {
             animationResult = Value;
+            gameState.score += Mathf.CeilToInt(animationResult);
         }
     }
     
