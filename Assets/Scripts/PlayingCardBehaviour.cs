@@ -121,14 +121,14 @@ public class PlayingCardBehaviour : MonoBehaviour
         if (_playingCardState != playingCardState)
         {
             _playingCardState = playingCardState;
-            Debug.Log("New card state: " + playingCardState);
+            //Debug.Log("New card state: " + playingCardState);
             if (_playingCardState == PlayingCardState.Drawing)
             {
                 var tween = transform.DOMove(handWorldPos, drawAnimationDuration).SetEase(Ease.OutCubic);
                 tween.OnUpdate(() => { tween.SetTarget(handWorldPos); });
                 tween.OnComplete(() =>
                 {
-                    Debug.Log("Tween complete");
+                    //Debug.Log("Tween complete");
                     playingCardState = PlayingCardState.InHand;
                 });
                 tween.Play();

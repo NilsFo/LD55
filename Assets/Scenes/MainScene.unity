@@ -1415,7 +1415,7 @@ MonoBehaviour:
   cardFoilChance: 0.1
   cardFoilMult: 1.25
   cardBurningMult: 0.5
-  specialCardDrawChance: 0.1
+  specialCardDrawChance: 1
   specialCardMax: 2
 --- !u!4 &2093978252
 Transform:

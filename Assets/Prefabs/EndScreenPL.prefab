@@ -353,7 +353,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3970132986132422116}
   - component: {fileID: 7028539295958432288}
-  - component: {fileID: 5432744177251355774}
   - component: {fileID: 3026819486907837395}
   m_Layer: 5
   m_Name: Credits
@@ -389,19 +388,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3443136852705953391}
   m_CullTransparentMesh: 1
---- !u!114 &5432744177251355774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443136852705953391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c49e5e9ed93f66458a6464465d00b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefix: 'Your Score is:'
 --- !u!114 &3026819486907837395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +780,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3602949616606810981}
   - component: {fileID: 5984560234022743807}
-  - component: {fileID: 8544970465224528209}
   - component: {fileID: 5994865093174619077}
   m_Layer: 5
   m_Name: Credits (1)
@@ -830,19 +815,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5978812744924082389}
   m_CullTransparentMesh: 1
---- !u!114 &8544970465224528209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5978812744924082389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c49e5e9ed93f66458a6464465d00b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefix: 'Your Score is:'
 --- !u!114 &5994865093174619077
 MonoBehaviour:
   m_ObjectHideFlags: 0
