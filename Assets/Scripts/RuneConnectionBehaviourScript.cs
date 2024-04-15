@@ -8,6 +8,7 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
     public GameObject runeOne;
     public GameObject runeTwo;
     public ConnectionParticleManager myConnectionParticleManager;
+    public MeshRenderer myChalkMesh;
     
     public TMP_Text text;
     
@@ -71,6 +72,9 @@ public class RuneConnectionBehaviourScript : MonoBehaviour
             toBookTween.Play();
         });
         upTween.Play();
+        
+        if(myChalkMesh != null)
+            myChalkMesh.material.DOColor(new Color(1,0,1,255), Shader.PropertyToID("_EmissionColor"), .2f).SetLoops(2, LoopType.Yoyo).Play();
     }
 
     public Color GetColor() {
