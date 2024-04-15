@@ -1541,7 +1541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd440678cbec02628335d90fe87e73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicator: {fileID: 7747182435640536199}
+  indicator: {fileID: 8621207401925603283}
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultColor: {r: 0.8840858, g: 0.8867924, b: 0.8407796, a: 1}
 --- !u!1 &8094231932465554274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1660,7 @@ GameObject:
   - component: {fileID: 3147090189696603022}
   - component: {fileID: 8621207401925603283}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: SigilIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1681,7 +1683,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 5}
+  m_SizeDelta: {x: 17, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3147090189696603022
 CanvasRenderer:
@@ -1704,14 +1706,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6147772, g: 0.09815953, b: 0.09815953, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -288142705, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
