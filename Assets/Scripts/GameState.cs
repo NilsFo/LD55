@@ -211,17 +211,17 @@ public class GameState : MonoBehaviour
                 break;
         }
 
-        mainMenuPL.SetActive(false);
-        helpPL.SetActive(false);
-        endScreenPL.SetActive(false);
-        inGameBookPages.SetActive(false);
         switch (levelState)
         {
             case LevelState.GameOver:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
                 inGameBookPages.SetActive(false);
                 endScreenPL.SetActive(true);
                 break;
             case LevelState.MainMenu:
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 mainMenuPL.SetActive(true);
                 inGameBookPages.SetActive(false);
                 break;
@@ -229,17 +229,35 @@ public class GameState : MonoBehaviour
                 Debug.LogError("Unknown level state");
                 return;
             case LevelState.Playing:
-                Time.timeScale = 1;
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
+                Time.timeScale = 1;
                 break;
             case LevelState.Paused:
-                Time.timeScale = 0;
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
+                Time.timeScale = 0;
                 break;
             case LevelState.Calculating:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
+                inGameBookPages.SetActive(true);
+                break;
+            case LevelState.Summoning:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
             case LevelState.EndOfRound:
+                mainMenuPL.SetActive(false);
+                helpPL.SetActive(false);
+                endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
         }
@@ -381,11 +399,6 @@ public class GameState : MonoBehaviour
         // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
 
         // Cleanup
-        PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
-        foreach (PlayingCardBehaviour card in cards)
-        {
-            card.OnRoundEnd();
-        }
 
         levelCurrent++;
         if (levelCurrent >= levelMax)
@@ -410,6 +423,13 @@ public class GameState : MonoBehaviour
 
     public void CreateDemonCards()
     {
+
+        PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
+        foreach (PlayingCardBehaviour card in cards)
+        {
+            card.OnRoundEnd();
+        }
+        
         float offset = 0;
         for (var i = 0; i < demonCreationCount; i++)
         {
