@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -71,11 +72,17 @@ public class PlayingCardHand : MonoBehaviour
         }
 
         GameObject playingCardObj = Instantiate(cardPrefab, transform);
-        playingCardObj.transform.position = _gameState.deckGameObject.transform.position;
+        playingCardObj.transform.position = _gameState.deckGameObject.cardSpawnPoint.position;
+        playingCardObj.transform.rotation = _gameState.deckGameObject.cardSpawnPoint.rotation;
 
         PlayingCardBehaviour cardBehaviour = playingCardObj.GetComponent<PlayingCardBehaviour>();
         cardBehaviour.playingCardData = cardDataData;
         cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.DrawAnimation;
+        var moveTween = playingCardObj.transform.DOMove(_gameState.deckGameObject.cardDrawAnimPoint.position, .5f).SetEase(Ease.OutQuad);
+        moveTween.OnComplete(() => {cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.Drawing;});
+        moveTween.Play();
+        playingCardObj.transform.DORotateQuaternion(_gameState.deckGameObject.cardDrawAnimPoint.rotation, .5f).SetEase(Ease.OutQuad).Play();
+        
         cardsInHand.Add(cardBehaviour);
     }
 

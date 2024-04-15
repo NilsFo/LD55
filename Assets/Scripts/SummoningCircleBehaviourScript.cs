@@ -214,7 +214,6 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         {
             animationResult += _previousAnimValue;
         } else if(index == 12) {
-            animationResult = Value;
             gameState.score += Mathf.CeilToInt(animationResult);
         }
     }

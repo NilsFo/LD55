@@ -26,7 +26,7 @@ public class ResultScoreIndicator : MonoBehaviour
     // Update is called once per frame
     void UpdateText()
     {
-        _text.text = "Result: " + _summonCircle.animationResult;
+        _text.text = "" + Mathf.CeilToInt(_summonCircle.animationResult);
     }
 
     public void ResetText()

@@ -11,6 +11,9 @@ public class PlayingCardDeck : MonoBehaviour
     public string lastDrawnCardName="";
     public string lastDrawnCardNameSpecial="";
 
+    public Transform cardSpawnPoint;
+    public Transform cardDrawAnimPoint;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -157,7 +157,7 @@ public class PlayingCardBehaviour : MonoBehaviour
                 inTransition = !(Vector3.Distance(transform.position, handWorldPos) <= 0.01f);
                 break;
             case PlayingCardState.DrawAnimation:
-                playingCardState = PlayingCardState.Drawing;
+                //playingCardState = PlayingCardState.Drawing;
                 break;
             case PlayingCardState.Played:
                 transform.position =
