@@ -152,6 +152,8 @@ public class PlayingCardHand : MonoBehaviour
         cardBehaviour.displayName = currentDemonName;
         cardBehaviour.sigilDirection = _gameState.currentLevelSigil;
 
+        cardBehaviour.transform.DOMove(playingCardObj.transform.position + Vector3.up * 5, 1f).SetEase(Ease.OutCubic).SetDelay(offset).From().Play();
+
         _gameState.demomCreationCount += 1;
         cardsInHand.Add(cardBehaviour);
     }
