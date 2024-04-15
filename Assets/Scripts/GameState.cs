@@ -67,6 +67,7 @@ public class GameState : MonoBehaviour
 
     [Header("Gameplay Rules")] public int handSize = 5;
     public int drawsRemaining;
+    public bool firstTimePlaying = true;
     public bool allowCardPickUp = true;
     [Range(0, 1)] public float cardFoilChance = 0.1f;
     [Range(0, 2)] public float cardFoilMult = 1.25f;
@@ -272,6 +273,12 @@ public class GameState : MonoBehaviour
             case LevelState.EndOfRound:
                 OnRoundEnd();
                 break;
+            case LevelState.GameOver:
+                break;
+            case LevelState.MainMenu:
+                break;
+            case LevelState.Unknown:
+                break;
             default:
                 levelState = LevelState.Unknown;
                 break;
@@ -328,6 +335,7 @@ public class GameState : MonoBehaviour
         // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
         int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
         int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
+        print("result rune: " + resultRuneTotalIndex + ". current level: " + currentLevelSigilIndex);
 
         if (resultRuneTotalIndex == currentLevelSigilIndex)
         {
@@ -345,15 +353,15 @@ public class GameState : MonoBehaviour
         }
 
         levelCurrent++;
-        if (levelCurrent>=levelMax)
+        if (levelCurrent >= levelMax)
         {
             levelState = LevelState.GameOver;
         }
         else
         {
-        levelState = LevelState.Playing;
-        OnRoundStart();
-        print("Level: " + levelCurrent + "/" + levelMax);
+            levelState = LevelState.Playing;
+            OnRoundStart();
+            print("Level: " + levelCurrent + "/" + levelMax);
         }
     }
 
@@ -394,8 +402,18 @@ public class GameState : MonoBehaviour
         OnRoundStart();
     }
 
+    [ContextMenu("Back to menu")]
     public void BackToMenu()
     {
+        OnRoundEnd();
+
+        var cards = FindObjectsOfType<PlayingCardBehaviour>();
+        foreach (var playingCardBehaviour in cards)
+        {
+            playingCardBehaviour.DestroyCard();
+        }
+
+        score = 0;
         levelState = LevelState.MainMenu;
     }
 
