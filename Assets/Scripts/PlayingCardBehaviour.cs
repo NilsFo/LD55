@@ -344,20 +344,27 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         if (isFoil)
         {
-            power += Mathf.CeilToInt(((float)power * _gameState.cardFoilMult));
+            power = Mathf.CeilToInt(((float)power * _gameState.cardFoilMult));
         }
 
         if (isBurned)
         {
-            power += Mathf.CeilToInt(((float)power * _gameState.cardBurningMult));
+            power = Mathf.CeilToInt(((float)power * _gameState.cardBurningMult));
         }
 
-        return power;
+        return (int)Mathf.CeilToInt(MathF.Max(power, 0));
     }
 
     public Vector2 GetSigilDirection()
     {
         Vector2 v = sigilDirection;
+
+        if (isBurned)
+        {
+            v.x = v.x * -1;
+            v.y = v.y * -1;
+        }
+
         return v.normalized;
     }
 

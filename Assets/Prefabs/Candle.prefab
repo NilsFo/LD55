@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99e4c34bd9a98e49bfb2aebe0364530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   placeable: 0
   cardPlacement: {fileID: 0}
   onSelected:
