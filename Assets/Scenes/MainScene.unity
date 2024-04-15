@@ -2063,6 +2063,14 @@ PrefabInstance:
       propertyPath: scoringLayoutHolder
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7440639305438487558, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714619499284743090, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8862286377997209083, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
