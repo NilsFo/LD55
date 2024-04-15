@@ -20,11 +20,15 @@ public class TutorialBook : MonoBehaviour
 
     public List<GameObject> attachedObjects;
 
+    public Light mainLight;
+    private float _mainLightInte;
+
     // Start is called before the first frame update
     void Start()
     {
         _gameState = FindObjectOfType<GameState>();
         originalPos = transform.position;
+        _mainLightInte = mainLight.intensity;
 
         Hide();
     }
@@ -45,7 +49,7 @@ public class TutorialBook : MonoBehaviour
     public void RequestHide()
     {
         print("request hide");
-        float TOLERANCE = 0.01f;
+        // float TOLERANCE = 0.01f;
         // if (Math.Abs(transform.localPosition.x - showX) < TOLERANCE)
         // {
         //     Hide();
@@ -66,6 +70,7 @@ public class TutorialBook : MonoBehaviour
             .SetEase(Ease.OutQuad);
         moveTween.OnComplete(() => { OnArriveShow(); });
         moveTween.Play();
+        mainLight.DOIntensity(0, .5f).Play();
     }
 
     public void OnArriveShow()
@@ -104,5 +109,7 @@ public class TutorialBook : MonoBehaviour
             .SetEase(Ease.OutQuad);
         moveTween.OnComplete(() => { OnHideShow(); });
         moveTween.Play();
+
+        mainLight.DOIntensity(_mainLightInte, .5f).Play();
     }
 }

@@ -445,6 +445,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &209958456 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 4162746785276289645, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+  m_PrefabInstance: {fileID: 1301062511954187956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &290697542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8435808341919300158, guid: 6845d0950a19b0547a63ef29d9f3a002, type: 3}
@@ -1834,6 +1839,7 @@ MonoBehaviour:
   inGameBookPages: {fileID: 179045954}
   playingState: 1
   levelState: 1
+  demonCaptureCorrect: 0
   draggingCard: {fileID: 0}
   currentLevelSigil: {x: 0, y: 0}
   levelCurrent: 0
@@ -1921,6 +1927,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 267789925472834866, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 267789925472834866, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134559067743697533, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148158654213116188, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148158654213116188, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148158654213116188, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162746785276289645, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_Range
+      value: 33.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162746785276289645, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162746785276289645, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
+      propertyPath: m_Intensity
+      value: 48.13
+      objectReference: {fileID: 0}
     - target: {fileID: 5938711158994851930, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2063,6 +2105,10 @@ PrefabInstance:
       propertyPath: scoringLayoutHolder
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7337879217526624401, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
+      propertyPath: mainLight
+      value: 
+      objectReference: {fileID: 209958456}
     - target: {fileID: 7440639305438487558, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: m_IsActive
       value: 0
