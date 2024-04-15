@@ -20,7 +20,7 @@ public class EndScoreIndicator : MonoBehaviour
         _summonCircle = FindObjectOfType<SummoningCircleBehaviourScript>();
         _summonCircle.onRuneLineActivation.AddListener(UpdateText);
         _summonCircle.onRuneLineActivationEnding.AddListener(UpdateText);
-        _gameState.onRoundEnd.AddListener(ResetText);
+        //_gameState.onRoundEnd.AddListener(ResetText);
         
         _text.text = prefix + " 0";
     }
