@@ -6,6 +6,9 @@ public class Candle : MonoBehaviour
 {
     private GameState _gameState;
     public int usesRemaining = 4;
+    public bool infiniteUses = true;
+    public bool canDestroyCards = false;
+    public bool canBuffCards = false;
     private int _usesOriginal;
     public List<GameObject> attachedObjects;
 
@@ -35,16 +38,22 @@ public class Candle : MonoBehaviour
         }
 
         print("Burning Card: " + playingCardBehaviour.name);
-        usesRemaining--;
+        if (!infiniteUses) usesRemaining--;
 
         if (playingCardBehaviour.isBurned)
         {
-            _gameState.drawsRemaining += 1;
-            playingCardBehaviour.DestroyCard();
+            if (canDestroyCards)
+            {
+                _gameState.drawsRemaining += 1;
+                playingCardBehaviour.DestroyCard();
+            }
         }
         else
         {
-            playingCardBehaviour.isBurned = true;
+            if (canBuffCards)
+            {
+                playingCardBehaviour.isBurned = true;
+            }
         }
     }
 
