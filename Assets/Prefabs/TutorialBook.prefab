@@ -415,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distX: 0
   distY: 0
-  distZ: 0
+  distZ: 7.25
 --- !u!1 &5824936370782003374
 GameObject:
   m_ObjectHideFlags: 0
