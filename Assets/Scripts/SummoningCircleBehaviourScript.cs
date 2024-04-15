@@ -106,7 +106,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         
         onRuneLineActivationEnding.AddListener(() =>
         {
-            Invoke("StartNextRound", 7f);
+            Invoke("StartNextRound", 1f);
         });
     }
 
