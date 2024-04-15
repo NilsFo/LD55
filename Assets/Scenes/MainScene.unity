@@ -409,6 +409,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7766a2e7f01073046abdec7b90a2042c, type: 3}
+--- !u!1 &179045954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6131022488338956049, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+  m_PrefabInstance: {fileID: 7183620418350904625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &184490716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1593,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e1d14b458ab22b409c0c1e37d773718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1903349688 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7337879217526624401, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
+  m_PrefabInstance: {fileID: 3631727040865301478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f089c88d10285d4597c566295ed0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1963848280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,10 +1776,12 @@ MonoBehaviour:
   mouseSelectTargetPos: {x: 0, y: 0, z: 0}
   mouseCardPlaneTargetPos: {x: 0, y: 0, z: 0}
   musicManager: {fileID: 1963848282}
+  tutorialBook: {fileID: 1903349688}
   mainMenuPL: {fileID: 495270526}
   helpPL: {fileID: 304123821}
   endScreenPL: {fileID: 290697542}
   volumeSlider: {fileID: 2090174729}
+  inGameBookPages: {fileID: 179045954}
   playingState: 1
   levelState: 1
   draggingCard: {fileID: 0}
@@ -1773,6 +1791,7 @@ MonoBehaviour:
   demonCreationCount: 1
   score: 0
   highScore: 0
+  demomCreationCount: 0
   selectedCardOffset: {x: 0, y: 0, z: 0}
   daemonCardPowerMod: 0.1
   onRoundEnd:
@@ -1815,8 +1834,8 @@ MonoBehaviour:
   cardFoilChance: 0.1
   cardFoilMult: 1.25
   cardBurningMult: 0.5
-  specialCardDrawChance: 1
-  specialCardMax: 0
+  specialCardDrawChance: 0.15
+  specialCardMax: 2
 --- !u!4 &2093978252
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,7 +1994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4948756677387016978, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5861997573367116285, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: roundTF
@@ -1993,9 +2012,13 @@ PrefabInstance:
       propertyPath: scoringLayoutHolder
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7337879217526624401, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
+      propertyPath: distZ
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8862286377997209083, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8862286377997209083, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2648,6 +2671,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2093978251}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1903349688}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Show
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TutorialBook, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691481939859898969, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

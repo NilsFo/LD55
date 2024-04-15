@@ -99,7 +99,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Demon Power
+  m_text: Sigil Strength
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4cf2c0411a57a63419e0b3501b24b0b0, type: 2}
   m_sharedMaterial: {fileID: 7235717029652812830, guid: 4cf2c0411a57a63419e0b3501b24b0b0, type: 2}
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Help?
+  m_text: Rules
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4cf2c0411a57a63419e0b3501b24b0b0, type: 2}
   m_sharedMaterial: {fileID: 7235717029652812830, guid: 4cf2c0411a57a63419e0b3501b24b0b0, type: 2}
