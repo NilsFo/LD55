@@ -224,25 +224,30 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     
     void UpdateStats()
     {
-        gameState.demonCreationCount = 2;
-        // TODO update this
+        gameState.demonCreationCount = 1; //Reset GameState Card-Effect
         
         if (runeOne != null) ResetRuneEffect(runeOne);
         if (runeTwo != null) ResetRuneEffect(runeTwo);
         if (runeThree != null) ResetRuneEffect(runeThree);
         if (runeFour != null) ResetRuneEffect(runeFour);
         if (runeFive != null) ResetRuneEffect(runeFive);
+        
+        if (runeOne != null) UpdateRuneEffect(runeOne);
+        if (runeTwo != null) UpdateRuneEffect(runeTwo);
+        if (runeThree != null) UpdateRuneEffect(runeThree);
+        if (runeFour != null) UpdateRuneEffect(runeFour);
+        if (runeFive != null) UpdateRuneEffect(runeFive);
 
-        if (runeOne != null && runeTwo != null) UpdateRuneEffect(runeOne, runeTwo);
-        if (runeOne != null && runeThree != null) UpdateRuneEffect(runeOne, runeThree);
-        if (runeOne != null && runeFour != null) UpdateRuneEffect(runeOne, runeFour);
-        if (runeOne != null && runeFive != null) UpdateRuneEffect(runeOne, runeFive);
-        if (runeTwo != null && runeThree != null) UpdateRuneEffect(runeTwo, runeThree);
-        if (runeTwo != null && runeFour != null) UpdateRuneEffect(runeTwo, runeFour);
-        if (runeTwo != null && runeFive != null) UpdateRuneEffect(runeTwo, runeFive);
-        if (runeThree != null && runeFour != null) UpdateRuneEffect(runeThree, runeFour);
-        if (runeThree != null && runeFive != null) UpdateRuneEffect(runeThree, runeFive);
-        if (runeFour != null && runeFive != null) UpdateRuneEffect(runeFour, runeFive);
+        if (runeOne != null && runeTwo != null) UpdateRuneEffectOnConnection(runeOne, runeTwo);
+        if (runeOne != null && runeThree != null) UpdateRuneEffectOnConnection(runeOne, runeThree);
+        if (runeOne != null && runeFour != null) UpdateRuneEffectOnConnection(runeOne, runeFour);
+        if (runeOne != null && runeFive != null) UpdateRuneEffectOnConnection(runeOne, runeFive);
+        if (runeTwo != null && runeThree != null) UpdateRuneEffectOnConnection(runeTwo, runeThree);
+        if (runeTwo != null && runeFour != null) UpdateRuneEffectOnConnection(runeTwo, runeFour);
+        if (runeTwo != null && runeFive != null) UpdateRuneEffectOnConnection(runeTwo, runeFive);
+        if (runeThree != null && runeFour != null) UpdateRuneEffectOnConnection(runeThree, runeFour);
+        if (runeThree != null && runeFive != null) UpdateRuneEffectOnConnection(runeThree, runeFive);
+        if (runeFour != null && runeFive != null) UpdateRuneEffectOnConnection(runeFour, runeFive);
         
         resultRuneOne = Vector2.zero;
         resultRuneTwo = Vector2.zero;
@@ -571,19 +576,8 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
     }
 
-    public void UpdateRuneEffect(PlayingCardBehaviour r1, PlayingCardBehaviour r2)
+    public void UpdateRuneEffectOnConnection(PlayingCardBehaviour r1, PlayingCardBehaviour r2)
     {
-        if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
-        {
-            gameState.demonCreationCount = 2;
-            // TODO affect
-        }
-        if (r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
-        {
-            gameState.demonCreationCount = 2;
-            // TODO affect
-        }
-        
         if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.ReturnToHand)
         {
             r2.returnToHandAtEndOfRound = true;
@@ -613,6 +607,12 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
     }
 
+    public void UpdateRuneEffect(PlayingCardBehaviour r1)
+    {
+        if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
+            gameState.demonCreationCount++;
+    }
+    
     public void ResetRuneEffect(PlayingCardBehaviour r1)
     {
         r1.powerMod = 1f;
