@@ -239,6 +239,9 @@ public class GameState : MonoBehaviour
             case LevelState.Calculating:
                 inGameBookPages.SetActive(true);
                 break;
+            case LevelState.Summoning:
+                inGameBookPages.SetActive(true);
+                break;
             case LevelState.EndOfRound:
                 inGameBookPages.SetActive(true);
                 break;
@@ -381,11 +384,6 @@ public class GameState : MonoBehaviour
         // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
 
         // Cleanup
-        PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
-        foreach (PlayingCardBehaviour card in cards)
-        {
-            card.OnRoundEnd();
-        }
 
         levelCurrent++;
         if (levelCurrent >= levelMax)
@@ -410,6 +408,13 @@ public class GameState : MonoBehaviour
 
     public void CreateDemonCards()
     {
+
+        PlayingCardBehaviour[] cards = FindObjectsOfType<PlayingCardBehaviour>();
+        foreach (PlayingCardBehaviour card in cards)
+        {
+            card.OnRoundEnd();
+        }
+        
         float offset = 0;
         for (var i = 0; i < demonCreationCount; i++)
         {

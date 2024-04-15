@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -43,6 +44,9 @@ public class PlayingCardBehaviour : MonoBehaviour
     public UnityEngine.UI.Image backgroundImg;
     public Sigil sigil;
     public float drawAnimationDuration = .5f;
+    public UnityEngine.UI.Image burnMask;
+    public ParticleSystem smokeParticlePrefab;
+    public ParticleSystem fireParticlePrefab;
 
     [Header("Card visual values")] public string displayName;
     public int basePower;
@@ -192,6 +196,8 @@ public class PlayingCardBehaviour : MonoBehaviour
                 transform.rotation = Quaternion.Euler(Vector3.MoveTowards(rot,
                     _gameState.camera.transform.rotation.eulerAngles, Time.deltaTime * rotationSpeed));
 
+                break;
+            case PlayingCardState.Destroyed:
                 break;
             default:
                 playingCardState = PlayingCardState.Unknown;
@@ -362,9 +368,15 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         _gameState.handGameObject.cardsInHand.Remove(this);
 
-        onDestroy?.Invoke(this);
-        
-        Destroy(gameObject);
+        burnMask.enabled = true;
+        burnMask.rectTransform.DOSizeDelta(Vector2.zero, 1.2f)
+            .OnComplete(() => {
+                onDestroy?.Invoke(this);
+                Destroy(gameObject);
+            })
+            .Play();
+        Instantiate(smokeParticlePrefab, transform);
+        Instantiate(fireParticlePrefab, transform);
     }
 
     private void OnDestroy()
