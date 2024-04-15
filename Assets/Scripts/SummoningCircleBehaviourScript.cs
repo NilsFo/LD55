@@ -37,6 +37,10 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     public PlayingCardBehaviour runeFour;
     public PlayingCardBehaviour runeFive;
 
+    [Header("Cardseffect")] 
+    public float powerModDaemon = 2f;
+    public float powerModSigil = 2f;
+    
     [Header("PowerUp Animation")] 
     public float stepTimer = 3f;
     public bool isPlaying = false;
@@ -220,6 +224,24 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
     
     void UpdateStats()
     {
+        gameState.giveDoubleDaemon = true;
+        if (runeOne != null) ResetRuneEffect(runeOne);
+        if (runeTwo != null) ResetRuneEffect(runeTwo);
+        if (runeThree != null) ResetRuneEffect(runeThree);
+        if (runeFour != null) ResetRuneEffect(runeFour);
+        if (runeFive != null) ResetRuneEffect(runeFive);
+
+        if (runeOne != null && runeTwo != null) UpdateRuneEffect(runeOne, runeTwo);
+        if (runeOne != null && runeThree != null) UpdateRuneEffect(runeOne, runeThree);
+        if (runeOne != null && runeFour != null) UpdateRuneEffect(runeOne, runeFour);
+        if (runeOne != null && runeFive != null) UpdateRuneEffect(runeOne, runeFive);
+        if (runeTwo != null && runeThree != null) UpdateRuneEffect(runeTwo, runeThree);
+        if (runeTwo != null && runeFour != null) UpdateRuneEffect(runeTwo, runeFour);
+        if (runeTwo != null && runeFive != null) UpdateRuneEffect(runeTwo, runeFive);
+        if (runeThree != null && runeFour != null) UpdateRuneEffect(runeThree, runeFour);
+        if (runeThree != null && runeFive != null) UpdateRuneEffect(runeThree, runeFive);
+        if (runeFour != null && runeFive != null) UpdateRuneEffect(runeFour, runeFive);
+        
         resultRuneOne = Vector2.zero;
         resultRuneTwo = Vector2.zero;
         resultRuneThree = Vector2.zero;
@@ -238,7 +260,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         if (runeFour != null)
             resultRuneFour = runeFour.GetSigilDirection() * runeFour.GetPower();
 
-        if (runeFive != null)
+        if (runeFive != null) 
             resultRuneFive = runeFive.GetSigilDirection() * runeFive.GetPower();
 
         
@@ -455,6 +477,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
         else if (runeOne == oldCard)
         {
+            ResetRuneEffect(oldCard);
             runeOne = null;
             if (listRuneOne.Count > 0)
             {
@@ -474,6 +497,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
         else if (runeTwo == oldCard)
         {
+            ResetRuneEffect(oldCard);
             runeTwo = null;
             if (listRuneTwo.Count > 0)
             {
@@ -493,6 +517,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
         else if (runeThree == oldCard)
         {
+            ResetRuneEffect(oldCard);
             runeThree = null;
             if (listRuneThree.Count > 0)
             {
@@ -512,6 +537,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
         else if (runeFour == oldCard)
         {
+            ResetRuneEffect(oldCard);
             runeFour = null;
             if (listRuneFour.Count > 0)
             {
@@ -531,6 +557,7 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         }
         else if (runeFive == oldCard)
         {
+            ResetRuneEffect(oldCard);
             runeFive = null;
             if (listRuneFive.Count > 0)
             {
@@ -540,5 +567,51 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
 
             UpdateStats();
         }
+    }
+
+    public void UpdateRuneEffect(PlayingCardBehaviour r1, PlayingCardBehaviour r2)
+    {
+        if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
+        {
+            gameState.giveDoubleDaemon = true;
+        }
+        if (r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesDoubleDemon)
+        {
+            gameState.giveDoubleDaemon = true;
+        }
+        
+        if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.ReturnToHand)
+        {
+            r2.returnToHand = true;
+        }
+        if (r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.ReturnToHand)
+        {
+            r1.returnToHand = true;
+        }
+        
+        if (r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentDemonDoublePoints && r2.isDaemon)
+        {
+            r2.powerMod = powerModDaemon;
+        }
+        if (r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentDemonDoublePoints && r1.isDaemon)
+        {
+            r1.powerMod = powerModDaemon;
+        }
+        
+        float potency = Vector2.Dot(r1.GetSigilDirection(), r2.GetSigilDirection());
+        if (potency >= 0 && r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentSigilDoublePoints)
+        {
+            r2.powerMod = powerModSigil;
+        }
+        if (potency >= 0 && r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentSigilDoublePoints)
+        {
+            r1.powerMod = powerModSigil;
+        }
+    }
+
+    public void ResetRuneEffect(PlayingCardBehaviour r1)
+    {
+        r1.powerMod = 1f;
+        r1.returnToHand = false;
     }
 }
