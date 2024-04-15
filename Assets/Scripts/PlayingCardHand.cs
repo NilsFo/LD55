@@ -13,6 +13,7 @@ public class PlayingCardHand : MonoBehaviour
     public float drawDelay = 0.69f;
     private float _drawDelay = 0;
     public string currentDemonName;
+    public Sprite daemonSprite;
 
     [Header("Cards in Hand")] public float cardOffset = 1f;
     public List<PlayingCardBehaviour> cardsInHand;
@@ -82,7 +83,7 @@ public class PlayingCardHand : MonoBehaviour
         moveTween.OnComplete(() => {cardBehaviour.playingCardState = PlayingCardBehaviour.PlayingCardState.Drawing;});
         moveTween.Play();
         playingCardObj.transform.DORotateQuaternion(_gameState.deckGameObject.cardDrawAnimPoint.rotation, .5f).SetEase(Ease.OutQuad).Play();
-        
+
         cardsInHand.Add(cardBehaviour);
     }
 
@@ -145,6 +146,7 @@ public class PlayingCardHand : MonoBehaviour
 
         cardBehaviour.isDaemon = true;
         cardBehaviour.isFoil = false;
+        cardBehaviour.sprite = daemonSprite;
 
         cardBehaviour.basePower = (int)Mathf.Ceil(_gameState.summoningCircle.Value * _gameState.daemonCardPowerMod);
         cardBehaviour.displayName = currentDemonName;
