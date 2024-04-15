@@ -165,7 +165,9 @@ public class GameState : MonoBehaviour
                     }
                 }
 
-                if (Input.GetMouseButtonUp(0) && AllowDropping)
+                if (Input.GetMouseButtonUp(0) && AllowDropping &&
+                    levelState == LevelState.Playing
+                   )
                 {
                     if (mouseSelectTargetObj != null)
                     {
@@ -192,7 +194,9 @@ public class GameState : MonoBehaviour
                     }
                 }
 
-                if (targetedCard != null && Input.GetMouseButtonDown(0))
+                if (targetedCard != null && Input.GetMouseButtonDown(0) &&
+                    levelState == LevelState.Playing
+                    )
                 {
                     _draggingDoubleClickTimer = 0.1f;
                     targetedCard.OnClick();

@@ -251,6 +251,12 @@ public class PlayingCardBehaviour : MonoBehaviour
 
     public void OnClick()
     {
+        if (_gameState.levelState != GameState.LevelState.Playing)
+        {
+            Debug.LogWarning("Cannot select this card. Wrong game state.");
+            return;
+        }
+        
         Debug.Log("Clicked on: " + name);
         if (_gameState.playingState == GameState.PlayingState.Default)
         {
