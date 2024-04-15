@@ -629,13 +629,14 @@ public class SummoningCircleBehaviourScript : MonoBehaviour
         {
             r1.powerMod = powerModDaemon;
         }
-        
-        float potency = Vector2.Dot(r1.GetSigilDirection(), r2.GetSigilDirection());
-        if (potency >= 0 && r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentSigilDoublePoints)
+
+        int indexR1 = Sigil.GetIndex(r1.GetSigilDirection());
+        int indexR2 = Sigil.GetIndex(r2.GetSigilDirection());
+        if (indexR1 == indexR2 && r1.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentSigilDoublePoints)
         {
             r2.powerMod = powerModSigil;
         }
-        if (potency >= 0 && r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentSigilDoublePoints)
+        if (indexR1 == indexR2 && r2.cardEffect == PlayingCardBehaviour.PlayingCardEffect.GivesAdjacentSigilDoublePoints)
         {
             r1.powerMod = powerModSigil;
         }
