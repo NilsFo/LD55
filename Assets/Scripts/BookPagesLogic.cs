@@ -9,6 +9,7 @@ public class BookPagesLogic : MonoBehaviour
     public TMP_Text roundTF;
     public TMP_Text demonNameTF;
     public TMP_Text scoreTF;
+    public TMP_Text highscoreTF;
     
     public GameObject roundLayoutHolder;
     public GameObject scoringLayoutHolder;
@@ -26,8 +27,9 @@ public class BookPagesLogic : MonoBehaviour
     {
         roundTF.text = "Page: "+_gameState.levelCurrent+"/"+_gameState.levelMax;
         demonNameTF.text = _gameState.handGameObject.currentDemonName;
-
         scoreTF.text = "Score:\n" + _gameState.score;
+        
+        highscoreTF.text = "Highscore: " + _gameState.highScore;
 
         if (_gameState.levelState==GameState.LevelState.Calculating)
         {

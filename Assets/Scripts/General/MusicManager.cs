@@ -118,7 +118,7 @@ public class MusicManager : MonoBehaviour
             var audioSource = _playList[i];
             var volumeMixing = _desiredMixingVolumes[i];
 
-            var trueVolume = Mathf.Lerp(audioSource.volume,
+            var trueVolume = Mathf.MoveTowards(audioSource.volume,
                 volumeMixing,
                 Time.deltaTime * musicFadeSpeed);
 
