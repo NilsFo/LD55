@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ResultScoreIndicator : MonoBehaviour
+public class EndScoreIndicator : MonoBehaviour
 {
+    public string prefix = "Score:";
+    
     private GameState _gameState;
     private SummoningCircleBehaviourScript _summonCircle;
 
@@ -20,17 +22,17 @@ public class ResultScoreIndicator : MonoBehaviour
         _summonCircle.onRuneLineActivationEnding.AddListener(UpdateText);
         _gameState.onRoundEnd.AddListener(ResetText);
         
-        _text.text = "";
+        _text.text = prefix + " 0";
     }
 
     // Update is called once per frame
     void UpdateText()
     {
-        _text.text = "Result: " + _summonCircle.animationResult;
+        _text.text = prefix + " " + _summonCircle.animationResult;
     }
 
     public void ResetText()
     {
-        _text.text = "";
+        _text.text = prefix + " 0";
     }
 }
