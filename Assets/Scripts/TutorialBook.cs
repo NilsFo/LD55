@@ -56,6 +56,7 @@ public class TutorialBook : MonoBehaviour
     [ContextMenu("Show")]
     public void Show()
     {
+        _gameState.firstTimePlaying = false;
         print("show");
         var pos = originalPos;
         pos.x += distX;

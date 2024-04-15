@@ -82,7 +82,8 @@ public class PlayingCardBehaviour : MonoBehaviour
     [Header("SFX")] public AudioClip cardReturnToHandClip;
     public AudioClip cardDragClip;
     public AudioClip placeOnTableSound;
-    
+    public AudioClip demonDestroyed;
+    public AudioClip normalCardDestroyed;
     
     private void Awake()
     {
@@ -289,6 +290,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             }
             else
             {
+                _gameState.musicManager.CreateAudioClip(demonDestroyed,_gameState.transform.position,respectBinning:false);
                 DestroyCard();
             }
 
@@ -381,6 +383,11 @@ public class PlayingCardBehaviour : MonoBehaviour
         }
 
         playingCardState = PlayingCardState.Destroyed;
+
+        if (!isDaemon)
+        {
+            _gameState.musicManager.CreateAudioClip(normalCardDestroyed,_gameState.transform.position,respectBinning:true);
+        }
 
         _gameState.handGameObject.cardsInHand.Remove(this);
 

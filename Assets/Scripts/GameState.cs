@@ -308,7 +308,8 @@ public class GameState : MonoBehaviour
         switch (levelState)
         {
             case LevelState.Playing:
-                RequestFirstTimeTutorial();
+                Invoke(nameof(RequestFirstTimeTutorial),5);
+                //RequestFirstTimeTutorial();
                 break;
             case LevelState.Paused:
                 break;
