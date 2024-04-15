@@ -158,6 +158,11 @@ public class PlayingCardBehaviour : MonoBehaviour
                 break;
             case PlayingCardState.DrawAnimation:
                 //playingCardState = PlayingCardState.Drawing;
+                if (isDaemon)
+                {
+                    Debug.LogWarning("Demons have no draw animation!");
+                    playingCardState = PlayingCardState.InHand;
+                }
                 break;
             case PlayingCardState.Played:
                 transform.position =
