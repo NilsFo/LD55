@@ -36,12 +36,14 @@ public class GameState : MonoBehaviour
     public Vector3 mouseSelectTargetPos;
     public Vector3 mouseCardPlaneTargetPos;
     public MusicManager musicManager;
+    public TutorialBook tutorialBook;
 
     [Header("UI Hookup")] public GameObject mainMenuPL;
     public GameObject helpPL;
     public GameObject endScreenPL;
 
     [Header("UI Elements")] public Slider volumeSlider;
+    public GameObject inGameBookPages;
 
     [Header("States")] public PlayingState playingState = PlayingState.Default;
     private PlayingState _playingState;
@@ -57,6 +59,7 @@ public class GameState : MonoBehaviour
     public int demonCreationCount = 1;
     public int score = 0;
     public int highScore = 0;
+    public int demomCreationCount = 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
     public float daemonCardPowerMod = 1 / 10f;
@@ -105,6 +108,8 @@ public class GameState : MonoBehaviour
         {
             onRoundCalculation = new UnityEvent();
         }
+
+        ResetMetrics();
     }
 
     public void StartGame()
@@ -196,7 +201,7 @@ public class GameState : MonoBehaviour
 
                 if (targetedCard != null && Input.GetMouseButtonDown(0) &&
                     levelState == LevelState.Playing
-                    )
+                   )
                 {
                     _draggingDoubleClickTimer = 0.1f;
                     targetedCard.OnClick();
@@ -208,22 +213,33 @@ public class GameState : MonoBehaviour
         mainMenuPL.SetActive(false);
         helpPL.SetActive(false);
         endScreenPL.SetActive(false);
+        inGameBookPages.SetActive(false);
         switch (levelState)
         {
             case LevelState.GameOver:
+                inGameBookPages.SetActive(false);
                 endScreenPL.SetActive(true);
                 break;
             case LevelState.MainMenu:
                 mainMenuPL.SetActive(true);
+                inGameBookPages.SetActive(false);
                 break;
             case LevelState.Unknown:
                 Debug.LogError("Unknown level state");
                 return;
             case LevelState.Playing:
                 Time.timeScale = 1;
+                inGameBookPages.SetActive(true);
                 break;
             case LevelState.Paused:
                 Time.timeScale = 0;
+                inGameBookPages.SetActive(true);
+                break;
+            case LevelState.Calculating:
+                inGameBookPages.SetActive(true);
+                break;
+            case LevelState.EndOfRound:
+                inGameBookPages.SetActive(true);
                 break;
         }
     }
@@ -252,6 +268,7 @@ public class GameState : MonoBehaviour
         switch (playingState)
         {
             case PlayingState.CardDrag:
+                tutorialBook.Hide();
                 break;
             case PlayingState.Default:
                 break;
@@ -268,18 +285,24 @@ public class GameState : MonoBehaviour
         switch (levelState)
         {
             case LevelState.Playing:
+                RequestFirstTimeTutorial();
                 break;
             case LevelState.Paused:
                 break;
             case LevelState.Calculating:
                 onRoundCalculation?.Invoke();
+                tutorialBook.Hide();
                 break;
             case LevelState.EndOfRound:
+                tutorialBook.Hide();
                 OnRoundEnd();
                 break;
             case LevelState.GameOver:
+                tutorialBook.Hide();
+                OnGameEnd();
                 break;
             case LevelState.MainMenu:
+                tutorialBook.Hide();
                 break;
             case LevelState.Unknown:
                 break;
@@ -291,6 +314,22 @@ public class GameState : MonoBehaviour
         if (_levelState == LevelState.EndOfRound)
         {
             OnRoundBegin();
+        }
+    }
+
+    private void RequestFirstTimeTutorial()
+    {
+        if (firstTimePlaying)
+        {
+            RequestTutorial();
+        }
+    }
+
+    public void RequestTutorial()
+    {
+        if (playingState == PlayingState.Default && levelState == LevelState.Playing)
+        {
+            tutorialBook.Show();
         }
     }
 
@@ -404,11 +443,26 @@ public class GameState : MonoBehaviour
     {
         levelState = LevelState.Playing;
         OnRoundStart();
+        ResetMetrics();
+    }
+
+    public void ResetMetrics()
+    {
+        var cards = FindObjectsOfType<PlayingCardBehaviour>();
+        foreach (var playingCardBehaviour in cards)
+        {
+            playingCardBehaviour.DestroyCard();
+        }
+
+        score = 0;
+        levelCurrent = 1;
+        demomCreationCount = 0;
     }
 
     [ContextMenu("Back to menu")]
     public void BackToMenu()
     {
+        firstTimePlaying = false;
         OnRoundEnd();
 
         var cards = FindObjectsOfType<PlayingCardBehaviour>();
@@ -417,7 +471,6 @@ public class GameState : MonoBehaviour
             playingCardBehaviour.DestroyCard();
         }
 
-        score = 0;
         levelState = LevelState.MainMenu;
     }
 

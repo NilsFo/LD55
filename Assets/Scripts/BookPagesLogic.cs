@@ -24,7 +24,9 @@ public class BookPagesLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        roundTF.text = "Page: "+_gameState.levelCurrent+"/"+_gameState.levelMax;
+        roundTF.text = "Page: "+_gameState.levelCurrent+"/"+_gameState.levelMax+
+                       "\n"+
+                       "Captured: "+_gameState.demomCreationCount;
         demonNameTF.text = _gameState.handGameObject.currentDemonName;
         scoreTF.text = "Score:\n" + _gameState.score;
         
