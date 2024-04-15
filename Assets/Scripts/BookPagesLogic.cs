@@ -11,7 +11,6 @@ public class BookPagesLogic : MonoBehaviour
     public TMP_Text scoreTF;
     public TMP_Text highscoreTF;
     
-    public GameObject roundLayoutHolder;
     public GameObject scoringLayoutHolder;
 
     private GameState _gameState;
@@ -33,12 +32,10 @@ public class BookPagesLogic : MonoBehaviour
 
         if (_gameState.levelState==GameState.LevelState.Calculating)
         {
-            roundLayoutHolder.SetActive(false);
             scoringLayoutHolder.SetActive(true);
         }
         else
         {
-            roundLayoutHolder.SetActive(true);
             scoringLayoutHolder.SetActive(false);
         }
         
