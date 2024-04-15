@@ -12,8 +12,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Feuer
+    second: {fileID: 2100000, guid: e534a48876b5976ccb03b412cd874ec3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Gargoyle
     second: {fileID: 2100000, guid: e76c558909d6a3443abbd7b237f01c89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glow
+    second: {fileID: 2100000, guid: ff4e9a3ef71f1d718adfa20dd5f71079, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
