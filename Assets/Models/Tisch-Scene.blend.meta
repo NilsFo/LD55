@@ -52,6 +52,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material.14
+    second: {fileID: 2100000, guid: 98e0a948f0a6288479407f3077763eeb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Papier
     second: {fileID: 2100000, guid: 41a09cb6a3d77464e96e7e402671bcc7, type: 2}
   - first:
