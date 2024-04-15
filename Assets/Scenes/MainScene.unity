@@ -605,6 +605,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610710127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+  m_PrefabInstance: {fileID: 7183620418350904625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &650702182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1125,6 +1136,66 @@ PrefabInstance:
       propertyPath: bookResultTransform
       value: 
       objectReference: {fileID: 1464546837}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 610710127}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 610710127}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921611843510460163, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
+      propertyPath: onRuneCircleDeactivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6155484525629442545, guid: 5cb199228d9df604996fb1b93492d469, type: 3}
       propertyPath: m_Name
       value: ConnectionParticles-45
@@ -2490,6 +2561,10 @@ PrefabInstance:
       propertyPath: sigilSprites.Array.data[8]
       value: 
       objectReference: {fileID: 130602035, guid: bbbfc624fe840de3795b54eb334079ab, type: 3}
+    - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6304111283839326415, guid: 1182093939a321b46ac5b4dd731edd37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
