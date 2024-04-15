@@ -59,7 +59,7 @@ public class Candle : MonoBehaviour
 
     public void Reset()
     {
-        print("Resetting candle.");
+        //print("Resetting candle.");
         usesRemaining = _usesOriginal;
     }
 }

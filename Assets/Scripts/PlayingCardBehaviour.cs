@@ -121,14 +121,14 @@ public class PlayingCardBehaviour : MonoBehaviour
         if (_playingCardState != playingCardState)
         {
             _playingCardState = playingCardState;
-            Debug.Log("New card state: " + playingCardState);
+            //Debug.Log("New card state: " + playingCardState);
             if (_playingCardState == PlayingCardState.Drawing)
             {
                 var tween = transform.DOMove(handWorldPos, drawAnimationDuration).SetEase(Ease.OutCubic);
                 tween.OnUpdate(() => { tween.SetTarget(handWorldPos); });
                 tween.OnComplete(() =>
                 {
-                    Debug.Log("Tween complete");
+                    //Debug.Log("Tween complete");
                     playingCardState = PlayingCardState.InHand;
                 });
                 tween.Play();
@@ -386,7 +386,7 @@ public class PlayingCardBehaviour : MonoBehaviour
 
         if (isFoil)
         {
-            name = name + "+";
+            name = name + "";
         }
 
         return name;
@@ -399,7 +399,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             case PlayingCardEffect.None:
                 return "";
             case PlayingCardEffect.GivesDoubleDemon:
-                return "Double demon, if summoned";
+                return "Summon +1 demon";
             case PlayingCardEffect.ReturnToHand:
                 return "Return cards to hand (except this)";
             case PlayingCardEffect.GivesAdjacentDemonDoublePoints:

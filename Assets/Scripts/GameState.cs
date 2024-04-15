@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class GameState : MonoBehaviour
@@ -15,9 +16,10 @@ public class GameState : MonoBehaviour
         CardDrag
     }
 
-    public enum LevelState 
+    public enum LevelState
     {
         Unknown,
+        MainMenu,
         Playing,
         Paused,
         EndOfRound,
@@ -33,6 +35,13 @@ public class GameState : MonoBehaviour
     public SelectorTarget mouseSelectTargetObj;
     public Vector3 mouseSelectTargetPos;
     public Vector3 mouseCardPlaneTargetPos;
+    public MusicManager musicManager;
+
+    [Header("UI Hookup")] public GameObject mainMenuPL;
+    public GameObject helpPL;
+    public GameObject endScreenPL;
+
+    [Header("UI Elements")] public Slider volumeSlider;
 
     [Header("States")] public PlayingState playingState = PlayingState.Default;
     private PlayingState _playingState;
@@ -47,6 +56,7 @@ public class GameState : MonoBehaviour
     public int levelMax = 6;
     public int demonCreationCount = 1;
     public int score = 0;
+    public int highScore = 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
     public float daemonCardPowerMod = 1 / 10f;
@@ -67,15 +77,19 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         playingState = PlayingState.Default;
-        levelState = LevelState.Playing;
+        levelState = LevelState.MainMenu;
         _playingState = playingState;
         _levelState = levelState;
+
+        volumeSlider.value = 0.5f;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         levelCurrent = 1;
+        volumeSlider.value = MusicManager.userDesiredMasterVolume;
+
         if (onRoundEnd == null)
         {
             onRoundEnd = new UnityEvent();
@@ -90,7 +104,10 @@ public class GameState : MonoBehaviour
         {
             onRoundCalculation = new UnityEvent();
         }
+    }
 
+    public void StartGame()
+    {
         OnRoundBegin();
     }
 
@@ -101,6 +118,10 @@ public class GameState : MonoBehaviour
         _draggingDoubleClickTimer -= Time.deltaTime;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastResults = Physics.RaycastAll(ray);
+
+        // Updating music
+        musicManager.Play(0);
+        MusicManager.userDesiredMasterVolume = volumeSlider.value;
 
         if (_levelState != levelState)
         {
@@ -179,8 +200,17 @@ public class GameState : MonoBehaviour
                 break;
         }
 
+        mainMenuPL.SetActive(false);
+        helpPL.SetActive(false);
+        endScreenPL.SetActive(false);
         switch (levelState)
         {
+            case LevelState.GameOver:
+                endScreenPL.SetActive(true);
+                break;
+            case LevelState.MainMenu:
+                mainMenuPL.SetActive(true);
+                break;
             case LevelState.Unknown:
                 Debug.LogError("Unknown level state");
                 return;
@@ -268,9 +298,14 @@ public class GameState : MonoBehaviour
         return worldPosition;
     }
 
+    public void RequestEndRound()
+    {
+        EndRound();
+    }
+
     private void EndRound()
     {
-        levelState = LevelState.EndOfRound;
+        levelState = LevelState.Calculating;
     }
 
     public void StartCalculateScores()
@@ -290,9 +325,16 @@ public class GameState : MonoBehaviour
         onRoundEnd.Invoke();
         handGameObject.OnEndOfRound();
 
-        for (var i = 0; i < demonCreationCount; i++)
+        // float f = Vector2.Dot(summoningCircle.resultRuneTotal, currentLevelSigil);
+        int resultRuneTotalIndex = Sigil.GetIndex(summoningCircle.resultRuneTotal);
+        int currentLevelSigilIndex = Sigil.GetIndex(currentLevelSigil);
+
+        if (resultRuneTotalIndex == currentLevelSigilIndex)
         {
-            handGameObject.CreateDaemonCard();
+            for (var i = 0; i < demonCreationCount; i++)
+            {
+                handGameObject.CreateDaemonCard();
+            }
         }
 
         // Cleanup
@@ -331,5 +373,27 @@ public class GameState : MonoBehaviour
         levelState = LevelState.Playing;
 
         onRoundStart.Invoke();
+    }
+
+    public void RequestStartNewGame()
+    {
+        print("Request new game.");
+        StartNewGame();
+    }
+
+    private void StartNewGame()
+    {
+        levelState = LevelState.Playing;
+        OnRoundStart();
+    }
+
+    public void BackToMenu()
+    {
+        levelState = LevelState.MainMenu;
+    }
+
+    public void OnGameEnd()
+    {
+        highScore = (int)MathF.Max(highScore, score);
     }
 }
