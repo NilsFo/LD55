@@ -827,6 +827,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &712544448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712544449}
+  - component: {fileID: 712544450}
+  m_Layer: 0
+  m_Name: TakeScreenshot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &712544449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712544448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2093978252}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &712544450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712544448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0280e7d221ee9aa4e9ee7cd2cf038cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorOnly: 1
+  autoScreenshotSize: 0
+  width: 1920
+  height: 1080
+  captureKey: 13
+  textureFormat: 3
 --- !u!23 &743597367 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8132025315234017115, guid: 9a1e7cd0b5b388e4782a3ac803d417a3, type: 3}
@@ -965,7 +1015,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -9204529658417890, guid: c9023d43b9bbd244e9c239f8ea2240f4, type: 2}
-  m_audioClip: {fileID: 8300000, guid: dea4246c0de97304182c67d91a57df6f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f13cfa0370cc29c43bc78576c04cfaca, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1848,7 +1898,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 712544449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2106481489 stripped
@@ -2011,10 +2062,6 @@ PrefabInstance:
     - target: {fileID: 5861997573367116285, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: scoringLayoutHolder
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337879217526624401, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
-      propertyPath: distZ
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8862286377997209083, guid: 0417c4f1bd6a83d40af79d0f712c3d15, type: 3}
       propertyPath: m_LocalPosition.x
