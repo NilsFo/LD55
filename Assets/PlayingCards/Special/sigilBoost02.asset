@@ -17,4 +17,4 @@ MonoBehaviour:
   power: 0
   sprite: {fileID: 0}
   cardEffect: 1
-  rarity: 4
+  rarity: 2

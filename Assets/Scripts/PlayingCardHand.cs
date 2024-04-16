@@ -61,9 +61,10 @@ public class PlayingCardHand : MonoBehaviour
     {
         PlayingCardData cardDataData;
         float roll = Random.Range(0f, 1f);
+        print("random roll: "+roll+". Chance: "+_gameState.specialCardDrawChance);
 
         // roll for special card
-        if (cardsInHand.Count < _gameState.specialCardMax && roll <= _gameState.specialCardDrawChance)
+        if (GetSpecialCardCount() < _gameState.specialCardMax && roll <= _gameState.specialCardDrawChance)
         {
             cardDataData = _gameState.deckGameObject.NextSpecialCard();
         }
@@ -100,6 +101,20 @@ public class PlayingCardHand : MonoBehaviour
         }
 
         return false;
+    }
+    
+    public int GetSpecialCardCount()
+    {
+        int c = 0;
+        foreach (PlayingCardBehaviour card in cardsInHand)
+        {
+            if (card.IsEffectCard)
+            {
+                c++;
+            }
+        }
+
+        return c;
     }
 
     public Vector3 GetDesiredCardPosition(int index)
@@ -153,8 +168,6 @@ public class PlayingCardHand : MonoBehaviour
         cardBehaviour.sigilDirection = _gameState.currentLevelSigil;
 
         cardBehaviour.transform.DOMove(playingCardObj.transform.position + Vector3.up * 5, 1f).SetEase(Ease.OutCubic).SetDelay(offset).From().Play();
-
-        _gameState.demomCreationCount += 1;
         cardsInHand.Add(cardBehaviour);
     }
 
@@ -171,16 +184,16 @@ public class PlayingCardHand : MonoBehaviour
             "The Crimson Carder",
             "Venomheart the Tormentor",
             "Blightwing, devourer of Souls",
-            "The Ten of Tormends",
-            "The Queen of Pain",
-            "The Dealer of Doom",
+            // "The Ten of Tormends",
+            // "The Queen of Pain",
+            // "The Dealer of Doom",
             "Heart of Hellfire",
-            "The Nine of Nightmares",
+            //"The Nine of Nightmares",
             "The Ace of the Abyss",
             "Sulfur's Shadow",
-            "Globulus the Glutton",
-            "The Folding Fiend",
-            "The Jack of Judgement",
+            "Globbulus the Glutton",
+            "The Fiend of Torments",
+            //"The Jack of Judgement",
             "Beelzebub",
             "Abaddon",
             "Asmodeus",
@@ -190,7 +203,7 @@ public class PlayingCardHand : MonoBehaviour
             "Rhadamanthus",
             "Gorgoroth the Unrepented",
             "Coagula the Uncooth",
-            "Abraxas",
+            "Abraxas the Judged",
             "Geryon"
         };
 

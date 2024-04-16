@@ -11,6 +11,10 @@ public class BookPagesLogic : MonoBehaviour
     public TMP_Text scoreTF;
     public TMP_Text highscoreTF;
     
+    public TMP_Text endScreenScoreTF;
+    public TMP_Text endScreenHighscoreTF;
+    public TMP_Text endScreenDemons;
+    
     public GameObject scoringLayoutHolder;
 
     private GameState _gameState;
@@ -26,9 +30,13 @@ public class BookPagesLogic : MonoBehaviour
     {
         roundTF.text = "Page: "+_gameState.levelCurrent+"/"+_gameState.levelMax+
                        "\n"+
-                       "Captured: "+_gameState.demomCreationCount;
+                       "Captured: "+_gameState.demonCaptureCount;
         demonNameTF.text = _gameState.handGameObject.currentDemonName;
         scoreTF.text = "Score:\n" + _gameState.score;
+
+        endScreenDemons.text = "Demons captured: " + _gameState.demonCaptureCount;
+        endScreenHighscoreTF.text = "Highscore: " + _gameState.highScore;
+        endScreenScoreTF.text = "Your Score: " + _gameState.score;
         
         highscoreTF.text = "Highscore: " + _gameState.highScore;
 

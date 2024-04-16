@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345c9701fdc04128b8b40517f6042e95, type: 3}
-  m_Name: sigilBoost01
+  m_Name: sigilBoost03
   m_EditorClassIdentifier: 
-  cardName: The Star
-  sigilDirection: {x: 0, y: 1}
+  cardName: The Empress
+  sigilDirection: {x: 1, y: 0}
   power: 0
   sprite: {fileID: 0}
   cardEffect: 1

@@ -287,6 +287,7 @@ public class PlayingCardBehaviour : MonoBehaviour
             if (_gameState.demonCaptureCorrect)
             {
                 playingCardState = PlayingCardState.Drawing;
+                _gameState.demonCaptureCount += 1;
             }
             else
             {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -40,7 +41,6 @@ public class GameState : MonoBehaviour
     public TutorialBook tutorialBook;
 
     [Header("UI Hookup")] public GameObject mainMenuPL;
-    public GameObject helpPL;
     public GameObject endScreenPL;
 
     [Header("UI Elements")] public Slider volumeSlider;
@@ -56,12 +56,12 @@ public class GameState : MonoBehaviour
     public bool AllowDropping => _draggingDoubleClickTimer <= 0;
 
     [Header("Current Level")] public Vector2 currentLevelSigil;
-    public int levelCurrent = 0;
+    public int levelCurrent = 1;
     public int levelMax = 6;
     public int demonCreationCount = 1;
     public int score = 0;
     public int highScore = 0;
-    public int demomCreationCount = 0;
+    public int demonCaptureCount = 0;
 
     [Header("Gameplay config")] public Vector3 selectedCardOffset;
     public float daemonCardPowerMod = 1 / 10f;
@@ -219,12 +219,10 @@ public class GameState : MonoBehaviour
         {
             case LevelState.GameOver:
                 mainMenuPL.SetActive(false);
-                helpPL.SetActive(false);
                 inGameBookPages.SetActive(false);
                 endScreenPL.SetActive(true);
                 break;
             case LevelState.MainMenu:
-                helpPL.SetActive(false);
                 endScreenPL.SetActive(false);
                 mainMenuPL.SetActive(true);
                 inGameBookPages.SetActive(false);
@@ -234,37 +232,34 @@ public class GameState : MonoBehaviour
                 return;
             case LevelState.Playing:
                 mainMenuPL.SetActive(false);
-                helpPL.SetActive(false);
                 endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 Time.timeScale = 1;
                 break;
             case LevelState.Paused:
                 mainMenuPL.SetActive(false);
-                helpPL.SetActive(false);
                 endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 Time.timeScale = 0;
                 break;
             case LevelState.Calculating:
                 mainMenuPL.SetActive(false);
-                helpPL.SetActive(false);
                 endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
             case LevelState.Summoning:
                 mainMenuPL.SetActive(false);
-                helpPL.SetActive(false);
                 endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
             case LevelState.EndOfRound:
                 mainMenuPL.SetActive(false);
-                helpPL.SetActive(false);
                 endScreenPL.SetActive(false);
                 inGameBookPages.SetActive(true);
                 break;
         }
+        
+        highScore = (int)MathF.Max(highScore, score);
     }
 
 #if UNITY_EDITOR
@@ -317,6 +312,7 @@ public class GameState : MonoBehaviour
                 onRoundCalculation?.Invoke();
                 demonCaptureCorrect = IsSigilMatching();
                 tutorialBook.Hide();
+                highScore = (int)MathF.Max(highScore, score);
                 break;
             case LevelState.EndOfRound:
                 demonCaptureCorrect = false;
@@ -405,7 +401,7 @@ public class GameState : MonoBehaviour
 
         // Cleanup
         levelCurrent++;
-        if (levelCurrent >= levelMax)
+        if (levelCurrent > levelMax)
         {
             highScore = (int)MathF.Max(highScore, score);
             levelState = LevelState.GameOver;
@@ -493,7 +489,7 @@ public class GameState : MonoBehaviour
         demonCaptureCorrect = false;
         score = 0;
         levelCurrent = 1;
-        demomCreationCount = 0;
+        demonCaptureCount = 0;
     }
 
     [ContextMenu("Back to menu")]
