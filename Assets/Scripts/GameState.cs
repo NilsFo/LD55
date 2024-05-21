@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -258,7 +259,7 @@ public class GameState : MonoBehaviour
                 inGameBookPages.SetActive(true);
                 break;
         }
-        
+
         highScore = (int)MathF.Max(highScore, score);
     }
 
@@ -303,7 +304,7 @@ public class GameState : MonoBehaviour
         switch (levelState)
         {
             case LevelState.Playing:
-                Invoke(nameof(RequestFirstTimeTutorial),5);
+                Invoke(nameof(RequestFirstTimeTutorial), 5);
                 //RequestFirstTimeTutorial();
                 break;
             case LevelState.Paused:
@@ -516,5 +517,17 @@ public class GameState : MonoBehaviour
     {
         int i = UnityEngine.Random.Range(0, cardSounds.Count);
         musicManager.CreateAudioClip(cardSounds[i], camera.transform.position, respectBinning: false);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit Game.");
+        Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("Restart Game.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
